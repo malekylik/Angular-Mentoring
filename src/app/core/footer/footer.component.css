@@ -1,0 +1,10 @@
+.footer {
+    font-size: 1.6rem;
+    min-height: 40px;
+}
+
+.footer_wrapper {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 15px;
+}
