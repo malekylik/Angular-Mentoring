@@ -4,4 +4,5 @@
 
 .courses-list-container_wrapper {
     padding: 10px 15px;
+    border: 2px solid #CCC;
 }

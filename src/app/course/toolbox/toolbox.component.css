@@ -1,0 +1,14 @@
+.courses-list_toolbox {
+    display: flex;
+    min-height: 50px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.courses-list_toolbox-search-button {
+    margin-left: 20px;
+}
+
+.courses-list_toolbox-search-field {
+    width: 300px;
+}
