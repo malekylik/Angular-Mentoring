@@ -1,3 +1,16 @@
-<p>
-  course-item works!
-</p>
+<article class="courses-list-container_courses-itme">
+  <div>
+    <div class="courses-list-container_courses-itme-info">
+        <span>{{course.title}}</span>
+        <p>
+          <span>{{curseDuration}}</span>
+          <span class="courses-list-container_courses-creation-time-info">{{course.creationTime}}</span>
+        </p>
+    </div>
+    <p class="courses-list-container_courses-description">{{course.description}}</p>
+  </div>
+  <div class="courses-list-container_courses-itme-controls">
+    <button>Edit</button>
+    <button>Delete</button>
+  </div>
+</article>

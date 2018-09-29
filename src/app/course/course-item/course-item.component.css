@@ -1,0 +1,31 @@
+p {
+    margin: 0;
+}
+
+.courses-list-container_courses-itme {
+    display: flex;
+    border: 2px solid #CCC;
+    padding: 5px 10px;
+}
+
+.courses-list-container_courses-itme-controls {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    margin-left: 20px;
+}
+
+.courses-list-container_courses-itme-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.courses-list-container_courses-creation-time-info {
+    margin-left: 15px;
+}
+
+.courses-list-container_courses-description {
+    text-align: justify;
+    text-indent: 3rem;
+}

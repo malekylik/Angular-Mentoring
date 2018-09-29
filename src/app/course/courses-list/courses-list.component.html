@@ -1,3 +1,5 @@
-<ul>
-  <li></li>
+<ul class="courses-list-container_courses-list">
+  <li *ngFor="let course of courses">
+    <app-course-item [course]="course"></app-course-item>
+  </li>
 </ul>
