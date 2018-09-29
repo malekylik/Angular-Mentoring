@@ -6,3 +6,9 @@
     padding: 10px 15px;
     border: 2px solid #CCC;
 }
+
+.courses-list-container_load-more-button {
+    margin-top: 15px;
+    min-height: 50px;
+    width: 100%;
+}
