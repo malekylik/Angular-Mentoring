@@ -15,6 +15,10 @@ p {
     margin-left: 20px;
 }
 
+.courses-list-container_courses-itme-controls > button {
+    cursor: pointer;
+}
+
 .courses-list-container_courses-itme-info {
     display: flex;
     justify-content: space-between;
