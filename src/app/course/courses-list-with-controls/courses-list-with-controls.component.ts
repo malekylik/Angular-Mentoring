@@ -12,4 +12,8 @@ export class CoursesListWithControlsComponent implements OnInit {
   ngOnInit() {
   }
 
+  onLoadMore(): void {
+    console.log("LOADING");
+  }
+
 }
