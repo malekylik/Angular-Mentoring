@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToolboxComponent implements OnInit {
 
+  searchValue: string = "";
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  onSearch() {
+    console.log(this.searchValue);
+  }
 }
