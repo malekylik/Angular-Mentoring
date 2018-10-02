@@ -17,4 +17,8 @@ export class CoursesListComponent implements OnInit {
   ngOnInit() {
   }
 
+  onDeleteCourse(id: string): void {
+    console.log(id);
+  }
+
 }

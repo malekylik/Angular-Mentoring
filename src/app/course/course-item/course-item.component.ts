@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { Course } from '../course.model';
 
@@ -10,10 +10,15 @@ import { Course } from '../course.model';
 export class CourseItemComponent implements OnInit {
 
   @Input() course: Course;
+  @Output() deleteCourse: EventEmitter<string> = new EventEmitter();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onDeleteCourse(id: string): void {
+    this.deleteCourse.emit(id);
   }
 
   get curseDuration(): string {
