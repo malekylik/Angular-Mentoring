@@ -1,4 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 import { CoursesListWithControlsComponent } from './courses-list-with-controls.component';
 
@@ -8,7 +10,8 @@ describe('CoursesListWithControlsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CoursesListWithControlsComponent ]
+      declarations: [ CoursesListWithControlsComponent ],
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
     })
     .compileComponents();
   }));
@@ -21,5 +24,13 @@ describe('CoursesListWithControlsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('start load more on button click', () => {
+    spyOn(component, 'onLoadMore');
+
+    fixture.debugElement.query(By.css('.courses-list-container_load-more-button')).triggerEventHandler('click', null);
+
+    expect(component.onLoadMore).toHaveBeenCalled();
   });
 });
