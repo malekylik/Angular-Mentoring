@@ -47,11 +47,39 @@ describe('CourseItemComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should trigger delete event on clicked course item', () => {
-    const deleteButton = fixture.debugElement.query(By.css(".courses-list-container_delete-courses-itme-control"));
-    
-    deleteButton.triggerEventHandler('click', null);
+  it('should return formatted time dutaion', () => {
+    const courseItemComponent: CourseItemComponent = new CourseItemComponent();
+
+    courseItemComponent.course = { duration: 0 } as Course;
+    expect(courseItemComponent.courseDuration).toBe('0min');
+
+    courseItemComponent.course = { duration: 46 } as Course;
+    expect(courseItemComponent.courseDuration).toBe('46min');
+
+    courseItemComponent.course = { duration: 60 } as Course;
+    expect(courseItemComponent.courseDuration).toBe('1h 0min');
+
+    courseItemComponent.course = { duration: 86 } as Course;
+    expect(courseItemComponent.courseDuration).toBe('1h 26min');
   });
 
+  it('should render passed course information', () => {
+    const courseTitleElement = fixture.debugElement.query(By.css(".courses-list-container_course-title")).nativeElement;
+    const courseDurationElement = fixture.debugElement.query(By.css(".courses-list-container_course-duration")).nativeElement;
+    const creationTimeElement = fixture.debugElement.query(By.css(".courses-list-container_course-creation-time-info")).nativeElement;
+    const descriptionTimeElement = fixture.debugElement.query(By.css(".courses-list-container_course-description")).nativeElement;
+    const course = component.course;
 
+    expect(courseTitleElement.innerText).toBe(course.title);
+    expect(courseDurationElement.innerText).toBe('46min');
+    expect(creationTimeElement.innerText).toBe(course.creationTime);
+    expect(descriptionTimeElement.innerText).toBe(course.description);
+  });
+
+  it('should trigger delete event on clicked course item', () => {
+    const deleteButton = fixture.debugElement.query(By.css(".courses-list-container_delete-course-itme-control"));
+    
+    deleteButton.triggerEventHandler('click', null);
+    expect(component.courseIdToDelete).toBe(component.course.id);    
+  });
 });

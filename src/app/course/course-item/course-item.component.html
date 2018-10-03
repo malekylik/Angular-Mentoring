@@ -1,16 +1,16 @@
-<article class="courses-list-container_courses-itme">
+<article class="courses-list-container_course-itme">
   <div>
-    <div class="courses-list-container_courses-itme-info">
-        <span>{{course.title}}</span>
+    <div class="courses-list-container_course-itme-info">
+        <span class="courses-list-container_course-title">{{course.title}}</span>
         <p>
-          <span>{{curseDuration}}</span>
-          <span class="courses-list-container_courses-creation-time-info">{{course.creationTime}}</span>
+          <span class="courses-list-container_course-duration">{{courseDuration}}</span>
+          <span class="courses-list-container_course-creation-time-info">{{course.creationTime}}</span>
         </p>
     </div>
-    <p class="courses-list-container_courses-description">{{course.description}}</p>
+    <p class="courses-list-container_course-description">{{course.description}}</p>
   </div>
-  <div class="courses-list-container_courses-itme-controls">
+  <div class="courses-list-container_course-itme-controls">
     <button>Edit</button>
-    <button class="courses-list-container_delete-courses-itme-control" (click)="onDeleteCourse()" >Delete</button>
+    <button class="courses-list-container_delete-course-itme-control" (click)="onDeleteCourse()" >Delete</button>
   </div>
 </article>
