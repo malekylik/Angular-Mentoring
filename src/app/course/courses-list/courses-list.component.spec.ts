@@ -1,8 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 import { CoursesListComponent } from './courses-list.component';
+import { CourseItemComponent } from '../course-item/course-item.component';
+import { Course } from '../course.model';
 
 describe('CoursesListComponent', () => {
   let component: CoursesListComponent;
@@ -10,10 +11,9 @@ describe('CoursesListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CoursesListComponent ],
-      schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+      declarations: [CoursesListComponent, CourseItemComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -25,15 +25,40 @@ describe('CoursesListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('init with course items', () => {
-    it('after constructor courses list should be zero length', () => {
-      expect(component.courses.length).toBe(0);
-    });
+  it('should delete course item with proper id when delete button is clicked at course item', () => {
+    const courses: Course[] = [
+      {
+        id: "1",
+        title: "Video Course 1",
+        creationTime: "05.29.2018",
+        duration: 88,
+        description: 'Sleeper pelican gulper slimy sculpin demoiselle duckbill, "Sacramento splittail mudminnow dwarf gourami Australian lungfish Atlantic trout mrigal." Nurseryfish: mullet jellynose fish: bonytail chub spiny-back zebrafish crevice kelpfish dartfish; Atlantic silverside. Rice eel four-eyed fish roach, "roanoke bass." Manta Ray halfmoon Shingle Fish: northern squawfish jack nase barfish combfish bowfin stoneroller minnow. Kelp perch haddock oarfish weever, prickleback pencilfish yellowtail barracuda. Carpetshark butterflyfish; monkeyface prickleback orangestriped triggerfish elasmobranch giant danio ocean sunfish, longnose dace oarfish?"'
+      },
+      {
+        id: "244",
+        title: "Video Course 2",
+        creationTime: "06.10.2018",
+        duration: 27,
+        description: 'Sleeper pelican gulper slimy sculpin demoiselle duckbill, "Sacramento splittail mudminnow dwarf gourami Australian lungfish Atlantic trout mrigal." Nurseryfish: mullet jellynose fish: bonytail chub spiny-back zebrafish crevice kelpfish dartfish; Atlantic silverside. Rice eel four-eyed fish roach, "roanoke bass." Manta Ray halfmoon Shingle Fish: northern squawfish jack nase barfish combfish bowfin stoneroller minnow. Kelp perch haddock oarfish weever, prickleback pencilfish yellowtail barracuda. Carpetshark butterflyfish; monkeyface prickleback orangestriped triggerfish elasmobranch giant danio ocean sunfish, longnose dace oarfish?"'
+      },
+      {
+        id: "3",
+        title: "Video Course 3",
+        creationTime: "07.14.2018",
+        duration: 70,
+        description: 'Sleeper pelican gulper slimy sculpin demoiselle duckbill, "Sacramento splittail mudminnow dwarf gourami Australian lungfish Atlantic trout mrigal." Nurseryfish: mullet jellynose fish: bonytail chub spiny-back zebrafish crevice kelpfish dartfish; Atlantic silverside. Rice eel four-eyed fish roach, "roanoke bass." Manta Ray halfmoon Shingle Fish: northern squawfish jack nase barfish combfish bowfin stoneroller minnow. Kelp perch haddock oarfish weever, prickleback pencilfish yellowtail barracuda. Carpetshark butterflyfish; monkeyface prickleback orangestriped triggerfish elasmobranch giant danio ocean sunfish, longnose dace oarfish?"'
+      },
+    ];
 
-    it('after onInit courses list should be zero length', () => {
-      fixture.detectChanges();
-      expect(component.courses.length).toBeGreaterThanOrEqual(0);
-    });
+    spyOn(component, 'ngOnInit');
+    component.courses = courses;
+    fixture.detectChanges();
+    const onDeleteCourse = spyOn(component, 'onDeleteCourse');
+
+    const deleteButton = fixture.debugElement.queryAll(By.css('.courses-list-container_delete-course-itme-control'))[1];
+    deleteButton.triggerEventHandler('click', null);
+
+    expect(onDeleteCourse).toHaveBeenCalledWith(courses[1].id);
   });
 
   it('should render proper amount of course items', () => {
