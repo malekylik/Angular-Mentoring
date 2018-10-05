@@ -1,7 +1,10 @@
-<article [appCourseRelevance]="course.creationTime" class="courses-list-container_course-itme">
+<article [appCourseRelevance]="course.creationTime" class="courses-list-container_course-item" [ngClass]="classes">
   <div>
-    <div class="courses-list-container_course-itme-info">
-        <h3 class="courses-list-container_course-title">{{course.title}}</h3>
+    <div class="courses-list-container_course-item-info">
+        <h3 class="courses-list-container_course-title">
+          {{course.title}}
+          <fa-icon [icon]="starIcon" class="courses-list-container_course-item-top-rated-start" *ngIf="course.topRated"></fa-icon>
+        </h3>
         <p>
           <span class="courses-list-container_course-duration">{{courseDuration}}</span>
           <span class="courses-list-container_course-creation-time-info">{{course.creationTime}}</span>
@@ -9,8 +12,8 @@
     </div>
     <p class="courses-list-container_course-description">{{course.description}}</p>
   </div>
-  <div class="courses-list-container_course-itme-controls">
+  <div class="courses-list-container_course-item-controls">
     <button>Edit</button>
-    <button class="courses-list-container_delete-course-itme-control" (click)="onDeleteCourse()" >Delete</button>
+    <button class="courses-list-container_delete-course-item-control" (click)="onDeleteCourse()" >Delete</button>
   </div>
 </article>

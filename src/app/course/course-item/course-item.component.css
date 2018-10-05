@@ -2,27 +2,35 @@ p {
     margin: 0;
 }
 
-.courses-list-container_course-itme {
+.courses-list-container_course-item {
     display: flex;
     border: 2px solid #CCC;
     padding: 5px 10px;
 }
 
-.courses-list-container_course-itme-controls {
+.courses-list-container_course-item__top-rated {
+    background-color: #b2b2b2;
+}
+
+.courses-list-container_course-item-top-rated-start {
+    color: gold;
+}
+
+.courses-list-container_course-item-controls {
     display: flex;
     flex-flow: column;
     justify-content: space-around;
     margin-left: 20px;
 }
 
-.courses-list-container_course-itme-controls > button {
+.courses-list-container_course-item-controls > button {
     cursor: pointer;
 }
 
-.courses-list-container_course-itme-info {
+.courses-list-container_course-item-info {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .courses-list-container_course-creation-time-info {

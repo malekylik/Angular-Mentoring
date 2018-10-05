@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { faStar } from '@fortawesome/free-solid-svg-icons'
 
 import { Course } from '../course.model';
 
@@ -12,9 +13,13 @@ export class CourseItemComponent implements OnInit {
   @Input() course: Course;
   @Output() deleteCourse: EventEmitter<string> = new EventEmitter();
 
+  starIcon = faStar;
+  classes = {};
+
   constructor() { }
 
   ngOnInit() {
+    this.classes['courses-list-container_course-item__top-rated'] = this.course.topRated;
   }
 
   onDeleteCourse(): void {
@@ -22,17 +27,17 @@ export class CourseItemComponent implements OnInit {
   }
 
   get courseDuration(): string {
-      const hours: number = Math.floor(this.course.duration / 60);
-      const minutes: number = this.course.duration - hours * 60;
+    const hours: number = Math.floor(this.course.duration / 60);
+    const minutes: number = this.course.duration - hours * 60;
 
-      let duration: string = "";
+    let duration: string = "";
 
-      if (hours != 0) {
-        duration = `${hours}h ${minutes}min`;
-      } else {
-        duration = `${minutes}min`;
-      }
-      
-      return duration;
+    if (hours != 0) {
+      duration = `${hours}h ${minutes}min`;
+    } else {
+      duration = `${minutes}min`;
+    }
+
+    return duration;
   }
 }

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'
+import { FormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { ToolboxComponent } from './toolbox/toolbox.component';
 import { CoursesListComponent } from './courses-list/courses-list.component';
@@ -12,6 +13,7 @@ import { CourseRelevanceDirective } from './course-relevance.directive';
   imports: [
     CommonModule,
     FormsModule,
+    FontAwesomeModule,
   ],
   declarations: [
     ToolboxComponent,
