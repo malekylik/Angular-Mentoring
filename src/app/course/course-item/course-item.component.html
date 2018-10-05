@@ -6,7 +6,7 @@
           <fa-icon [icon]="starIcon" class="courses-list-container_course-item-top-rated-start" *ngIf="course.topRated"></fa-icon>
         </h3>
         <p>
-          <span class="courses-list-container_course-duration">{{courseDuration}}</span>
+          <span class="courses-list-container_course-duration">{{course.duration | durationPipe}}</span>
           <span class="courses-list-container_course-creation-time-info">{{course.creationTime}}</span>
         </p>
     </div>

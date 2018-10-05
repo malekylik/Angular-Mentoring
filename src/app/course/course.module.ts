@@ -8,6 +8,7 @@ import { CoursesListComponent } from './courses-list/courses-list.component';
 import { CourseItemComponent } from './course-item/course-item.component';
 import { CoursesListWithControlsComponent } from './courses-list-with-controls/courses-list-with-controls.component';
 import { CourseRelevanceDirective } from './course-relevance.directive';
+import { DurationPipe } from './duration-pipe.pipe';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { CourseRelevanceDirective } from './course-relevance.directive';
     CourseItemComponent, 
     CoursesListWithControlsComponent,
     CourseRelevanceDirective,
+    DurationPipe,
   ],
   exports: [
     CoursesListWithControlsComponent

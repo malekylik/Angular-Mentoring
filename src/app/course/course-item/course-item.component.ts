@@ -25,19 +25,4 @@ export class CourseItemComponent implements OnInit {
   onDeleteCourse(): void {
     this.deleteCourse.emit(this.course.id);
   }
-
-  get courseDuration(): string {
-    const hours: number = Math.floor(this.course.duration / 60);
-    const minutes: number = this.course.duration - hours * 60;
-
-    let duration: string = "";
-
-    if (hours != 0) {
-      duration = `${hours}h ${minutes}min`;
-    } else {
-      duration = `${minutes}min`;
-    }
-
-    return duration;
-  }
 }
