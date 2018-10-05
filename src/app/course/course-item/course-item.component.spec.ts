@@ -1,9 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Component } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { UpperCasePipe } from '@angular/common';
 
 import { CourseItemComponent } from './course-item.component';
 import { Course } from '../course.model';
+import { CourseRelevanceDirective } from '../course-relevance.directive';
+import { DurationPipe } from '../duration.pipe';
 
 @Component({
   template: `
@@ -16,7 +20,8 @@ class TestHostComponent {
     title: "Video Course 4",
     creationTime: "07.16.2018",
     duration: 46,
-    description: 'Sleeper pelican gulper slimy sculpin demoiselle duckbill, "Sacramento splittail mudminnow dwarf gourami Australian lungfish Atlantic trout mrigal." Nurseryfish: mullet jellynose fish: bonytail chub spiny-back zebrafish crevice kelpfish dartfish; Atlantic silverside. Rice eel four-eyed fish roach, "roanoke bass." Manta Ray halfmoon Shingle Fish: northern squawfish jack nase barfish combfish bowfin stoneroller minnow. Kelp perch haddock oarfish weever, prickleback pencilfish yellowtail barracuda. Carpetshark butterflyfish; monkeyface prickleback orangestriped triggerfish elasmobranch giant danio ocean sunfish, longnose dace oarfish?"'
+    description: 'Sleeper pelican gulper slimy sculpin demoiselle duckbill, "Sacramento splittail mudminnow dwarf gourami Australian lungfish Atlantic trout mrigal." Nurseryfish: mullet jellynose fish: bonytail chub spiny-back zebrafish crevice kelpfish dartfish; Atlantic silverside. Rice eel four-eyed fish roach, "roanoke bass." Manta Ray halfmoon Shingle Fish: northern squawfish jack nase barfish combfish bowfin stoneroller minnow. Kelp perch haddock oarfish weever, prickleback pencilfish yellowtail barracuda. Carpetshark butterflyfish; monkeyface prickleback orangestriped triggerfish elasmobranch giant danio ocean sunfish, longnose dace oarfish?"',
+    topRated: false
   };
 
   courseIdToDelete: string;
@@ -32,7 +37,8 @@ describe('CourseItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CourseItemComponent, TestHostComponent]
+      declarations: [CourseItemComponent, TestHostComponent, CourseRelevanceDirective, DurationPipe],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
       .compileComponents();
   }));
@@ -47,22 +53,6 @@ describe('CourseItemComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should return formatted time dutaion', () => {
-    const courseItemComponent: CourseItemComponent = new CourseItemComponent();
-
-    courseItemComponent.course = { duration: 0 } as Course;
-    expect(courseItemComponent.courseDuration).toBe('0min');
-
-    courseItemComponent.course = { duration: 46 } as Course;
-    expect(courseItemComponent.courseDuration).toBe('46min');
-
-    courseItemComponent.course = { duration: 60 } as Course;
-    expect(courseItemComponent.courseDuration).toBe('1h 0min');
-
-    courseItemComponent.course = { duration: 86 } as Course;
-    expect(courseItemComponent.courseDuration).toBe('1h 26min');
-  });
-
   it('should render passed course information', () => {
     const courseTitleElement = fixture.debugElement.query(By.css(".courses-list-container_course-title")).nativeElement;
     const courseDurationElement = fixture.debugElement.query(By.css(".courses-list-container_course-duration")).nativeElement;
@@ -70,14 +60,14 @@ describe('CourseItemComponent', () => {
     const descriptionTimeElement = fixture.debugElement.query(By.css(".courses-list-container_course-description")).nativeElement;
     const course = component.course;
 
-    expect(courseTitleElement.innerText).toBe(course.title);
-    expect(courseDurationElement.innerText).toBe('46min');
+    expect(courseTitleElement.innerText).toBe(new UpperCasePipe().transform(course.title));
+    expect(courseDurationElement.innerText).toBe(new DurationPipe().transform(course.duration));
     expect(creationTimeElement.innerText).toBe(course.creationTime);
     expect(descriptionTimeElement.innerText).toBe(course.description);
   });
 
   it('should trigger delete event on clicked course item', () => {
-    const deleteButton = fixture.debugElement.query(By.css(".courses-list-container_delete-course-itme-control"));
+    const deleteButton = fixture.debugElement.query(By.css(".courses-list-container_delete-course-item-control"));
     
     deleteButton.triggerEventHandler('click', null);
     expect(component.courseIdToDelete).toBe(component.course.id);    

@@ -1,8 +1,8 @@
-import { DurationPipePipe } from './duration-pipe.pipe';
+import { DurationPipe } from './duration.pipe';
 
 describe('DurationPipePipe', () => {
   it('create an instance', () => {
-    const pipe = new DurationPipePipe();
+    const pipe = new DurationPipe();
     expect(pipe).toBeTruthy();
   });
 });
