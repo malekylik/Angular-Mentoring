@@ -7,7 +7,7 @@ import { CourseModule } from './course/course.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
