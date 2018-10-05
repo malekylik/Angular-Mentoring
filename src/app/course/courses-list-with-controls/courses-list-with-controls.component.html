@@ -2,6 +2,17 @@
   <div class="width-wrapper courses-list-container_wrapper">
     <app-toolbox></app-toolbox>
     <app-courses-list></app-courses-list>
-    <button class="courses-list-container_load-more-button" (click)="onLoadMore()">LOAD MORE</button>
+
+    <button 
+    class="courses-list-container_load-more-button" 
+    (click)="onLoadMore()" 
+    *ngIf="coursesListLength" >LOAD MORE</button>
+
+    <button 
+    class="courses-list-container_load-more-button" 
+    (click)="onLoadMore()" 
+    *ngIf="!coursesListLength" disabled >LOAD MORE</button>
+
+    <ng-template #noDataButton >NO DATA. FEEL FREE TO ADD NEW COURSE</ng-template>
   </div>
 </div>
