@@ -7,6 +7,7 @@ import { CourseItemComponent } from '../course-item/course-item.component';
 import { Course } from '../course.model';
 import { CourseRelevanceDirective } from '../course-relevance.directive';
 import { DurationPipe } from '../duration.pipe';
+import { CourseOrderByPipe } from '../course-order-by.pipe';
 
 describe('CoursesListComponent', () => {
   let component: CoursesListComponent;
@@ -14,7 +15,13 @@ describe('CoursesListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CoursesListComponent, CourseItemComponent, CourseRelevanceDirective, DurationPipe],
+      declarations: [
+        CoursesListComponent,
+        CourseItemComponent, 
+        CourseRelevanceDirective, 
+        DurationPipe,
+        CourseOrderByPipe,
+      ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
       .compileComponents();
