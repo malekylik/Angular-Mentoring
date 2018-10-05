@@ -2,7 +2,7 @@
   <div>
     <div class="courses-list-container_course-item-info">
         <h3 class="courses-list-container_course-title">
-          {{course.title}}
+          {{course.title | uppercase}}
           <fa-icon [icon]="starIcon" class="courses-list-container_course-item-top-rated-start" *ngIf="course.topRated"></fa-icon>
         </h3>
         <p>
