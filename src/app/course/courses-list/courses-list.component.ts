@@ -35,7 +35,6 @@ export class CoursesListComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.courses = coursesListMock;
   }
 
   onDeleteCourse(id: string): void {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { coursesListMock } from '../courses-list-mock';
+import { Course } from '../course.model';
 
 @Component({
   selector: 'app-courses-list-with-controls',
@@ -9,11 +10,14 @@ import { coursesListMock } from '../courses-list-mock';
 })
 export class CoursesListWithControlsComponent implements OnInit {
 
-  coursesListLength: number = coursesListMock.length;
+  courses: Course[];
 
-  constructor() { }
+  constructor() { 
+    this.courses = [];
+  }
 
   ngOnInit() {
+    this.courses = coursesListMock;
   }
 
   onLoadMore(): void {

@@ -1,7 +1,7 @@
 <div class="courses-list-container">
   <div class="width-wrapper courses-list-container_wrapper">
     <app-toolbox></app-toolbox>
-    <app-courses-list></app-courses-list>
+    <app-courses-list [courses]="courses" ></app-courses-list>
 
     <button 
     class="courses-list-container_load-more-button" 
@@ -11,8 +11,7 @@
     <button 
     class="courses-list-container_load-more-button" 
     (click)="onLoadMore()" 
-    *ngIf="!coursesListLength" disabled >LOAD MORE</button>
-
-    <ng-template #noDataButton >NO DATA. FEEL FREE TO ADD NEW COURSE</ng-template>
+    *ngIf="!courses.length" disabled >NO DATA. FEEL FREE TO ADD NEW COURSE</button>
+    
   </div>
 </div>
