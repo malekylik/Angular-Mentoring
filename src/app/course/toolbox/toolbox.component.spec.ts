@@ -28,7 +28,7 @@ describe('ToolboxComponent', () => {
 
   it('should start searching on search button click', () => {
     spyOn(component, 'onSearch');
-    fixture.debugElement.query(By.css('.courses-list_toolbox-search-button')).triggerEventHandler('click', null);
+    fixture.debugElement.query(By.css('form')).triggerEventHandler('submit', null);
 
     expect(component.onSearch).toHaveBeenCalled();
   });
