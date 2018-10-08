@@ -1,17 +1,17 @@
 <div class="courses-list-container">
   <div class="width-wrapper courses-list-container_wrapper">
-    <app-toolbox></app-toolbox>
-    <app-courses-list [courses]="courses" ></app-courses-list>
+    <app-toolbox (search)="onSearch($event)" ></app-toolbox>
+    <app-courses-list [courses]="transformedCourses" ></app-courses-list>
 
     <button 
     class="courses-list-container_load-more-button" 
     (click)="onLoadMore()" 
-    *ngIf="coursesListLength" >LOAD MORE</button>
+    *ngIf="courses.length" >LOAD MORE</button>
 
     <button 
     class="courses-list-container_load-more-button" 
     (click)="onLoadMore()" 
     *ngIf="!courses.length" disabled >NO DATA. FEEL FREE TO ADD NEW COURSE</button>
-    
+
   </div>
 </div>

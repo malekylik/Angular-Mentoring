@@ -1,10 +1,10 @@
 <div class="courses-list_toolbox">
-  <form>
+  <form (submit)="onSearch()" >
     <input type="search" class="courses-list_toolbox-search-field" 
     placeholder="Name, fragment or date" 
     name="courseName"
     [(ngModel)]="searchValue">
-    <input (click)="onSearch()" type="submit" class="courses-list_toolbox-search-button" value="Search">
+    <input type="submit" class="courses-list_toolbox-search-button" value="Search">
   </form>
 
   <button>Add course</button>
