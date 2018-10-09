@@ -42,6 +42,6 @@ describe('SearchPipe', () => {
       },
     ];
   
-    expect(pipe.transform(filtredCourses, searchString)).toEqual(filtredCourses);
+    expect(pipe.transform(coursesListMock, searchString)).toEqual(filtredCourses);
   });
 });
