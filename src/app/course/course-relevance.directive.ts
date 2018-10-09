@@ -1,23 +1,23 @@
-import { Directive, ElementRef, Input } from '@angular/core';
+import { Directive, ElementRef, Input, OnChanges } from '@angular/core';
 
 @Directive({
   selector: '[appCourseRelevance]'
 })
-export class CourseRelevanceDirective {
+export class CourseRelevanceDirective implements OnChanges {
 
   @Input('appCourseRelevance') createdDate: string;
-
-  constructor(private el: ElementRef) {
-    setTimeout(() => {
-      this.changeCourseBorderByRelevance();
-    });
-  }
 
   private readonly millisecondsPerSecond: number = 1000;
   private readonly secondsPerMinute: number = 60;
   private readonly minutesPerHour: number = 60;
   private readonly hoursPerDay: number = 24;
   private readonly millisecondsPerDay: number = this.hoursPerDay * this.minutesPerHour * this.secondsPerMinute * this.millisecondsPerSecond;
+
+  constructor(private el: ElementRef) { }
+
+  ngOnChanges() {
+    this.changeCourseBorderByRelevance();
+  }
 
   private changeCourseBorderByRelevance(): void {
     const currentDate: number = new Date().getTime();
