@@ -20,4 +20,6 @@ import { FooterComponent } from './footer/footer.component';
     FooterComponent,
   ]
 })
-export class CoreModule { }
+export class CoreModule {
+
+}
