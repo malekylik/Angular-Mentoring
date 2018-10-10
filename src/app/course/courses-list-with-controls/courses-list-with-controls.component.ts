@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { coursesListMock } from '../courses-list-mock';
 import { Course } from '../course.model';
 import { CourseOrderByPipe } from '../course-order-by.pipe';
 import { SearchPipe } from '../search.pipe';
+import { CoursesService } from '../courses.service';
 
 @Component({
   selector: 'app-courses-list-with-controls',
@@ -22,13 +22,14 @@ export class CoursesListWithControlsComponent implements OnInit {
   constructor(
     private courseOrderByPipe : CourseOrderByPipe,
     private searchPipe : SearchPipe,
+    private coursesService: CoursesService
   ) { 
     this.courses = [];
     this.transformedCourses = [];
   }
 
   ngOnInit() {
-    this.courses = coursesListMock;
+    this.courses = this.coursesService.getCourses();
     this.transformedCourses = this.orderByCourses(this.courses);
   }
 

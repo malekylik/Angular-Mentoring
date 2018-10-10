@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
 
-import { CourseModule } from './course.module';
+import { Course } from './course.model';
+import { coursesListMock } from './courses-list-mock';
 
 @Injectable({
-  providedIn: CourseModule
+  providedIn: 'root'
 })
 export class CoursesService {
 
   constructor() { }
+
+  getCourses(): Course[] {
+    return coursesListMock;
+  }
 }
