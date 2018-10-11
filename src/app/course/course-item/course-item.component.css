@@ -4,7 +4,7 @@ p {
 
 .courses-list-container_course-item {
     display: flex;
-    border: 2px solid #CCC;
+    border: 2px solid transparent;
     padding: 5px 10px;
 }
 

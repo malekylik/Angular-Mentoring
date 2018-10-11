@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Observable } from 'rxjs';
 
 import { Course } from '../course.model';
 import { CourseOrderByPipe } from '../course-order-by.pipe';
 import { SearchPipe } from '../search.pipe';
 import { CoursesService } from '../courses.service';
+import { DeleteConfirmationModalComponent } from '../delete-confirmation-modal/delete-confirmation-modal.component';
 
 @Component({
   selector: 'app-courses-list-with-controls',
@@ -20,10 +23,11 @@ export class CoursesListWithControlsComponent implements OnInit {
   transformedCourses: Course[];
 
   constructor(
-    private courseOrderByPipe : CourseOrderByPipe,
-    private searchPipe : SearchPipe,
+    public dialog: MatDialog,
+    private courseOrderByPipe: CourseOrderByPipe,
+    private searchPipe: SearchPipe,
     private coursesService: CoursesService
-  ) { 
+  ) {
     this.courses = [];
     this.transformedCourses = [];
   }
@@ -43,6 +47,15 @@ export class CoursesListWithControlsComponent implements OnInit {
     }
   }
 
+  onDeleteCourse(id: string): void {
+    this.openDeleteConfirmationDialog()
+    .subscribe((result) => {
+      if (result) {
+        this.coursesService.deleteCourse(id);
+      }
+    });
+  }
+
   onLoadMore(): void {
     console.log("LOADING");
   }
@@ -54,4 +67,13 @@ export class CoursesListWithControlsComponent implements OnInit {
   private searchCourses(courses: Course[], searchString: string): Course[] {
     return this.searchPipe.transform(courses, searchString);
   }
+
+  private openDeleteConfirmationDialog(): Observable<boolean> {
+    const dialogRef = this.dialog.open(DeleteConfirmationModalComponent, {
+      maxWidth: '500px',
+    });
+
+    return dialogRef.afterClosed();
+  }
+
 }

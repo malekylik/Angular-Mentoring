@@ -1,12 +1,14 @@
-<div class="app-wrapper">
-    <header>
+<div class="mat-app-background">
+    <div class="app-wrapper mat-app-foreground">
+        <header>
             <app-header logo="Logo" [user-login]="user.firstName"></app-header>
-    </header>
-    <main class="app-main">
-        <app-breadcrumbs></app-breadcrumbs>
-        <app-courses-list-with-controls></app-courses-list-with-controls>
-    </main>
-    <footer class="app-footer">
-        <app-footer></app-footer>
-    </footer>
+        </header>
+        <main class="app-main">
+            <app-breadcrumbs></app-breadcrumbs>
+            <app-courses-list-with-controls></app-courses-list-with-controls>
+        </main>
+        <footer class="app-footer">
+            <app-footer></app-footer>
+        </footer>
+    </div>
 </div>
