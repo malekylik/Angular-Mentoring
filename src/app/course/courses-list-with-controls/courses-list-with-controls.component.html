@@ -6,12 +6,12 @@
     <button 
     class="courses-list-container_load-more-button" 
     (click)="onLoadMore()" 
-    *ngIf="courses.length" >LOAD MORE</button>
+    *ngIf="courses.length" mat-button >LOAD MORE</button>
 
     <button 
     class="courses-list-container_load-more-button" 
     (click)="onLoadMore()" 
-    *ngIf="!courses.length" disabled >NO DATA. FEEL FREE TO ADD NEW COURSE</button>
+    *ngIf="!courses.length" disabled mat-button >NO DATA. FEEL FREE TO ADD NEW COURSE</button>
 
   </div>
 </div>

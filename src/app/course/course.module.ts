@@ -5,6 +5,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatInputModule } from '@angular/material/input';
 
 import { ToolboxComponent } from './toolbox/toolbox.component';
 import { CoursesListComponent } from './courses-list/courses-list.component';
@@ -24,6 +25,7 @@ import { DeleteConfirmationModalComponent } from './delete-confirmation-modal/de
     BrowserAnimationsModule,
     MatDialogModule,
     MatButtonModule,
+    MatInputModule,
   ],
   declarations: [
     ToolboxComponent,

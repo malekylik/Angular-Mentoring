@@ -1,11 +1,11 @@
 <div class="courses-list_toolbox">
-  <form (submit)="onSearch()" >
-    <input type="search" class="courses-list_toolbox-search-field" 
-    placeholder="Name, fragment or date" 
-    name="courseName"
-    [(ngModel)]="searchValue">
-    <input type="submit" class="courses-list_toolbox-search-button" value="Search">
+  <form (submit)="onSearch()">
+    <mat-form-field class="example-full-width">
+      <input matInput type="search" class="courses-list_toolbox-search-field" placeholder="Name, fragment or date" name="courseName"
+        [(ngModel)]="searchValue">
+    </mat-form-field>
+    <button (click)="onSearch()" class="courses-list_toolbox-search-button" mat-button>Search</button>
   </form>
 
-  <button>Add course</button>
+  <button mat-button>Add course</button>
 </div>
