@@ -18,6 +18,10 @@ export class CoursesService {
     return this.coursesList;
   }
 
+  getCourse(id: string): Course | null {
+    return this.coursesList.find((course) => course.id === id) || null;
+  }
+
   deleteCourse(id: string): void {
     const index = this.coursesList.findIndex((course) => course.id === id);
 
