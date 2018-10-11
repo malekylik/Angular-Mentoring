@@ -27,6 +27,10 @@ p {
     cursor: pointer;
 }
 
+.courses-list-container_course-item-info-with-description {
+    flex-grow: 1;
+}
+
 .courses-list-container_course-item-info {
     display: flex;
     justify-content: space-between;
