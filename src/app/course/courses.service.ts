@@ -22,6 +22,20 @@ export class CoursesService {
     return this.coursesList.find((course) => course.id === id) || null;
   }
 
+  updateCourse(course: Course): boolean {
+    const index = this.coursesList.findIndex((_course) => _course.id === course.id);
+
+    if (~index) {
+      this.coursesList[index] = {
+        ...course
+      };
+
+      return true;
+    }
+
+    return false;
+  }
+
   deleteCourse(id: string): void {
     const index = this.coursesList.findIndex((course) => course.id === id);
 
