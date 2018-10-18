@@ -1,3 +1,5 @@
+// раскидывай по папкам. Каша какая-то
+
 import { CourseOrderByPipe } from './course-order-by.pipe';
 
 import { Course } from './course.model';

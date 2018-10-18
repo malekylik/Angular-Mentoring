@@ -4,7 +4,7 @@ import { Course } from './course.model';
 import { coursesListMock } from './courses-list-mock';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root' // Не думаю, что это нужно в руте. Скорее всего это принадлежит листингу курсов
 })
 export class CoursesService {
 
@@ -22,20 +22,20 @@ export class CoursesService {
     return this.coursesList.find((course) => course.id === id) || null;
   }
 
-  addCourse(title: string, duration: number, description: string, topRated: boolean = false): void {
-    const maxId: string = this.coursesList.reduce((prev, current) => {
+  addCourse(title: string, duration: number, description: string, topRated: boolean = false): void { // Лучше объект принимать
+    const maxId: string = this.coursesList.reduce((prev, current) => { // Весь метод так себе. Стринговые айдишники, странная логика
       if (Number(prev) < Number(current.id)) {
         return current.id;
       }
 
       return prev;
-    }, "-1");
+    }, "-1"); // Магическое число
     
     const nowDate: Date = new Date();
 
     let idForNewCourse: string;
 
-    if (~maxId) {
+    if (~maxId) { // Вместо этого просто используй генерацию уникальных чисел, а не прибавляй.
       idForNewCourse = String(Number(maxId) + 1);
     } else {
       idForNewCourse = "1"
@@ -70,7 +70,7 @@ export class CoursesService {
   deleteCourse(id: string): void {
     const index = this.coursesList.findIndex((course) => course.id === id);
 
-    if (~index) {
+    if (~index) { // Что ты тут проверяешь? Не ясно
       this.coursesList.splice(index, 1);
     }
   }

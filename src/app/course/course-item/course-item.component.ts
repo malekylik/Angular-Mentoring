@@ -12,14 +12,14 @@ export class CourseItemComponent implements OnInit {
 
   @Input() course: Course;
   @Output() deleteCourse: EventEmitter<string> = new EventEmitter();
-
+  // Неадекватный компонент
   starIcon = faStar;
   classes = {};
 
   constructor() { }
 
   ngOnInit() {
-    this.classes['courses-list-container_course-item__top-rated'] = this.course.topRated;
+    this.classes['courses-list-container_course-item__top-rated'] = this.course.topRated; // Дикая дичь
   }
 
   onDeleteCourse(): void {

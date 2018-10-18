@@ -8,7 +8,7 @@ import { User } from './user.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  user: User = {
+  user: User = { // Даже для фейка заготовь сразу класс и создавай с помощью класса
     id: "1",
     firstName: "Maksim",
     lastName: "Kalinouski",
