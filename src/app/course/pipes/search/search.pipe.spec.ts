@@ -1,6 +1,6 @@
 import { SearchPipe } from './search.pipe';
 
-import { Course } from './course.model';
+import { Course } from '../../models/course.model';
 
 const coursesListMock: Course[] = [
   {

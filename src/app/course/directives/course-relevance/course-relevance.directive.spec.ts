@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { CourseRelevanceDirective } from './course-relevance.directive';
-import { Course } from './course.model';
+import { Course } from '../../models/course.model';
 
 const nowDate: Date = new Date();
 

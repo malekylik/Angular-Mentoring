@@ -1,4 +1,4 @@
-import { Course } from './course.model';
+import { Course } from './models/course.model';
 
 const nowDate: Date = new Date();
 

@@ -1,4 +1,4 @@
-export interface Course { // Выкинуть в папку
+export interface Course {
     id: string;
     title: string;
     creationTime: string;

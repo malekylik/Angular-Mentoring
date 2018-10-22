@@ -1,5 +1,5 @@
 import { Directive, ElementRef, Input, OnChanges } from '@angular/core';
-import { millisecondsPerDay, courseRelevanceTimeInDays } from './constants';
+import { millisecondsPerDay, courseRelevanceTimeInDays } from '../../constants';
 
 @Directive({
   selector: '[appCourseRelevance]'

@@ -1,8 +1,6 @@
-// раскидывай по папкам. Каша какая-то
-
 import { CourseOrderByPipe } from './course-order-by.pipe';
 
-import { Course } from './course.model';
+import { Course } from '../../models/course.model';
 
 const coursesListMock: Course[] = [
   {

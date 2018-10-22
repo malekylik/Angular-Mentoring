@@ -11,10 +11,10 @@ import { ToolboxComponent } from './toolbox/toolbox.component';
 import { CoursesListComponent } from './courses-list/courses-list.component';
 import { CourseItemComponent } from './course-item/course-item.component';
 import { CoursesListWithControlsComponent } from './courses-list-with-controls/courses-list-with-controls.component';
-import { CourseRelevanceDirective } from './course-relevance.directive';
-import { DurationPipe } from './duration.pipe';
-import { CourseOrderByPipe } from './course-order-by.pipe';
-import { SearchPipe } from './search.pipe';
+import { CourseRelevanceDirective } from './directives/course-relevance/course-relevance.directive';
+import { DurationPipe } from './pipes/duration/duration.pipe';
+import { CourseOrderByPipe } from './pipes/course-order-by/course-order-by.pipe';
+import { SearchPipe } from './pipes/search/search.pipe';
 import { DeleteConfirmationModalComponent } from './delete-confirmation-modal/delete-confirmation-modal.component';
 
 @NgModule({

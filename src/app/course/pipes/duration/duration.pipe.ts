@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { minutesPerHour } from './constants';
+import { minutesPerHour } from '../../constants';
 
 @Pipe({
   name: 'durationPipe'

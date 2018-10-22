@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 
-import { Course } from '../course.model';
+import { Course } from '../models/course.model';
 
 @Component({
   selector: 'app-course-item',
