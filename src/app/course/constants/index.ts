@@ -3,3 +3,5 @@ export const secondsPerMinute: number = 60; // Используй констан
 export const minutesPerHour: number = 60; // Используй константы
 export const hoursPerDay: number = 24; // Используй константы
 export const millisecondsPerDay: number = hoursPerDay * minutesPerHour * secondsPerMinute * millisecondsPerSecond;
+
+export const courseRelevanceTimeInDays: number = 14; 

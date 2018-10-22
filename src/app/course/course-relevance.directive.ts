@@ -1,5 +1,5 @@
 import { Directive, ElementRef, Input, OnChanges } from '@angular/core';
-import { millisecondsPerDay } from './constants';
+import { millisecondsPerDay, courseRelevanceTimeInDays } from './constants';
 
 @Directive({
   selector: '[appCourseRelevance]'
@@ -21,9 +21,9 @@ export class CourseRelevanceDirective implements OnChanges {
       (createdDate - currentDate) / (millisecondsPerDay)
     );
 
-    if (differenceDate < 0 && differenceDate >= -14) { // Магическое число
+    if (differenceDate < 0 && differenceDate >= -courseRelevanceTimeInDays) {
       this.el.nativeElement.style.borderColor = 'green';
-    } if (differenceDate > 0) {
+    } else if (differenceDate > 0) {
       this.el.nativeElement.style.borderColor = 'blue';
     }
   }
