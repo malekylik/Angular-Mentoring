@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
-import { User } from './models/user.model';
+import { User } from './models/user/user.model';
+import { BaseUser } from './models/user/base-user';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +9,5 @@ import { User } from './models/user.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  user: User = { // Даже для фейка заготовь сразу класс и создавай с помощью класса
-    id: "1",
-    firstName: "Maksim",
-    lastName: "Kalinouski",
-  }
-
+  user: User = new BaseUser("1", "Maksim", "Kalinouski");
 }
