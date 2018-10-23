@@ -16,6 +16,7 @@ import { DurationPipe } from './pipes/duration/duration.pipe';
 import { CourseOrderByPipe } from './pipes/course-order-by/course-order-by.pipe';
 import { SearchPipe } from './pipes/search/search.pipe';
 import { DeleteConfirmationModalComponent } from './delete-confirmation-modal/delete-confirmation-modal.component';
+import { CoursesService } from './services/courses/courses.service';
 
 @NgModule({
   imports: [
@@ -38,6 +39,7 @@ import { DeleteConfirmationModalComponent } from './delete-confirmation-modal/de
     SearchPipe,
     DeleteConfirmationModalComponent,
   ],
+  providers: [CoursesService],
   entryComponents: [
     DeleteConfirmationModalComponent
   ],

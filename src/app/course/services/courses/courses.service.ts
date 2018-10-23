@@ -1,11 +1,6 @@
-import { Injectable } from '@angular/core';
-
 import { Course } from '../../models/course.model';
 import { coursesListMock } from '../../courses-list-mock';
 
-@Injectable({
-  providedIn: 'root' // Не думаю, что это нужно в руте. Скорее всего это принадлежит листингу курсов
-})
 export class CoursesService {
 
   private coursesList: Course[] = [];
