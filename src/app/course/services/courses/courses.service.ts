@@ -17,35 +17,8 @@ export class CoursesService {
     return this.coursesList.find((course) => course.id === id) || null;
   }
 
-  addCourse(title: string, duration: number, description: string, topRated: boolean = false): void { // Лучше объект принимать
-    const maxId: string = this.coursesList.reduce((prev, current) => { // Весь метод так себе. Стринговые айдишники, странная логика
-      if (Number(prev) < Number(current.id)) {
-        return current.id;
-      }
-
-      return prev;
-    }, "-1"); // Магическое число
-    
-    const nowDate: Date = new Date();
-
-    let idForNewCourse: string;
-
-    if (~maxId) { // Вместо этого просто используй генерацию уникальных чисел, а не прибавляй.
-      idForNewCourse = String(Number(maxId) + 1);
-    } else {
-      idForNewCourse = "1"
-    }
-
-    const newCourse: Course = {
-      id: idForNewCourse,
-      creationTime: `${nowDate.getMonth() + 1}.${nowDate.getDate()}.${nowDate.getFullYear()}`,
-      title,
-      duration,
-      description,
-      topRated,
-    };
-
-    this.coursesList = [...this.coursesList, newCourse];
+  addCourse(course: Course): void {
+    this.coursesList = [...this.coursesList, course];
   }
 
   updateCourse(course: Course): boolean {
