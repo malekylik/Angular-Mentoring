@@ -51,7 +51,7 @@ export class CoursesService {
   updateCourse(course: Course): boolean {
     const index = this.coursesList.findIndex((_course) => _course.id === course.id);
 
-    if (~index) {
+    if (index !== -1) {
       this.coursesList[index] = {
         ...course
       };
@@ -65,7 +65,7 @@ export class CoursesService {
   deleteCourse(id: string): void {
     const index = this.coursesList.findIndex((course) => course.id === id);
 
-    if (~index) { // Что ты тут проверяешь? Не ясно
+    if (index !== -1) {
       this.coursesList.splice(index, 1);
     }
   }
