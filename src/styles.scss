@@ -1,5 +1,7 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
+$app-width: 1024px;
+
 html {
     font-size: 10px;
 }
@@ -14,7 +16,7 @@ html, body {
 }
 
 .width-wrapper {
-    width: 1024px;
+    width: $app-width;
     margin: 0 auto;
 }
 
