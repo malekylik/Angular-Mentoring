@@ -1,4 +1,7 @@
-<article [appCourseRelevance]="course.creationTime" class="courses-list-container_course-item mat-elevation-z4" [ngClass]="classes">
+<article 
+[appCourseRelevance]="course.creationTime" 
+[ngClass]="{ 'courses-list-container_course-item__top-rated': course.topRated }"
+class="courses-list-container_course-item mat-elevation-z4" >
   <div class="courses-list-container_course-item-info-with-description" >
     <div class="courses-list-container_course-item-info">
         <h3 class="courses-list-container_course-title">
