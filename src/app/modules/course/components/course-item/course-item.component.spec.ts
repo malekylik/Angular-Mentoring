@@ -5,9 +5,9 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { UpperCasePipe } from '@angular/common';
 
 import { CourseItemComponent } from './course-item.component';
-import { Course } from '../models/course.model';
-import { CourseRelevanceDirective } from '../directives/course-relevance/course-relevance.directive';
-import { DurationPipe } from '../pipes/duration/duration.pipe';
+import { Course } from '../../models/course.model';
+import { CourseRelevanceDirective } from '../../directives/course-relevance/course-relevance.directive';
+import { DurationPipe } from '../../pipes/duration/duration.pipe';
 
 @Component({
   template: `

@@ -4,10 +4,10 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { CoursesListComponent } from './courses-list.component';
 import { CourseItemComponent } from '../course-item/course-item.component';
-import { Course } from '../models/course.model';
-import { CourseRelevanceDirective } from '../directives/course-relevance/course-relevance.directive';
-import { DurationPipe } from '../pipes/duration/duration.pipe';
-import { CourseOrderByPipe } from '../pipes/course-order-by/course-order-by.pipe';
+import { Course } from '../../models/course.model';
+import { CourseRelevanceDirective } from '../../directives/course-relevance/course-relevance.directive';
+import { DurationPipe } from '../../pipes/duration/duration.pipe';
+import { CourseOrderByPipe } from '../../pipes/course-order-by/course-order-by.pipe';
 
 const courses: Course[] = [
   {

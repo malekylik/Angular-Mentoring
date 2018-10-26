@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Observable } from 'rxjs';
 
-import { Course } from '../models/course.model';
-import { CourseOrderByPipe } from '../pipes/course-order-by/course-order-by.pipe';
-import { SearchPipe } from '../pipes/search/search.pipe';
-import { CoursesService } from '../services/courses/courses.service';
+import { Course } from '../../models/course.model';
+import { CourseOrderByPipe } from '../../pipes/course-order-by/course-order-by.pipe';
+import { SearchPipe } from '../../pipes/search/search.pipe';
+import { CoursesService } from '../../services/courses/courses.service';
 import { DeleteConfirmationModalComponent } from '../delete-confirmation-modal/delete-confirmation-modal.component';
 
 @Component({
