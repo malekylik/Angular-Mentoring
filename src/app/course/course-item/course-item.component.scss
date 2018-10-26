@@ -1,7 +1,3 @@
-p {
-    margin: 0;
-}
-
 .courses-list-container_course-item {
     display: flex;
     border: 2px solid transparent;
@@ -21,10 +17,10 @@ p {
     flex-flow: column;
     justify-content: space-around;
     margin-left: 20px;
-}
 
-.courses-list-container_course-item-controls > button {
-    cursor: pointer;
+    button {
+        cursor: pointer;
+    }
 }
 
 .courses-list-container_course-item-info-with-description {

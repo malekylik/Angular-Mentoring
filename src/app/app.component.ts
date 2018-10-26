@@ -6,7 +6,7 @@ import { BaseUser } from './models/user/base-user';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   user: User = new BaseUser("1", "Maksim", "Kalinouski");

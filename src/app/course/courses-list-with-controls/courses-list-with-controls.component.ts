@@ -11,7 +11,7 @@ import { DeleteConfirmationModalComponent } from '../delete-confirmation-modal/d
 @Component({
   selector: 'app-courses-list-with-controls',
   templateUrl: './courses-list-with-controls.component.html',
-  styleUrls: ['./courses-list-with-controls.component.css'],
+  styleUrls: ['./courses-list-with-controls.component.scss'],
   providers: [
     CourseOrderByPipe,
     SearchPipe,

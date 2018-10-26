@@ -1,0 +1,19 @@
+$breadcrumbs-padding: 15px;
+
+.breadcrumbs {
+    font-size: 1.6rem;
+    min-height: 30px;
+}
+
+.breadcrumbs_wrapper {
+    padding: $breadcrumbs-padding $breadcrumbs-padding;
+}
+
+.breadcrumbs_link {
+    text-decoration: none;
+    color: #000;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
