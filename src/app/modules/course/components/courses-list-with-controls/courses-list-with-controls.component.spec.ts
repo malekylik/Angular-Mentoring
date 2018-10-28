@@ -33,7 +33,7 @@ describe('CoursesListWithControlsComponent', () => {
   it('start load more on button click', () => {
     spyOn(component, 'onLoadMore');
 
-    fixture.debugElement.query(By.css('.courses-list-container_load-more-button')).triggerEventHandler('click', null);
+    fixture.debugElement.query(By.css('.load-more-button')).triggerEventHandler('click', null);
 
     expect(component.onLoadMore).toHaveBeenCalled();
   });

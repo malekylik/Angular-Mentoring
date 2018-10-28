@@ -25,7 +25,7 @@ describe('HeaderComponent', () => {
   });
 
   it('should render passed logo text', () => {
-    const logoText = fixture.debugElement.query(By.css('.header_logo-text'));
+    const logoText = fixture.debugElement.query(By.css('.logo-text'));
     component.logo = "logo-text";
     fixture.detectChanges();
 
@@ -33,7 +33,7 @@ describe('HeaderComponent', () => {
   });
 
   it('should render passed user login', () => {
-    const logoText = fixture.debugElement.query(By.css('.header_user-login'));
+    const logoText = fixture.debugElement.query(By.css('.user-login'));
     component.userLogin = "user-login";
     fixture.detectChanges();
 

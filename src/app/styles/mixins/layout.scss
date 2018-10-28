@@ -1,0 +1,18 @@
+@import "../variables/sizes.scss";
+
+@mixin page-width() {
+    width: $page-width-size;
+    margin: 0 auto;
+}
+
+@mixin sticky-footer {
+    min-height: 100%;
+
+    &_main {
+        flex: 1 0 auto;
+    }
+    
+    &_footer {
+        flex-shrink: 0;
+    }
+}

@@ -1,3 +1,5 @@
-.courses-list_delete-confirmation-modal {
-    font-size: 1.6rem;
+@import "../../../../styles/variables/sizes.scss";
+
+.delete-confirmation-modal {
+    font-size: $text-size-default;
 }

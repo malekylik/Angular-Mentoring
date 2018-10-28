@@ -68,7 +68,7 @@ describe('CoursesListComponent', () => {
     const onDeleteCourse = spyOn(component, 'onDeleteCourse');
     
     fixture.detectChanges();
-    const deleteButton = fixture.debugElement.queryAll(By.css('.courses-list-container_delete-course-item-control'))[1];
+    const deleteButton = fixture.debugElement.queryAll(By.css('.controls__delete-course-item-control'))[1];
     deleteButton.triggerEventHandler('click', fixture.componentInstance.courses[1].id);
 
     expect(onDeleteCourse).toHaveBeenCalledWith(fixture.componentInstance.courses[1].id);
@@ -77,6 +77,6 @@ describe('CoursesListComponent', () => {
   it('should render proper amount of course items', () => {
     fixture.detectChanges();
 
-    expect(fixture.debugElement.queryAll(By.css('.courses-list-container_courses-list-item')).length).toBe(component.courses.length);
+    expect(fixture.debugElement.queryAll(By.css('li')).length).toBe(component.courses.length);
   });
 });

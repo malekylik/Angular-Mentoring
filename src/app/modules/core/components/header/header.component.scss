@@ -1,45 +1,52 @@
+@import "../../../../styles/mixins/layout.scss";
+@import "../../../../styles/variables/sizes.scss";
+
 .header {
     box-shadow: 0 5px rgba(0, 0, 0, .1);
+
+    &__wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 65px;
+        max-height: 100px;
+        padding: 10px 15px;
+    
+        @include page-width();
+    }
 }
 
-.header_wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    min-height: 65px;
-    max-height: 100px;
-    padding: 10px 15px;
-}
-
-.header_logo {
+.logo {
     display: flex;
     height: 50px;
     cursor: pointer;
+
+    &_logo-image {
+        margin-right: 10px;
+    }
 }
 
-.header_logo-image {
+.logo-image {
     height: 50px;
     user-select: none;
-    margin-right: 10px;
 }
 
-.header_logo-text {
+.logo-text {
     display: flex;
     align-items: center;
     font-size: 2.4rem;
 }
 
-.header_user-managment {
+.user-managment {
     display: flex;
     align-items: baseline;
-    font-size: 1.6rem;
+    font-size: $text-size-default;
+
+    &__user-login-button {
+        margin-left: 10px;
+    }
 }
 
-.header_user-login {
+.user-login {
     color: #999;
-}
-
-.header_user-login-button {
-    margin-left: 10px;
-    cursor: pointer;
 }

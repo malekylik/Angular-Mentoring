@@ -1,6 +1,9 @@
+import { Injectable } from '@angular/core';
+
 import { Course } from '../../models/course.model';
 import { coursesListMock } from '../../courses-list-mock';
 
+@Injectable()
 export class CoursesService {
 
   private coursesList: Course[] = [];

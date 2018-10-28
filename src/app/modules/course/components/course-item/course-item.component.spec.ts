@@ -54,10 +54,10 @@ describe('CourseItemComponent', () => {
   });
 
   it('should render passed course information', () => {
-    const courseTitleElement = fixture.debugElement.query(By.css(".courses-list-container_course-title")).nativeElement;
-    const courseDurationElement = fixture.debugElement.query(By.css(".courses-list-container_course-duration")).nativeElement;
-    const creationTimeElement = fixture.debugElement.query(By.css(".courses-list-container_course-creation-time-info")).nativeElement;
-    const descriptionTimeElement = fixture.debugElement.query(By.css(".courses-list-container_course-description")).nativeElement;
+    const courseTitleElement = fixture.debugElement.query(By.css(".course-title")).nativeElement;
+    const courseDurationElement = fixture.debugElement.query(By.css(".course-duration")).nativeElement;
+    const creationTimeElement = fixture.debugElement.query(By.css(".info-with-description__creation-time")).nativeElement;
+    const descriptionTimeElement = fixture.debugElement.query(By.css(".description")).nativeElement;
     const course = component.course;
 
     expect(courseTitleElement.innerText).toBe(new UpperCasePipe().transform(course.title));
@@ -67,7 +67,7 @@ describe('CourseItemComponent', () => {
   });
 
   it('should trigger delete event on clicked course item', () => {
-    const deleteButton = fixture.debugElement.query(By.css(".courses-list-container_delete-course-item-control"));
+    const deleteButton = fixture.debugElement.query(By.css(".controls__delete-course-item-control"));
     
     deleteButton.triggerEventHandler('click', null);
     expect(component.courseIdToDelete).toBe(component.course.id);    

@@ -1,10 +1,9 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-
-import { HeaderComponent } from './components/header/header.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   imports: [
@@ -12,8 +11,8 @@ import { FooterComponent } from './components/footer/footer.component';
     MatButtonModule,
   ],
   declarations: [
-    HeaderComponent, 
-    BreadcrumbsComponent, 
+    HeaderComponent,
+    BreadcrumbsComponent,
     FooterComponent,
   ],
   exports: [

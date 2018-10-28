@@ -1,10 +1,15 @@
-.footer {
-    font-size: 1.6rem;
-    min-height: 40px;
-}
+@import "../../../../styles/mixins/layout.scss";
+@import "../../../../styles/variables/sizes.scss";
 
-.footer_wrapper {
-    display: flex;
-    justify-content: flex-end;
-    padding: 10px 15px;
+.footer {
+    font-size: $text-size-default;
+    min-height: 40px;
+
+    &__wrapper {
+        display: flex;
+        justify-content: flex-end;
+        padding: 10px 15px;
+    
+        @include page-width();
+    }
 }
