@@ -9,7 +9,7 @@
       </a>
       <h1 class="logo-text">{{logo}}</h1>
     </div>
-    <div class="user-managment">
+    <div class="user-managment" *ngIf="userLogin" >
       <span class="user-login">{{userLogin}}</span>
       <button class="user-managment__user-login-button" mat-button >Log off</button>
     </div>

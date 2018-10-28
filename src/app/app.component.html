@@ -1,10 +1,10 @@
 <div class="app mat-app-background">
     <header>
-        <app-header logo="Logo" [user-login]="user.firstName"></app-header>
+        <app-header logo="Logo" [user-login]="authorizationService.getUserInfo()"></app-header>
     </header>
     <main class="app_main">
-        <app-breadcrumbs></app-breadcrumbs>
-        <app-courses-list-with-controls></app-courses-list-with-controls>
+        <app-breadcrumbs *ngIf="authorizationService.isAuthenticated()"></app-breadcrumbs>
+        <app-courses-list-with-controls *ngIf="authorizationService.isAuthenticated()"></app-courses-list-with-controls>
     </main>
     <footer class="app_footer">
         <app-footer></app-footer>

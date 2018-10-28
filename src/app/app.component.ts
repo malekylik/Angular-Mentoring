@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 
-import { User } from './models/user/user.model';
-import { BaseUser } from './models/user/base-user';
+import { AuthorizationService } from './services/authorization/authorization.service';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +8,7 @@ import { BaseUser } from './models/user/base-user';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  user: User = new BaseUser("1", "Maksim", "Kalinouski");
+  constructor(
+    private authorizationService: AuthorizationService
+  ) {}
 }
