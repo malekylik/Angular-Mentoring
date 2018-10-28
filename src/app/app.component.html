@@ -5,6 +5,7 @@
     <main class="app_main">
         <app-breadcrumbs *ngIf="authorizationService.isAuthenticated()"></app-breadcrumbs>
         <app-courses-list-with-controls *ngIf="authorizationService.isAuthenticated()"></app-courses-list-with-controls>
+        <app-login *ngIf="!authorizationService.isAuthenticated()"></app-login>
     </main>
     <footer class="app_footer">
         <app-footer></app-footer>
