@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { authorizationStorageToken } from '../../constants/authorization';
-import { User } from '../../models/user/user.model';
+import { authorizationStorageToken } from '../../../../constants/authorization';
+import { User } from '../../../../models/user/user.model';
 
 @Injectable()
 export class AuthorizationService {
