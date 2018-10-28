@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { CoreModule } from './modules/core/core.module'
 import { CourseModule } from './modules/course/course.module';
+import { AuthorizationService } from './services/authorization/authorization.service';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,9 @@ import { CourseModule } from './modules/course/course.module';
     CoreModule,
     CourseModule,
   ],
-  providers: [],
+  providers: [
+    AuthorizationService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
