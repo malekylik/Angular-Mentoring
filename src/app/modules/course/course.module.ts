@@ -17,6 +17,8 @@ import { DurationPipe } from './pipes/duration/duration.pipe';
 import { CourseOrderByPipe } from './pipes/course-order-by/course-order-by.pipe';
 import { SearchPipe } from './pipes/search/search.pipe';
 import { CoursesService } from './services/courses/courses.service';
+import { CoursesPageComponent } from './components/courses-page/courses-page.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -27,6 +29,7 @@ import { CoursesService } from './services/courses/courses.service';
     MatDialogModule,
     MatButtonModule,
     MatInputModule,
+    SharedModule,
   ],
   declarations: [
     ToolboxComponent,
@@ -38,13 +41,14 @@ import { CoursesService } from './services/courses/courses.service';
     CourseOrderByPipe,
     SearchPipe,
     DeleteConfirmationModalComponent,
+    CoursesPageComponent,
   ],
   providers: [CoursesService],
   entryComponents: [
     DeleteConfirmationModalComponent
   ],
   exports: [
-    CoursesListWithControlsComponent
+    CoursesPageComponent
   ]
 })
 export class CourseModule { }

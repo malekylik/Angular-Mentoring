@@ -1,0 +1,33 @@
+@import "../../../../styles/variables/sizes.scss";
+
+.login-page {
+    font-size: $text-size-default;
+    width: 600px;
+    border-radius: 5px;
+    background: #fff;
+}
+
+.login-header {
+    display: flex;
+    align-items: flex-end;
+    height: 50px;
+    padding: 10px;
+    border-bottom: 2px solid #999;
+}
+
+.login-heading {
+    display: flex;
+    align-items: flex-end;
+    font-size: $text-size-heading;
+}
+
+.login-button {
+    font-size: $text-size-default;
+    align-self: end;
+}
+
+.login-form {
+    display: flex;
+    flex-flow: column;
+    padding: 20px 50px;
+}

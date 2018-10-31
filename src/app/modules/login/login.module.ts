@@ -1,14 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginComponent } from './components/login/login.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+
+import { LoginPageComponent } from './components/login-page/login.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    MatButtonModule,
+    MatInputModule,
+    FormsModule,
   ],
-  declarations: [LoginComponent],
+  declarations: [
+    LoginPageComponent
+  ],
   exports: [
-    LoginComponent,
+    LoginPageComponent,
   ]
 })
 export class LoginModule { }

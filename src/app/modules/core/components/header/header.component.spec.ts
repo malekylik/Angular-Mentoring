@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { HeaderComponent } from './header.component';
+import { AuthorizationService } from '../../services/authorization/authorization.service';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -9,7 +10,8 @@ describe('HeaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HeaderComponent ]
+      providers: [AuthorizationService],
+      declarations: [HeaderComponent],
     })
     .compileComponents();
   }));
@@ -25,18 +27,18 @@ describe('HeaderComponent', () => {
   });
 
   it('should render passed logo text', () => {
-    const logoText = fixture.debugElement.query(By.css('.logo-text'));
     component.logo = "logo-text";
     fixture.detectChanges();
-
+    
+    const logoText = fixture.debugElement.query(By.css('.logo-text'));
     expect(logoText.nativeElement.innerText).toBe(component.logo);
   });
 
   it('should render passed user login', () => {
-    const logoText = fixture.debugElement.query(By.css('.user-login'));
     component.userLogin = "user-login";
     fixture.detectChanges();
-
+    
+    const logoText = fixture.debugElement.query(By.css('.user-login'));
     expect(logoText.nativeElement.innerText).toBe(component.userLogin);
   });
 });

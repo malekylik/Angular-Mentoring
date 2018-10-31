@@ -5,14 +5,16 @@
     margin: 0 auto;
 }
 
-@mixin sticky-footer {
+@mixin sticky-footer() {
+    display: flex;
+    flex-flow: column;
     min-height: 100%;
 
-    &_main {
+    &__content {
         flex: 1 0 auto;
     }
     
-    &_footer {
+    &__footer {
         flex-shrink: 0;
     }
 }

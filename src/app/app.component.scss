@@ -1,8 +1,12 @@
 @import "./styles/mixins/layout.scss";
 
 .app {
+    @include sticky-footer(); 
+}
+
+.content {
     display: flex;
     flex-flow: column;
-
-    @include sticky-footer(); 
+    justify-content: center;
+    align-items: center;
 }

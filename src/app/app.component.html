@@ -2,12 +2,11 @@
     <header>
         <app-header logo="Logo" [user-login]="authorizationService.getUserInfo()"></app-header>
     </header>
-    <main class="app_main">
-        <app-breadcrumbs *ngIf="authorizationService.isAuthenticated()"></app-breadcrumbs>
-        <app-courses-list-with-controls *ngIf="authorizationService.isAuthenticated()"></app-courses-list-with-controls>
-        <app-login *ngIf="!authorizationService.isAuthenticated()"></app-login>
+    <main class="app__content content">
+        <app-courses-page *ngIf="authorizationService.isAuthenticated()"></app-courses-page>
+        <app-login-page *ngIf="!authorizationService.isAuthenticated()"></app-login-page>
     </main>
-    <footer class="app_footer">
+    <footer class="app__footer">
         <app-footer></app-footer>
     </footer>
 </div>
