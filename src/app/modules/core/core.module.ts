@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders, Optional, SkipSelf } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
 
+import { SharedModule } from '../shared/shared.module';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { AuthorizationService } from './services/authorization/authorization.service';
@@ -9,7 +9,7 @@ import { AuthorizationService } from './services/authorization/authorization.ser
 @NgModule({
   imports: [
     CommonModule,
-    MatButtonModule,
+    SharedModule,
   ],
   declarations: [
     HeaderComponent,
