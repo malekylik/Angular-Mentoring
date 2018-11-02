@@ -7,9 +7,18 @@ import { coursesListMock } from '../../courses-list-mock';
 export class CoursesService {
 
   private coursesList: Course[] = [];
+  private _isEditing: boolean = false;
 
   constructor() {
     this.coursesList = [...coursesListMock];
+  }
+
+  isEditing(): boolean {
+    return this._isEditing;
+  }
+
+  setEditing(editing: boolean): void {
+    this._isEditing = editing;
   }
 
   getCourses(): Course[] {

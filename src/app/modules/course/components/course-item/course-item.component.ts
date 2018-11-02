@@ -12,6 +12,7 @@ import { Course } from '../../models/course.model';
 export class CourseItemComponent implements OnInit {
 
   @Input() course: Course;
+  @Output() editCourse: EventEmitter<Course> = new EventEmitter();
   @Output() deleteCourse: EventEmitter<string> = new EventEmitter();
 
   starIcon = faStar;
@@ -19,6 +20,10 @@ export class CourseItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onEditCourse(): void {
+    this.editCourse.emit(this.course);
   }
 
   onDeleteCourse(): void {

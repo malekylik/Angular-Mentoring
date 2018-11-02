@@ -3,8 +3,9 @@
         <app-header logo="Logo" [user-login]="authorizationService.getUserInfo()"></app-header>
     </header>
     <main class="app__content content">
-        <app-courses-page *ngIf="authorizationService.isAuthenticated()"></app-courses-page>
+        <app-courses-page *ngIf="authorizationService.isAuthenticated() && !coursesService.isEditing()"></app-courses-page>
         <app-login-page *ngIf="!authorizationService.isAuthenticated()"></app-login-page>
+        <app-course-add-edit-page *ngIf="authorizationService.isAuthenticated() && coursesService.isEditing()"></app-course-add-edit-page>
     </main>
     <footer class="app__footer">
         <app-footer></app-footer>

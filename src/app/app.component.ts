@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { AuthorizationService } from './modules/core/services/authorization/authorization.service';
+import { CoursesService } from './modules/course/services/courses/courses.service';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,7 @@ import { AuthorizationService } from './modules/core/services/authorization/auth
 })
 export class AppComponent {
   constructor(
-    private authorizationService: AuthorizationService
+    public authorizationService: AuthorizationService,
+    public coursesService: CoursesService,
   ) {}
 }

@@ -13,6 +13,7 @@ import { SearchPipe } from './pipes/search/search.pipe';
 import { CoursesService } from './services/courses/courses.service';
 import { CoursesPageComponent } from './components/courses-page/courses-page.component';
 import { SharedModule } from '../shared/shared.module';
+import { CourseAddEditPageComponent } from './components/course-add-edit-page/course-add-edit-page.component';
 
 @NgModule({
   imports: [
@@ -30,13 +31,15 @@ import { SharedModule } from '../shared/shared.module';
     SearchPipe,
     DeleteConfirmationModalComponent,
     CoursesPageComponent,
+    CourseAddEditPageComponent,
   ],
   providers: [CoursesService],
   entryComponents: [
     DeleteConfirmationModalComponent
   ],
   exports: [
-    CoursesPageComponent
+    CoursesPageComponent,
+    CourseAddEditPageComponent,
   ]
 })
 export class CourseModule { }

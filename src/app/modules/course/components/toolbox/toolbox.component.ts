@@ -9,15 +9,19 @@ export class ToolboxComponent implements OnInit {
 
   searchValue: string = "";
 
-  @Output()
-  search: EventEmitter<string> = new EventEmitter();
+  @Output() search: EventEmitter<string> = new EventEmitter();
+  @Output() addCourse: EventEmitter<void> = new EventEmitter();
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  onSearch() {
+  onSearch(): void {
     this.search.emit(this.searchValue);
+  }
+
+  onAddCourse(): void {
+    this.addCourse.emit();
   }
 }

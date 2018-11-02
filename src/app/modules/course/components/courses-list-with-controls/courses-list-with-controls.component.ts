@@ -47,6 +47,14 @@ export class CoursesListWithControlsComponent implements OnInit {
     }
   }
 
+  onAddCourse(): void {
+    this.coursesService.setEditing(true);
+  }
+
+  onEditCourse(course: Course): void {
+    this.coursesService.setEditing(true);
+  }
+
   onDeleteCourse(id: string): void {
     this.openDeleteConfirmationDialog()
     .subscribe((result) => {
