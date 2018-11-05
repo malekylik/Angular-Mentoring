@@ -14,6 +14,7 @@ import { CoursesService } from './services/courses/courses.service';
 import { CoursesPageComponent } from './components/courses-page/courses-page.component';
 import { SharedModule } from '../shared/shared.module';
 import { CourseAddEditPageComponent } from './components/course-add-edit-page/course-add-edit-page.component';
+import { CourseAddEditComponent } from './components/course-add-edit/course-add-edit.component';
 
 @NgModule({
   imports: [
@@ -32,6 +33,7 @@ import { CourseAddEditPageComponent } from './components/course-add-edit-page/co
     DeleteConfirmationModalComponent,
     CoursesPageComponent,
     CourseAddEditPageComponent,
+    CourseAddEditComponent,
   ],
   providers: [CoursesService],
   entryComponents: [

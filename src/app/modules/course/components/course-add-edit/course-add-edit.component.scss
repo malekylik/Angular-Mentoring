@@ -1,0 +1,10 @@
+@import "../../../../styles/mixins/layout.scss";
+@import "../../../../styles/variables/sizes.scss";
+
+.course-add-edit {
+    font-size: $text-size-default;
+    padding: 10px 15px;
+    border: 2px solid #CCC;
+
+    @include page-width();
+}

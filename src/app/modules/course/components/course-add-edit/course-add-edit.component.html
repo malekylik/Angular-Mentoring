@@ -1,0 +1,14 @@
+<form class="course-add-edit">
+  <mat-form-field>
+    <input matInput type="text" placeholder="Title:" name="courseTitle">
+  </mat-form-field>
+  <mat-form-field>
+    <textarea matInput placeholder="Description:" name="courseDescription"></textarea>
+  </mat-form-field>
+    <app-date-input name="courseDate" placeholder="Date:"></app-date-input>
+    <app-duration-input name="courseDuration" placeholder="Duration:"></app-duration-input>
+  <div>
+    <button mat-button (click)="onSave()">Save</button>
+    <button mat-button (click)="onCancel()">Cancel</button>
+  </div>
+</form>
