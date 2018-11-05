@@ -3,6 +3,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { AuthorizationService } from './modules/core/services/authorization/authorization.service';
+import { CoursesService } from './modules/course/services/courses/courses.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -10,7 +11,7 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
-      providers: [AuthorizationService],
+      providers: [AuthorizationService, CoursesService],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
     }).compileComponents();
   }));
