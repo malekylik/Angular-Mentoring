@@ -1,3 +1,8 @@
 <mat-form-field>
-  <input matInput type="text" [placeholder]="placeholder" [name]="name">
+  <input  matInput 
+          type="text" 
+          [placeholder]="placeholder" 
+          [name]="name"
+          [ngModel]="date"
+          (ngModelChange)="changeDate($event)">
 </mat-form-field>
