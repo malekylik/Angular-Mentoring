@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { CoursesService } from '../../services/courses/courses.service';
 import { Course } from '../../models/course.model';
+import { BaseCourse } from '../../models/base-course';
 
 @Component({
   selector: 'app-course-add-edit-page',
@@ -19,12 +20,13 @@ export class CourseAddEditPageComponent implements OnInit {
 
     if (course) {
       this.course = { ...course };
+    } else {
+      this.course = BaseCourse.generateCourseWithCurrentDate('', 0, '');
     }
   }
 
   onSave(course: Course): void {
     console.log('saved');
-    console.log(course);
   }
 
   onCancel(): void {
