@@ -8,8 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
-import { DateInputComponent } from './components/date-input/date-input.component';
-import { DurationInputComponent } from './components/duration-input/duration-input.component';
 
 @NgModule({
   imports: [
@@ -19,7 +17,7 @@ import { DurationInputComponent } from './components/duration-input/duration-inp
     MatInputModule,
     FormsModule,
   ],
-  declarations: [BreadcrumbsComponent, DateInputComponent, DurationInputComponent],
+  declarations: [BreadcrumbsComponent],
   exports: [    
     MatDialogModule,
     MatButtonModule,
@@ -28,8 +26,6 @@ import { DurationInputComponent } from './components/duration-input/duration-inp
     FontAwesomeModule,
     BrowserAnimationsModule,
     BreadcrumbsComponent,
-    DateInputComponent,
-    DurationInputComponent,
   ]
 })
 export class SharedModule { }

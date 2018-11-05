@@ -1,0 +1,4 @@
+<mat-form-field>
+  <input matInput type="number" min="0" [(ngModel)]="duration" [placeholder]="placeholder" [name]="name">
+  <mat-hint>{{duration | durationPipe}}</mat-hint>
+</mat-form-field>

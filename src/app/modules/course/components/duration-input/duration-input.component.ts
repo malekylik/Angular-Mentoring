@@ -9,6 +9,7 @@ export class DurationInputComponent implements OnInit {
 
   @Input() name: string = '';
   @Input() placeholder: string = '';
+  @Input() duration: number = 0;
 
   constructor() { }
 

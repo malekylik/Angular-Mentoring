@@ -15,6 +15,8 @@ import { CoursesPageComponent } from './components/courses-page/courses-page.com
 import { SharedModule } from '../shared/shared.module';
 import { CourseAddEditPageComponent } from './components/course-add-edit-page/course-add-edit-page.component';
 import { CourseAddEditComponent } from './components/course-add-edit/course-add-edit.component';
+import { DateInputComponent } from './components/date-input/date-input.component';
+import { DurationInputComponent } from './components/duration-input/duration-input.component';
 
 @NgModule({
   imports: [
@@ -34,6 +36,8 @@ import { CourseAddEditComponent } from './components/course-add-edit/course-add-
     CoursesPageComponent,
     CourseAddEditPageComponent,
     CourseAddEditComponent,
+    DateInputComponent,
+    DurationInputComponent,
   ],
   providers: [CoursesService],
   entryComponents: [
