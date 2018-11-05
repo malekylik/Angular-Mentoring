@@ -27,7 +27,7 @@ export class BaseCourse implements Course {
             topRated,
         };
 
-        return new BaseCourse(hash(courseForHash), title, creationTime, duration, description, topRated);
+        return new BaseCourse(hash([courseForHash, Date.now()]), title, creationTime, duration, description, topRated);
     }
 
     static generateCourseWithCurrentDate(
