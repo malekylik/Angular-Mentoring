@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
+import { Course } from '../../models/course.model';
 
 @Component({
   selector: 'app-course-add-edit',
@@ -7,16 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CourseAddEditComponent implements OnInit {
 
+  @Input() course: Course;
+  @Output() save: EventEmitter<Course> = new EventEmitter();
+  @Output() cancel: EventEmitter<void> = new EventEmitter();
+
   constructor() { }
 
   ngOnInit() {
   }
 
   onSave(): void {
-    console.log('saved');
+    this.save.emit(this.course);
   }
 
   onCancel(): void {
-    console.log('canceled');
+    this.cancel.emit();
   }
 }

@@ -1,12 +1,20 @@
 <form class="course-add-edit mat-elevation-z4">
   <mat-form-field class="course-add-edit__field">
-    <input matInput type="text" placeholder="Title:" name="courseTitle">
+    <input matInput type="text" placeholder="Title:" name="courseTitle" [(ngModel)]="course.title">
   </mat-form-field>
   <mat-form-field class="course-add-edit__field">
-    <textarea matInput placeholder="Description:" name="courseDescription"></textarea>
+    <textarea matInput placeholder="Description:" name="courseDescription" [(ngModel)]="course.description"></textarea>
   </mat-form-field>
-    <app-date-input class="course-add-edit__field" name="courseDate" placeholder="Date:"></app-date-input>
-    <app-duration-input class="course-add-edit__field" name="courseDuration" placeholder="Duration:"></app-duration-input>
+    <app-date-input 
+      class="course-add-edit__field" 
+      name="courseDate" 
+      placeholder="Date:"
+      [(date)]="course.creationTime"></app-date-input>
+    <app-duration-input 
+      class="course-add-edit__field" 
+      name="courseDuration" 
+      placeholder="Duration:"
+      [(duration)]="course.duration"></app-duration-input>
   <div class="controls course-add-edit__field">
     <button mat-button (click)="onSave()">Save</button>
     <button mat-button (click)="onCancel()">Cancel</button>

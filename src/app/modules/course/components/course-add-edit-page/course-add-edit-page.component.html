@@ -1,4 +1,4 @@
 <div>
   <app-breadcrumbs></app-breadcrumbs>
-  <app-course-add-edit></app-course-add-edit>
+  <app-course-add-edit [course]="course" (save)="onSave($event)" (cancel)="onCancel()"></app-course-add-edit>
 </div>

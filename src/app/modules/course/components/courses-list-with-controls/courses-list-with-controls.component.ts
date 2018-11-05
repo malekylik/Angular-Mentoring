@@ -26,7 +26,7 @@ export class CoursesListWithControlsComponent implements OnInit {
     public dialog: MatDialog,
     private courseOrderByPipe: CourseOrderByPipe,
     private searchPipe: SearchPipe,
-    private coursesService: CoursesService
+    private coursesService: CoursesService,
   ) {
     this.courses = [];
     this.transformedCourses = [];
@@ -52,6 +52,7 @@ export class CoursesListWithControlsComponent implements OnInit {
   }
 
   onEditCourse(course: Course): void {
+    this.coursesService.setEditingCourseId(course.id);
     this.coursesService.setEditing(true);
   }
 

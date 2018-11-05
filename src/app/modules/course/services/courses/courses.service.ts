@@ -8,6 +8,7 @@ export class CoursesService {
 
   private coursesList: Course[] = [];
   private _isEditing: boolean = false;
+  private editingCourseId: string = '';
 
   constructor() {
     this.coursesList = [...coursesListMock];
@@ -20,6 +21,14 @@ export class CoursesService {
   setEditing(editing: boolean): void {
     this._isEditing = editing;
   }
+
+  setEditingCourseId(id: string): void {
+    this.editingCourseId = id;
+  }
+
+  getEditingCourseId(): string {
+    return this.editingCourseId;
+  } 
 
   getCourses(): Course[] {
     return this.coursesList;
