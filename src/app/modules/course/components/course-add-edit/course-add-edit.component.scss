@@ -4,7 +4,28 @@
 .course-add-edit {
     font-size: $text-size-default;
     padding: 10px 15px;
-    border: 2px solid #CCC;
+    border: 2px solid #ccc;
+    background-color: #fff;
+    display: flex;
+    flex-flow: column;
 
     @include page-width();
+
+    &__field {
+        margin-bottom: 15px;
+    }
+
+    &__field:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.controls {
+    button {
+        margin-right: 10px;
+    }
+
+    button:last-of-type {
+        margin-right: 0;
+    }
 }

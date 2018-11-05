@@ -1,13 +1,13 @@
-<form class="course-add-edit">
-  <mat-form-field>
+<form class="course-add-edit mat-elevation-z4">
+  <mat-form-field class="course-add-edit__field">
     <input matInput type="text" placeholder="Title:" name="courseTitle">
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field class="course-add-edit__field">
     <textarea matInput placeholder="Description:" name="courseDescription"></textarea>
   </mat-form-field>
-    <app-date-input name="courseDate" placeholder="Date:"></app-date-input>
-    <app-duration-input name="courseDuration" placeholder="Duration:"></app-duration-input>
-  <div>
+    <app-date-input class="course-add-edit__field" name="courseDate" placeholder="Date:"></app-date-input>
+    <app-duration-input class="course-add-edit__field" name="courseDuration" placeholder="Duration:"></app-duration-input>
+  <div class="controls course-add-edit__field">
     <button mat-button (click)="onSave()">Save</button>
     <button mat-button (click)="onCancel()">Cancel</button>
   </div>
