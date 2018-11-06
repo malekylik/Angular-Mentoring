@@ -1,0 +1,35 @@
+@import "../../../../styles/variables/sizes.scss";
+
+.notfound {
+  max-width: 767px;
+  width: 100%;
+  line-height: 1.4;
+  padding: 15px;
+  background-color: #fff;
+
+  &__back-button {
+      margin-top: 15px;
+      font-size: $text-size-default;
+  }
+}
+  
+.notfound-404 {
+  font-size: 186px;
+  font-weight: 900;
+  margin: 0px;
+  text-transform: uppercase;
+}
+
+.description-heading {
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.description {
+  font-size: $text-size-default;
+  font-weight: 500;
+  margin-bottom: 0px;
+  text-transform: uppercase;
+}
+ 
