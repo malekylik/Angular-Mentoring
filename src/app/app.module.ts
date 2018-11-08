@@ -7,6 +7,8 @@ import { CoreModule } from './modules/core/core.module'
 import { CourseModule } from './modules/course/course.module';
 import { LoginModule } from './modules/login/login.module';
 import { ROUTES } from './app.routes';
+import { AuthGuard } from './guards/auth.guard';
+import { NoAuthGuard } from './guards/no-auth.guard';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,10 @@ import { ROUTES } from './app.routes';
     LoginModule,
     CoreModule.forRoot(),
     RouterModule.forRoot(ROUTES),
+  ],
+  providers: [
+    AuthGuard,
+    NoAuthGuard,
   ],
   bootstrap: [AppComponent]
 })

@@ -7,16 +7,18 @@
       <mat-form-field>
         <input  matInput 
                 type="text" 
-                placeholder="Please enter firstname*" 
+                placeholder="Please enter firstname" 
                 name="firstname"
-                [(ngModel)]="firstName">
+                [(ngModel)]="firstName"
+                required>
       </mat-form-field>
       <mat-form-field>
         <input  matInput 
                 type="text" 
-                placeholder="Please enter lastname*"
+                placeholder="Please enter lastname"
                 name="lastname"
-                [(ngModel)]="lastName">
+                [(ngModel)]="lastName"
+                required>
       </mat-form-field>
       <button mat-button type="button" class="login-button" (click)="login()">Login</button>
     </form>

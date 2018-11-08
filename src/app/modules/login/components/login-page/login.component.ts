@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
 
 import { AuthorizationService } from '../../../core/services/authorization/authorization.service';
 import { BaseUser } from '../../../../models/user/base-user';
@@ -14,7 +15,8 @@ export class LoginPageComponent implements OnInit {
   lastName: string = "";
 
   constructor(
-    private authorizationService: AuthorizationService
+    private router: Router,
+    private authorizationService: AuthorizationService,
   ) { }
 
   ngOnInit() {
@@ -22,6 +24,6 @@ export class LoginPageComponent implements OnInit {
 
   login(): void {
     this.authorizationService.login(BaseUser.generateUser(this.firstName, this.lastName));
-    console.log('logged in successfully');
+    this.router.navigateByUrl('courses');
   }
 }
