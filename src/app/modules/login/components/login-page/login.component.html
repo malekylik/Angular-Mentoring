@@ -3,7 +3,7 @@
     <header class="login-header">
       <h2 class="login-heading">Login</h2>
     </header>
-    <form class="login-form">
+    <form class="login-form" #form="ngForm" (ngSubmit)="login(form.valid)">
       <mat-form-field>
         <input  matInput 
                 type="text" 
@@ -20,7 +20,7 @@
                 [(ngModel)]="lastName"
                 required>
       </mat-form-field>
-      <button mat-button type="button" class="login-button" (click)="login()">Login</button>
+      <button mat-button type="submit" class="login-button">Login</button>
     </form>
   </div>
 </main>

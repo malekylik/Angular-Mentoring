@@ -22,8 +22,10 @@ export class LoginPageComponent implements OnInit {
   ngOnInit() {
   }
 
-  login(): void {
-    this.authorizationService.login(BaseUser.generateUser(this.firstName, this.lastName));
-    this.router.navigateByUrl('courses');
+  login(isValid: boolean): void {
+    if (isValid) {
+      this.authorizationService.login(BaseUser.generateUser(this.firstName, this.lastName));
+      this.router.navigateByUrl('courses');
+    }
   }
 }
