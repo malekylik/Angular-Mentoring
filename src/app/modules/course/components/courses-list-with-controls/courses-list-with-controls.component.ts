@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Observable } from 'rxjs';
+import { Router } from "@angular/router";
 
 import { Course } from '../../models/course.model';
 import { CourseOrderByPipe } from '../../pipes/course-order-by/course-order-by.pipe';
@@ -27,6 +28,7 @@ export class CoursesListWithControlsComponent implements OnInit {
     private courseOrderByPipe: CourseOrderByPipe,
     private searchPipe: SearchPipe,
     private coursesService: CoursesService,
+    private router: Router,
   ) {
     this.courses = [];
     this.transformedCourses = [];
@@ -48,12 +50,10 @@ export class CoursesListWithControlsComponent implements OnInit {
   }
 
   onAddCourse(): void {
-    this.coursesService.setEditing(true);
+    this.router.navigateByUrl('courses/new');    
   }
 
   onEditCourse(course: Course): void {
-    this.coursesService.setEditingCourseId(course.id);
-    this.coursesService.setEditing(true);
   }
 
   onDeleteCourse(id: string): void {

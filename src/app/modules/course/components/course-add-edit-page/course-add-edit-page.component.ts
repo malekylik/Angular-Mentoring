@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
 
 import { CoursesService } from '../../services/courses/courses.service';
 import { Course } from '../../models/course.model';
@@ -13,24 +14,22 @@ export class CourseAddEditPageComponent implements OnInit {
 
   course: Course;
 
-  constructor(private coursesService: CoursesService) { }
+  constructor(
+    private router: Router,
+    private coursesService: CoursesService,
+    ) { }
 
   ngOnInit() {
-    const course: Course | null = this.coursesService.getCourse(this.coursesService.getEditingCourseId());
-
-    if (course) {
-      this.course = { ...course };
-    } else {
-      this.course = BaseCourse.generateCourseWithCurrentDate('', 0, '');
-    }
+    this.course = BaseCourse.generateCourseWithCurrentDate('', 0, '');
   }
 
   onSave(course: Course): void {
-    console.log('saved');
+    this.coursesService.addCourse(course);
+    this.router.navigateByUrl('courses');
   }
 
   onCancel(): void {
-    console.log('canceled');
+    this.router.navigateByUrl('courses');
   }
 
 }

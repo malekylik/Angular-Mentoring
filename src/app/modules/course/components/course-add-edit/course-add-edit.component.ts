@@ -18,8 +18,10 @@ export class CourseAddEditComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSave(): void {
-    this.save.emit(this.course);
+  onSave(isValid: boolean): void {
+    if (isValid) {
+      this.save.emit(this.course);
+    }
   }
 
   onCancel(): void {

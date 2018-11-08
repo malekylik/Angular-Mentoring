@@ -14,22 +14,6 @@ export class CoursesService {
     this.coursesList = [...coursesListMock];
   }
 
-  isEditing(): boolean {
-    return this._isEditing;
-  }
-
-  setEditing(editing: boolean): void {
-    this._isEditing = editing;
-  }
-
-  setEditingCourseId(id: string): void {
-    this.editingCourseId = id;
-  }
-
-  getEditingCourseId(): string {
-    return this.editingCourseId;
-  } 
-
   getCourses(): Course[] {
     return this.coursesList;
   }
