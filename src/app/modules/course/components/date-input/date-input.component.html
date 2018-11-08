@@ -1,8 +1,9 @@
 <mat-form-field>
   <input  matInput 
-          type="text" 
+          type="text"
+          (blur)="onBlur()"
           [placeholder]="placeholder" 
           [name]="name"
-          [ngModel]="date"
-          (ngModelChange)="changeDate($event)">
+          [(ngModel)]="date"
+          [required]="isRequired">
 </mat-form-field>
