@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 
 import { CoursesService } from '../../services/courses/courses.service';
 import { Course } from '../../models/course.model';
@@ -14,17 +14,40 @@ export class CourseAddEditPageComponent implements OnInit {
 
   course: Course;
 
+  private id: string | null = null;
+
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private coursesService: CoursesService,
     ) { }
 
   ngOnInit() {
-    this.course = BaseCourse.generateCourseWithCurrentDate('', 0, '');
+    const COURSE_ID: string = 'id';
+
+    this.route.params.subscribe((data) => {
+      this.id = data[COURSE_ID] || null;
+
+      if (this.id) {
+        this.course = this.coursesService.getCourse(this.id);
+
+        if (!this.course) {
+          this.course = new BaseCourse('', '', '', 0, '');
+          this.router.navigateByUrl('courses/new');
+        }
+      } else {
+        this.course = BaseCourse.generateCourseWithCurrentDate('', 0, '');
+      }
+    });
   }
 
   onSave(course: Course): void {
-    this.coursesService.addCourse(course);
+    if (this.id) {
+      this.coursesService.updateCourse(course);
+    } else {
+      this.coursesService.addCourse(course);
+    }
+
     this.router.navigateByUrl('courses');
   }
 

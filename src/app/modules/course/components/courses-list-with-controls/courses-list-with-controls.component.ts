@@ -54,6 +54,7 @@ export class CoursesListWithControlsComponent implements OnInit {
   }
 
   onEditCourse(course: Course): void {
+    this.router.navigate(['courses', course.id]);
   }
 
   onDeleteCourse(id: string): void {
