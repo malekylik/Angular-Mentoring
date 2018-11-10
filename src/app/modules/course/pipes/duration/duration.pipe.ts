@@ -12,7 +12,7 @@ export class DurationPipe implements PipeTransform {
 
     let duration: string = "";
 
-    if (hours) {
+    if (hours) { // Можно использовать тернарник. Будет чуть короче запись
       duration = `${hours}h ${restMinutes}min`;
     } else {
       duration = `${restMinutes}min`;

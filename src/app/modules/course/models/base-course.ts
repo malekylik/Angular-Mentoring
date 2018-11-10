@@ -2,7 +2,7 @@ import hash from 'object-hash';
 
 import { Course } from './course.model';
 
-export class BaseCourse implements Course {
+export class BaseCourse implements Course { // Не все поля имплементированы
     constructor (
         public id: string,
         public title: string,
