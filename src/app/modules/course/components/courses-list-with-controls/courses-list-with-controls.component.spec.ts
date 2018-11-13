@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { CoursesListWithControlsComponent } from './courses-list-with-controls.component';
-import { CoursesService } from '../../services/courses/courses.service';
+import { CoursesService } from '../../services/courses.service';
 
 describe('CoursesListWithControlsComponent', () => {
   let component: CoursesListWithControlsComponent;

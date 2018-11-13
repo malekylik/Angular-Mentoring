@@ -10,7 +10,7 @@ import { CourseRelevanceDirective } from './directives/course-relevance/course-r
 import { DurationPipe } from './pipes/duration/duration.pipe';
 import { CourseOrderByPipe } from './pipes/course-order-by/course-order-by.pipe';
 import { SearchPipe } from './pipes/search/search.pipe';
-import { CoursesService } from './services/courses/courses.service';
+import { CoursesService } from './services/courses.service';
 import { CoursesPageComponent } from './components/courses-page/courses-page.component';
 import { SharedModule } from '../shared/shared.module';
 import { CourseAddEditPageComponent } from './components/course-add-edit-page/course-add-edit-page.component';

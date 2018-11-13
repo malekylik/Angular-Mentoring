@@ -1,5 +1,9 @@
 @import "../../../../styles/variables/sizes.scss";
 
+:host(.login) {
+    margin: auto;
+}
+
 .login-page {
     font-size: $text-size-default;
     width: 600px;

@@ -14,10 +14,11 @@ const ROUTES: Routes = [
         path: 'courses',
         component: CoursesPageComponent, 
         canActivate: [NoAuthGuard],
+        data: { breadcrumb: 'Coursesss' }, 
         children: [
             { path: '', component: CoursesListWithControlsComponent },
-            { path: 'new', component: CourseAddEditPageComponent },
-            { path: ':id', component: CourseAddEditPageComponent },
+            { path: 'new', component: CourseAddEditPageComponent, data: { breadcrumb: 'Coursesss new' }  },
+            { path: ':id', component: CourseAddEditPageComponent, data: { breadcrumb: 'Coursesss Name' }  },
         ]
     },
     { path: '', pathMatch: 'full', redirectTo: 'courses' },

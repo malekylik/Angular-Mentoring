@@ -6,7 +6,7 @@ import { Router } from "@angular/router";
 import { Course } from '../../models/course.model';
 import { CourseOrderByPipe } from '../../pipes/course-order-by/course-order-by.pipe';
 import { SearchPipe } from '../../pipes/search/search.pipe';
-import { CoursesService } from '../../services/courses/courses.service';
+import { CoursesService } from '../../services/courses.service';
 import { DeleteConfirmationModalComponent } from '../delete-confirmation-modal/delete-confirmation-modal.component';
 
 @Component({
@@ -53,15 +53,12 @@ export class CoursesListWithControlsComponent implements OnInit {
     this.router.navigateByUrl('courses/new');    
   }
 
-  onEditCourse(course: Course): void {
-    this.router.navigate(['courses', course.id]);
-  }
-
   onDeleteCourse(id: string): void {
     this.openDeleteConfirmationDialog()
     .subscribe((result) => {
       if (result) {
         this.coursesService.deleteCourse(id);
+        this.transformedCourses = [...this.orderByCourses(this.courses)];
       }
     });
   }
@@ -79,9 +76,7 @@ export class CoursesListWithControlsComponent implements OnInit {
   }
 
   private openDeleteConfirmationDialog(): Observable<boolean> {
-    const dialogRef = this.dialog.open(DeleteConfirmationModalComponent, {
-      maxWidth: '500px',
-    });
+    const dialogRef = this.dialog.open(DeleteConfirmationModalComponent);
 
     return dialogRef.afterClosed();
   }

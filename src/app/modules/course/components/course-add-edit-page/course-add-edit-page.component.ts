@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 
-import { CoursesService } from '../../services/courses/courses.service';
+import { CoursesService } from '../../services/courses.service';
 import { Course } from '../../models/course.model';
 import { BaseCourse } from '../../models/base-course';
 
@@ -32,7 +32,7 @@ export class CourseAddEditPageComponent implements OnInit {
         this.course = this.coursesService.getCourse(this.id);
 
         if (!this.course) {
-          this.course = new BaseCourse('', '', '', 0, '');
+          this.course = BaseCourse.generateCourseWithCurrentDate('', 0, '');
           this.router.navigateByUrl('courses/new');
         }
       } else {

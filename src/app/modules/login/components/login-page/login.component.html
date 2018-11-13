@@ -1,26 +1,15 @@
-<main>
-  <div class="login-page mat-elevation-z4">
-    <header class="login-header">
-      <h2 class="login-heading">Login</h2>
-    </header>
-    <form class="login-form" #form="ngForm" (ngSubmit)="login(form.valid)">
-      <mat-form-field>
-        <input  matInput 
-                type="text" 
-                placeholder="Please enter firstname" 
-                name="firstname"
-                [(ngModel)]="firstName"
-                required>
-      </mat-form-field>
-      <mat-form-field>
-        <input  matInput 
-                type="text" 
-                placeholder="Please enter lastname"
-                name="lastname"
-                [(ngModel)]="lastName"
-                required>
-      </mat-form-field>
-      <button mat-button type="submit" class="login-button">Login</button>
-    </form>
-  </div>
-</main>
+<div class="login-page mat-elevation-z4">
+  <header class="login-header">
+    <h2 class="login-heading">Login</h2>
+  </header>
+  <form class="login-form" #form="ngForm" (ngSubmit)="login(form.valid)">
+    <mat-form-field>
+      <input matInput type="text" placeholder="Please enter firstname" name="firstname" [(ngModel)]="firstName"
+        required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" placeholder="Please enter lastname" name="lastname" [(ngModel)]="lastName" required>
+    </mat-form-field>
+    <button mat-button type="submit" class="login-button">Login</button>
+  </form>
+</div>

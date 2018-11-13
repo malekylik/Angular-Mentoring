@@ -7,6 +7,7 @@ import { BaseUser } from '../../../../models/user/base-user';
 @Component({
   selector: 'app-login-page',
   templateUrl: './login.component.html',
+  host: { class: 'login' },
   styleUrls: ['./login.component.scss']
 })
 export class LoginPageComponent implements OnInit {

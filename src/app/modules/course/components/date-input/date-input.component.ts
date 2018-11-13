@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, forwardRef } from '@angular/core';
+import { Component, OnInit, Input, forwardRef, ChangeDetectionStrategy } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 const noop = () => { };
@@ -7,7 +7,8 @@ const noop = () => { };
   selector: 'app-date-input',
   templateUrl: './date-input.component.html',
   styleUrls: ['./date-input.component.scss'],
-  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => DateInputComponent), multi: true }]
+  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => DateInputComponent), multi: true }],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DateInputComponent implements OnInit, ControlValueAccessor {
 

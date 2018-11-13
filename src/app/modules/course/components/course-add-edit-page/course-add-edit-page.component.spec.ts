@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { CourseAddEditPageComponent } from './course-add-edit-page.component';
-import { CoursesService } from '../../services/courses/courses.service';
+import { CoursesService } from '../../services/courses.service';
 
 describe('CourseAddEditPageComponent', () => {
   let component: CourseAddEditPageComponent;

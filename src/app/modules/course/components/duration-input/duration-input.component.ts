@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, forwardRef } from '@angular/core';
+import { Component, OnInit, Input, forwardRef, ChangeDetectionStrategy } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 const noop = () => { };
@@ -7,7 +7,8 @@ const noop = () => { };
   selector: 'app-duration-input',
   templateUrl: './duration-input.component.html',
   styleUrls: ['./duration-input.component.scss'],
-  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => DurationInputComponent), multi: true }]
+  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => DurationInputComponent), multi: true }],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DurationInputComponent implements OnInit, ControlValueAccessor {
 

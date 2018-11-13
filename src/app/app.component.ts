@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { AuthorizationService } from './modules/core/services/authorization/authorization.service';
-import { CoursesService } from './modules/course/services/courses/courses.service';
+import { CoursesService } from './modules/course/services/courses.service';
 
 @Component({
   selector: 'app-root',
