@@ -12,8 +12,8 @@ import { BaseUser } from '../../../../models/user/base-user';
 })
 export class LoginPageComponent implements OnInit {
 
-  firstName: string = "";
-  lastName: string = "";
+  userLogin: string = "";
+  password: string = "";
 
   constructor(
     private router: Router,
@@ -25,7 +25,7 @@ export class LoginPageComponent implements OnInit {
 
   login(isValid: boolean): void {
     if (isValid) {
-      this.authorizationService.login(BaseUser.generateUser(this.firstName, this.lastName));
+      this.authorizationService.login(BaseUser.generateUser('', '', this.userLogin, this.password));
       this.router.navigateByUrl('courses');
     }
   }

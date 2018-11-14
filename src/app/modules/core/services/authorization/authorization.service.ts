@@ -9,7 +9,7 @@ export class AuthorizationService {
   constructor() { }
 
   login(user: User): void {
-    localStorage.setItem(authorizationStorageToken, `${user.firstName} ${user.lastName}`);
+    localStorage.setItem(authorizationStorageToken, `${user.login} ${user.password}`);
   }
 
   logout(): void {
@@ -21,6 +21,7 @@ export class AuthorizationService {
   }
 
   getUserInfo(): string | null {
-    return localStorage.getItem(authorizationStorageToken);
+    const userInfo: string = localStorage.getItem(authorizationStorageToken);
+    return userInfo ? userInfo.split(' ')[0] : userInfo;
   }
 }

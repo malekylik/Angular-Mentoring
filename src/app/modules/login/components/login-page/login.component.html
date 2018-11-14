@@ -4,11 +4,11 @@
   </header>
   <form class="login-form" #form="ngForm" (ngSubmit)="login(form.valid)">
     <mat-form-field>
-      <input matInput type="text" placeholder="Please enter firstname" name="firstname" [(ngModel)]="firstName"
+      <input matInput type="text" placeholder="Please enter login" name="login" [(ngModel)]="userLogin"
         required>
     </mat-form-field>
     <mat-form-field>
-      <input matInput type="text" placeholder="Please enter lastname" name="lastname" [(ngModel)]="lastName" required>
+      <input matInput type="password" placeholder="Please enter password" name="password" [(ngModel)]="password" required>
     </mat-form-field>
     <button mat-button type="submit" class="login-button">Login</button>
   </form>
