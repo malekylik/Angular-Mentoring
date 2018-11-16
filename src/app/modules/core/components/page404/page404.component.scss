@@ -1,5 +1,9 @@
 @import "../../../../styles/variables/sizes.scss";
 
+:host(.page404) {
+  margin: auto;
+}
+
 .notfound {
   max-width: 767px;
   width: 100%;

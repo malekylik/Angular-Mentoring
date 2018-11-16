@@ -10,6 +10,7 @@ $breadcrumbs-padding: 15px;
 
 .breadcrumbs-list {
     padding: $breadcrumbs-padding $breadcrumbs-padding;
+    display: flex;
 
     @include page-width();
 }
@@ -20,5 +21,14 @@ $breadcrumbs-padding: 15px;
 
     &:hover {
         text-decoration: underline;
+    }
+
+    &_activated {
+        cursor: default;
+        pointer-events: none;
+    }
+
+    &_activated:hover {
+        text-decoration: none;
     }
 }

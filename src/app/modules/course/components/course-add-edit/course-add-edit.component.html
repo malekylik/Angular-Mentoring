@@ -1,6 +1,6 @@
 <form class="course-add-edit mat-elevation-z4" #form="ngForm" (ngSubmit)="onSave(form.valid)">
   <mat-form-field class="course-add-edit__field">
-    <input matInput type="text" placeholder="Title:" name="courseTitle" [(ngModel)]="course.title" required>
+    <input #courseTitleInput matInput type="text" placeholder="Title:" name="courseTitle" [(ngModel)]="course.title" required>
   </mat-form-field>
   <mat-form-field class="course-add-edit__field">
     <textarea matInput placeholder="Description:" name="courseDescription" [(ngModel)]="course.description"></textarea>

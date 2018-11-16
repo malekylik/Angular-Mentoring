@@ -1,7 +1,8 @@
 <div class="breadcrumbs">
   <ul class="breadcrumbs-list">
-    <li>
-      <a class="link" href="#">Courses</a>
+    <li class="breadcrumb" *ngFor="let breadcrumb of breadcrumbs;last as isLast">
+      <a class="link" [routerLink]="[breadcrumb.url]" [ngClass]="{ link_activated: isLast }">{{breadcrumb.label}}</a>
+      <span *ngIf="!isLast">/</span>
     </li>
   </ul>
 </div>

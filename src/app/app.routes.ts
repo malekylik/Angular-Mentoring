@@ -7,6 +7,7 @@ import { CourseAddEditPageComponent } from './modules/course/components/course-a
 import { CoursesListWithControlsComponent } from './modules/course/components/courses-list-with-controls/courses-list-with-controls.component';
 import { NoAuthGuard } from './guards/no-auth.guard';
 import { AuthGuard } from './guards/auth.guard';
+import { CourseBreadcrumbResolverService } from './modules/course/services/course-breadcrumb-resolver/course-breadcrumb-resolver.service';
 
 const ROUTES: Routes = [
     { path: 'auth', component: LoginPageComponent, canActivate: [AuthGuard] },
@@ -14,11 +15,11 @@ const ROUTES: Routes = [
         path: 'courses',
         component: CoursesPageComponent, 
         canActivate: [NoAuthGuard],
-        data: { breadcrumb: 'Coursesss' }, 
+        data: { breadcrumb: 'Courses' },
         children: [
-            { path: '', component: CoursesListWithControlsComponent },
-            { path: 'new', component: CourseAddEditPageComponent, data: { breadcrumb: 'Coursesss new' }  },
-            { path: ':id', component: CourseAddEditPageComponent, data: { breadcrumb: 'Coursesss Name' }  },
+            { path: '', component: CoursesListWithControlsComponent, data: { breadcrumb: '' } },
+            { path: 'new', component: CourseAddEditPageComponent, data: { breadcrumb: 'New' } },
+            { path: ':id', component: CourseAddEditPageComponent, data: { breadcrumb: 'course.title' }, resolve: { course: CourseBreadcrumbResolverService } },
         ]
     },
     { path: '', pathMatch: 'full', redirectTo: 'courses' },
