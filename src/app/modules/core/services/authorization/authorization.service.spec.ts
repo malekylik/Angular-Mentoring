@@ -9,6 +9,8 @@ describe('AuthorizationService', () => {
     id: '1',
     firstName: 'firstName',
     lastName: 'lastName',
+    login: 'login',
+    password: 'password',
   };
 
   let service: AuthorizationService;
@@ -61,12 +63,12 @@ describe('AuthorizationService', () => {
       expect(service.getUserInfo()).toBeNull();
     });
 
-    it('should return user firstName and lastName as string if user is authenticated', () => {
-      const userInfo: string = `${user.firstName} ${user.lastName}`;
+    it('should return user login if user is authenticated', () => {
+      const userLogin: string = user.login;
 
       service.login(user);
 
-      expect(service.getUserInfo()).toEqual(userInfo);
+      expect(service.getUserInfo()).toEqual(userLogin);
     });
   });
 });

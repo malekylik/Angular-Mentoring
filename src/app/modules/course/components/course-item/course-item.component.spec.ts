@@ -3,7 +3,9 @@ import { By } from '@angular/platform-browser';
 import { Component } from '@angular/core';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { UpperCasePipe } from '@angular/common';
+import { RouterTestingModule } from '@angular/router/testing';
 
+import { SharedModule } from '../../../shared/shared.module';
 import { CourseItemComponent } from './course-item.component';
 import { Course } from '../../models/course.model';
 import { CourseRelevanceDirective } from '../../directives/course-relevance/course-relevance.directive';
@@ -37,6 +39,7 @@ describe('CourseItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [SharedModule, RouterTestingModule],
       declarations: [CourseItemComponent, TestHostComponent, CourseRelevanceDirective, DurationPipe],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })

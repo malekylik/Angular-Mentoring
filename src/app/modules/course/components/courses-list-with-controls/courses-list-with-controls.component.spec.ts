@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { MatDialogModule } from '@angular/material/dialog';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { CoursesListWithControlsComponent } from './courses-list-with-controls.component';
 import { CoursesService } from '../../services/courses.service';
@@ -12,7 +13,7 @@ describe('CoursesListWithControlsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ MatDialogModule ],
+      imports: [ MatDialogModule, RouterTestingModule ],
       providers: [ CoursesService ],
       declarations: [ CoursesListWithControlsComponent ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ],

@@ -1,9 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 
 import { CoursesPageComponent } from './courses-page.component';
-import { SharedModule } from '../../../shared/shared.module';
 
 describe('CoursesPageComponent', () => {
   let component: CoursesPageComponent;

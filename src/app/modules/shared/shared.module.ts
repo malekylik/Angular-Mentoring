@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
+import { MatSelectModule } from '@angular/material';
 
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 
@@ -24,6 +25,7 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
     MatDialogModule,
     MatButtonModule,
     MatInputModule,
+    MatSelectModule,
     FormsModule,
     FontAwesomeModule,
     BrowserAnimationsModule,

@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { SharedModule } from '../../../shared/shared.module';
 
 import { DurationInputComponent } from './duration-input.component';
 import { DurationPipe } from '../../pipes/duration/duration.pipe';
@@ -11,7 +11,7 @@ describe('DurationInputComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule],
+      imports: [SharedModule],
       declarations: [DurationInputComponent, DurationPipe],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
