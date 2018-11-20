@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { CoreModule } from './modules/core/core.module'
@@ -16,6 +17,7 @@ import { NoAuthGuard } from './guards/no-auth.guard';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     CourseModule,
     LoginModule,
     CoreModule.forRoot(),
