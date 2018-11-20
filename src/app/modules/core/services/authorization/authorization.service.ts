@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { authorizationStorageToken } from '../../../../constants/authorization';
 import { User } from '../../../../models/user/user.model';
 import { Token } from '../../../../models/token.model';
-import { AUTH_URL } from '../../constants/api';
+import { AUTH_URL, USER_INFO_URL } from '../../constants/api';
 
 @Injectable()
 export class AuthorizationService {
@@ -28,8 +28,13 @@ export class AuthorizationService {
     return Boolean(localStorage.getItem(authorizationStorageToken));
   }
 
-  getUserInfo(): string | null {
-    const userInfo: string = localStorage.getItem(authorizationStorageToken);
-    return userInfo ? userInfo.split(' ')[0] : userInfo;
+  getUserInfo(): Observable<User> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': localStorage.getItem(authorizationStorageToken),
+      })
+    };
+
+    return this.http.post<User>(USER_INFO_URL, null, httpOptions);
   }
 }

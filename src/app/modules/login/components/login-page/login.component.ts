@@ -35,7 +35,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
           this.authorizationService.storeToken(token.token);
           this.router.navigateByUrl('courses');
         },
-        (error) => { this.httpErrorHandlingService.handlingError(error); });
+        error => this.httpErrorHandlingService.handlingError(error));
     }
   }
 
