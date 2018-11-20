@@ -35,8 +35,11 @@ export class CoursesListWithControlsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.courses = this.coursesService.getCourses();
-    this.transformedCourses = this.orderByCourses(this.courses);
+    this.coursesService.getCourses()
+    .subscribe((courses: Course[]) => {
+      this.courses = this.courses = courses;
+      this.transformedCourses = this.orderByCourses(this.courses);
+    });
   }
 
   onSearch(searchString: string): void {

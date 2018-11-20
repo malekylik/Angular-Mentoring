@@ -5,12 +5,12 @@ class="course-item mat-elevation-z4" >
   <div class="course-item__info-with-description info-with-description" >
     <div class="info-with-description__course-item-info course-item-info">
         <h3 class="course-title">
-          {{course.title | uppercase}}
+          {{course.name | uppercase}}
           <fa-icon [icon]="starIcon" class="top-rated-start_color_gold" *ngIf="course.topRated"></fa-icon>
         </h3>
         <p>
-          <span class="course-duration">{{course.duration | durationPipe}}</span>
-          <span class="info-with-description__creation-time">{{course.creationTime}}</span>
+          <span class="course-duration">{{course.length | durationPipe}}</span>
+          <span class="info-with-description__creation-time">{{course.date}}</span>
         </p>
     </div>
     <p class="info-with-description__description description">{{course.description}}</p>
