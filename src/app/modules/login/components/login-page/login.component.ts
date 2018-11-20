@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { Subscription } from 'rxjs';
 
 import { AuthorizationService } from '../../../core/services/authorization/authorization.service';
+import { HttpErrorHandlingService } from '../../../core/services/http-error-handling/http-error-handling.service';
 import { BaseUser } from '../../../../models/user/base-user';
 import { Token } from '../../../../models/token.model';
 
@@ -21,6 +22,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private authorizationService: AuthorizationService,
+    private httpErrorHandlingService: HttpErrorHandlingService
   ) { }
 
   ngOnInit() {
@@ -29,10 +31,11 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   login(isValid: boolean): void {
     if (isValid) {
       this.subscription = this.authorizationService.login(BaseUser.generateUser('', '', this.userLogin, this.password))
-      .subscribe((token: Token) => {
-        this.authorizationService.storeToken(token.token);
-        this.router.navigateByUrl('courses');
-      });
+        .subscribe((token: Token) => {
+          this.authorizationService.storeToken(token.token);
+          this.router.navigateByUrl('courses');
+        },
+        (error) => { this.httpErrorHandlingService.handlingError(error); });
     }
   }
 

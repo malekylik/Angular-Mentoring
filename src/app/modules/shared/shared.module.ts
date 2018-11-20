@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
 import { MatSelectModule } from '@angular/material';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 
@@ -21,11 +22,12 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
     RouterModule,
   ],
   declarations: [BreadcrumbsComponent],
-  exports: [    
+  exports: [
     MatDialogModule,
     MatButtonModule,
     MatInputModule,
     MatSelectModule,
+    MatSnackBarModule,
     FormsModule,
     FontAwesomeModule,
     BrowserAnimationsModule,
