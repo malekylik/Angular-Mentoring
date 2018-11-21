@@ -1,5 +1,5 @@
 <div class="toolbox">
-  <form (submit)="onSearch()">
+  <form (ngSubmit)="onSearch()">
     <mat-form-field>
       <input 
       matInput type="search" 
@@ -8,7 +8,7 @@
       name="courseName"
       [(ngModel)]="searchValue">
     </mat-form-field>
-    <button (click)="onSearch()" class="toolbox__search-button" mat-button>Search</button>
+    <button type="submit" class="toolbox__search-button" mat-button>Search</button>
   </form>
   <button (click)="onAddCourse()" mat-button>Add course</button>
 </div>

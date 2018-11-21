@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Course } from '../models/course.model';
 import { COURSES_URL } from '../constants/api';
 import { coursesListMock } from '../courses-list-mock';
+import { Params } from '../../../constants/api';
 
 @Injectable()
 export class CoursesService {
@@ -15,15 +16,18 @@ export class CoursesService {
     this.coursesList = [...coursesListMock];
   }
 
-  getCourses(start: number = 0, count: number = 15): Observable<Course[]> {
-    const config = {
-      params: {
-        start: String(start),
-        count: String(count),
-      }
+  getCourses(start: number = 0, count: number = 15, textFragment: string = ''): Observable<Course[]> {
+    const params: Params = {
+      textFragment,
+      start: String(start),
+      count: String(count),
     };
 
-    return this.http.get<Course[]>(COURSES_URL, config);
+    return this.getCoursesWithParams(params);
+  }
+
+  getCoursesWithParams(params: Params): Observable<Course[]> {
+    return this.http.get<Course[]>(COURSES_URL, { params });
   }
 
   getCourse(id: string): Course | null {

@@ -26,13 +26,13 @@ export class CoursesListWithControlsComponent implements OnInit, OnDestroy {
   transformedCourses: Course[];
   loading: boolean = false;
 
+  private searchString: string = '';
   private loadCount: number = 15;
   private unsubscribe$ = new Subject(); 
 
   constructor(
     public dialog: MatDialog,
     private courseOrderByPipe: CourseOrderByPipe,
-    private searchPipe: SearchPipe,
     private coursesService: CoursesService,
     private router: Router,
     private httpErrorHandlingService: HttpErrorHandlingService,
@@ -47,11 +47,12 @@ export class CoursesListWithControlsComponent implements OnInit, OnDestroy {
 
   onSearch(searchString: string): void {
     if (typeof searchString === 'string') {
-      if (searchString !== '') {
-        this.transformedCourses = this.searchCourses(this.orderByCourses(this.courses), searchString);
-      } else {
-        this.transformedCourses = this.orderByCourses(this.courses);
+      if (this.searchString !== searchString) {
+        this.searchString = searchString;
+        this.courses = [];
       }
+
+      this.onLoadMore();
     }
   }
 
@@ -71,7 +72,7 @@ export class CoursesListWithControlsComponent implements OnInit, OnDestroy {
 
   onLoadMore(): void {
     if (!this.loading) {
-      this.coursesService.getCourses(this.courses.length, this.loadCount)
+      this.coursesService.getCourses(this.courses.length, this.loadCount, this.searchString)
       .pipe(
         takeUntil(this.unsubscribe$),
       )
@@ -96,10 +97,6 @@ export class CoursesListWithControlsComponent implements OnInit, OnDestroy {
 
   private orderByCourses(courses: Course[]): Course[] {
     return this.courseOrderByPipe.transform(courses);
-  }
-
-  private searchCourses(courses: Course[], searchString: string): Course[] {
-    return this.searchPipe.transform(courses, searchString);
   }
 
   private openDeleteConfirmationDialog(): Observable<boolean> {
