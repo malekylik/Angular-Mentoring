@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { Observable } from 'rxjs';
 import { Router } from "@angular/router";
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { Course } from '../../models/course.model';
 import { CourseOrderByPipe } from '../../pipes/course-order-by/course-order-by.pipe';
 import { SearchPipe } from '../../pipes/search/search.pipe';
 import { CoursesService } from '../../services/courses.service';
+import { HttpErrorHandlingService } from '../../../core/services/http-error-handling/http-error-handling.service';
 import { DeleteConfirmationModalComponent } from '../delete-confirmation-modal/delete-confirmation-modal.component';
 
 @Component({
@@ -18,10 +20,14 @@ import { DeleteConfirmationModalComponent } from '../delete-confirmation-modal/d
     SearchPipe,
   ]
 })
-export class CoursesListWithControlsComponent implements OnInit {
+export class CoursesListWithControlsComponent implements OnInit, OnDestroy {
 
   courses: Course[];
   transformedCourses: Course[];
+  loading: boolean = false;
+
+  private loadCount: number = 15;
+  private unsubscribe$ = new Subject(); 
 
   constructor(
     public dialog: MatDialog,
@@ -29,17 +35,14 @@ export class CoursesListWithControlsComponent implements OnInit {
     private searchPipe: SearchPipe,
     private coursesService: CoursesService,
     private router: Router,
+    private httpErrorHandlingService: HttpErrorHandlingService,
   ) {
     this.courses = [];
     this.transformedCourses = [];
   }
 
   ngOnInit() {
-    this.coursesService.getCourses()
-    .subscribe((courses: Course[]) => {
-      this.courses = this.courses = courses;
-      this.transformedCourses = this.orderByCourses(this.courses);
-    });
+    this.onLoadMore();
   }
 
   onSearch(searchString: string): void {
@@ -67,7 +70,28 @@ export class CoursesListWithControlsComponent implements OnInit {
   }
 
   onLoadMore(): void {
-    console.log("LOADING");
+    if (!this.loading) {
+      this.coursesService.getCourses(this.courses.length, this.loadCount)
+      .pipe(
+        takeUntil(this.unsubscribe$),
+      )
+      .subscribe((courses: Course[]) => {
+        if (courses.length) {
+          this.courses = [...this.courses, ...courses];
+          this.transformedCourses = this.orderByCourses(this.courses);
+        }
+
+        this.loading = false;
+      },
+      error => this.httpErrorHandlingService.handlingError(error));
+
+      this.loading = true;
+    }
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   private orderByCourses(courses: Course[]): Course[] {

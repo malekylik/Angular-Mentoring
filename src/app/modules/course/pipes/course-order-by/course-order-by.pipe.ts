@@ -8,7 +8,7 @@ import { Course } from '../../models/course.model';
 export class CourseOrderByPipe implements PipeTransform {
 
   transform(courses: Course[]): Course[] {
-    return courses.sort((a: Course, b: Course) => new Date(b.creationTime).getTime() - new Date(a.creationTime).getTime());
+    return courses.sort((a: Course, b: Course) => new Date(b.date).getTime() - new Date(a.date).getTime());
   }
 
 }

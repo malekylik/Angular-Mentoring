@@ -10,7 +10,7 @@ export class SearchPipe implements PipeTransform {
   transform(courses: Course[], searchString: string): Course[] {
     const lowerCaseSearchString: string = searchString.toLowerCase();
 
-    return courses.filter(({ title }) => title.toLowerCase().includes(lowerCaseSearchString));
+    return courses.filter(({ name }) => name.toLowerCase().includes(lowerCaseSearchString));
   }
 
 }
