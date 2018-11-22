@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Course } from '../models/course.model';
@@ -34,8 +34,14 @@ export class CoursesService {
     return this.coursesList.find((course) => course.id === id) || null;
   }
 
-  addCourse(course: Course): void {
-    this.coursesList = [...this.coursesList, course];
+  addCourse(course: Course): Observable<Course> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+
+    return this.http.post<Course>(COURSES_URL, JSON.stringify(course), httpOptions);
   }
 
   updateCourse(course: Course): boolean {
