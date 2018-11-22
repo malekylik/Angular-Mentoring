@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 import { CoursesService } from '../courses.service';
 import { Course } from '../../models/course.model';
@@ -12,6 +13,9 @@ export class CourseBreadcrumbResolverService implements Resolve<Course> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Course> | Promise<Course> | Course {
     const courseIdParam: string = 'id';
-    return this.coursesService.getCourse(route.paramMap.get(courseIdParam));
+    return this.coursesService.getCourse(route.paramMap.get(courseIdParam))
+      .pipe(
+        catchError(() => of(null))
+      );
   }
 }

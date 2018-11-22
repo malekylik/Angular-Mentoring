@@ -19,7 +19,7 @@ const ROUTES: Routes = [
         children: [
             { path: '', component: CoursesListWithControlsComponent, data: { breadcrumb: '' } },
             { path: 'new', component: CourseAddEditPageComponent, data: { breadcrumb: 'New' } },
-            { path: ':id', component: CourseAddEditPageComponent, data: { breadcrumb: 'course.title' }, resolve: { course: CourseBreadcrumbResolverService } },
+            { path: ':id', component: CourseAddEditPageComponent, data: { breadcrumb: 'course.name' }, resolve: { course: CourseBreadcrumbResolverService } },
         ]
     },
     { path: '', pathMatch: 'full', redirectTo: 'courses' },

@@ -6,6 +6,7 @@ import { takeUntil } from 'rxjs/operators';
 import { CoursesService } from '../../services/courses.service';
 import { Course } from '../../models/course.model';
 import { BaseCourse } from '../../models/base-course';
+import { NOT_FOUND_STATUS } from '../../../../constants/api';
 import { HttpErrorHandlingService } from '../../../core/services/http-error-handling/http-error-handling.service';
 
 @Component({
@@ -34,12 +35,22 @@ export class CourseAddEditPageComponent implements OnInit, OnDestroy {
       this.id = data[COURSE_ID] || null;
 
       if (this.id) {
-        this.course = this.coursesService.getCourse(this.id);
-
-        if (!this.course) {
-          this.course = BaseCourse.generateCourseWithCurrentDate('', 0, '');
-          this.router.navigateByUrl('courses/new');
-        }
+        this.coursesService.getCourse(this.id)
+          .pipe(
+            takeUntil(this.unsubscribe$),
+          )
+          .subscribe(
+            (course) => {
+              this.course = course;
+            },
+            (error) => {
+              if (error.status === NOT_FOUND_STATUS) {
+                this.course = BaseCourse.generateCourseWithCurrentDate('', 0, '');
+                this.router.navigateByUrl('courses/new');
+              } else {
+                this.httpErrorHandlingService.handlingError(error)
+              }
+            });
       } else {
         this.course = BaseCourse.generateCourseWithCurrentDate('', 0, '');
       }
@@ -48,7 +59,10 @@ export class CourseAddEditPageComponent implements OnInit, OnDestroy {
 
   onSave(course: Course): void {
     if (this.id) {
-      this.coursesService.updateCourse(course);
+      this.coursesService.updateCourse(course)
+        .subscribe((course) => {
+          console.log(course);
+        });
     } else {
       this.coursesService.addCourse(course)
         .pipe(

@@ -26,12 +26,21 @@ export class CoursesService {
     return this.getCoursesWithParams(params);
   }
 
+  getCourseName(id: string): Observable<Partial<Course>> {
+    const params: Params = {
+      id,
+      ['courses.name']: 'typicode',
+    };
+
+    return this.http.get<Partial<Course>>(COURSES_URL, { params });
+  }
+
   getCoursesWithParams(params: Params): Observable<Course[]> {
     return this.http.get<Course[]>(COURSES_URL, { params });
   }
 
-  getCourse(id: string): Course | null {
-    return this.coursesList.find((course) => course.id === id) || null;
+  getCourse(id: string): Observable<Course> {
+    return this.http.get<Course>(`${COURSES_URL}/${id}`);
   }
 
   addCourse(course: Course): Observable<Course> {
@@ -44,18 +53,14 @@ export class CoursesService {
     return this.http.post<Course>(COURSES_URL, JSON.stringify(course), httpOptions);
   }
 
-  updateCourse(course: Course): boolean {
-    const index = this.coursesList.findIndex((_course) => _course.id === course.id);
+  updateCourse(course: Course): Observable<Course> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
 
-    if (index !== -1) {
-      this.coursesList[index] = {
-        ...course
-      };
-
-      return true;
-    }
-
-    return false;
+    return this.http.post<Course>(`${COURSES_URL}/${course.id}`, JSON.stringify(course), httpOptions);
   }
 
   deleteCourse(id: string): Observable<void> {
