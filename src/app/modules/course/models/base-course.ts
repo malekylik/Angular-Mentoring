@@ -9,7 +9,7 @@ export class BaseCourse implements Course {
         public date: string,
         public length: number,
         public description: string,
-        public topRated: boolean = false,
+        public isTopRated: boolean = false,
     ) {}
 
     static generateCourse(
@@ -17,28 +17,28 @@ export class BaseCourse implements Course {
         date: string,
         length: number,
         description: string,
-        topRated: boolean = false,
+        isTopRated: boolean = false,
     ): BaseCourse {
         const courseForHash: Partial<Course> = {
             name,
             date,
             length,
             description,
-            topRated,
+            isTopRated,
         };
 
-        return new BaseCourse(hash([courseForHash, Date.now()]), name, date, length, description, topRated);
+        return new BaseCourse(hash([courseForHash, Date.now()]), name, date, length, description, isTopRated);
     }
 
     static generateCourseWithCurrentDate(
         name: string,
         length: number,
         description: string,
-        topRated: boolean = false,
+        isTopRated: boolean = false,
     ): BaseCourse {
         const currentDate: Date = new Date();
         const currentFormatedDate = `${currentDate.getMonth() + 1}.${currentDate.getDate()}.${currentDate.getFullYear()}`;
 
-        return BaseCourse.generateCourse(name, currentFormatedDate, length, description, topRated);
+        return BaseCourse.generateCourse(name, currentFormatedDate, length, description, isTopRated);
     }
 }

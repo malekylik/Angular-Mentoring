@@ -1,12 +1,12 @@
 <article 
-[appCourseRelevance]="course.creationTime" 
-[ngClass]="{ 'course-item_top-rated': course.topRated }"
+[appCourseRelevance]="course.date" 
+[ngClass]="{ 'course-item_top-rated': course.isTopRated }"
 class="course-item mat-elevation-z4" >
   <div class="course-item__info-with-description info-with-description" >
     <div class="info-with-description__course-item-info course-item-info">
         <h3 class="course-title">
           {{course.name | uppercase}}
-          <fa-icon [icon]="starIcon" class="top-rated-start_color_gold" *ngIf="course.topRated"></fa-icon>
+          <fa-icon [icon]="starIcon" class="top-rated-start_color_gold" *ngIf="course.isTopRated"></fa-icon>
         </h3>
         <p>
           <span class="course-duration">{{course.length | durationPipe}}</span>
