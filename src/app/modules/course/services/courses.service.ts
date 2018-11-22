@@ -52,11 +52,7 @@ export class CoursesService {
     return false;
   }
 
-  deleteCourse(id: string): void {
-    const index = this.coursesList.findIndex((course) => course.id === id);
-
-    if (index !== -1) {
-      this.coursesList.splice(index, 1);
-    }
+  deleteCourse(id: string): Observable<void> {
+    return this.http.delete<void>(`${COURSES_URL}/${id}`);
   }
 }
