@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { CoursesService } from '../../services/courses.service';
@@ -58,20 +58,21 @@ export class CourseAddEditPageComponent implements OnInit, OnDestroy {
   }
 
   onSave(course: Course): void {
+    let updating$: Observable<Course> = null; 
+
     if (this.id) {
-      this.coursesService.updateCourse(course)
-        .subscribe((course) => {
-          console.log(course);
-        });
+      updating$ = this.coursesService.updateCourse(course);
     } else {
-      this.coursesService.addCourse(course)
-        .pipe(
-          takeUntil(this.unsubscribe$),
-        )
-        .subscribe(
-          course => this.router.navigateByUrl('courses'),
-          error => this.httpErrorHandlingService.handlingError(error));
+      updating$ = this.coursesService.addCourse(course)
     }
+
+    updating$
+    .pipe(
+      takeUntil(this.unsubscribe$),
+    )
+    .subscribe(
+      course => this.router.navigateByUrl('courses'),
+      error => this.httpErrorHandlingService.handlingError(error));
   }
 
   onCancel(): void {

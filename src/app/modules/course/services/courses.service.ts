@@ -60,7 +60,7 @@ export class CoursesService {
       })
     };
 
-    return this.http.post<Course>(`${COURSES_URL}/${course.id}`, JSON.stringify(course), httpOptions);
+    return this.http.put<Course>(`${COURSES_URL}/${course.id}`, JSON.stringify(course), httpOptions);
   }
 
   deleteCourse(id: string): Observable<void> {
