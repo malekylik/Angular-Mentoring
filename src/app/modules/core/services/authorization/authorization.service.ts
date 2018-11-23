@@ -29,12 +29,6 @@ export class AuthorizationService {
   }
 
   getUserInfo(): Observable<User> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': localStorage.getItem(authorizationStorageToken),
-      })
-    };
-
-    return this.http.post<User>(USER_INFO_URL, null, httpOptions);
+    return this.http.post<User>(USER_INFO_URL, null);
   }
 }

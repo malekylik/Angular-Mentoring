@@ -2,7 +2,7 @@
   <ul class="breadcrumbs-list">
     <li class="breadcrumb" *ngFor="let breadcrumb of breadcrumbs;last as isLast">
       <a class="link" [routerLink]="[breadcrumb.url]" [ngClass]="{ link_activated: isLast }">{{breadcrumb.label}}</a>
-      <span *ngIf="!isLast">/</span>
+      <span *ngIf="!isLast">&nbsp;>&nbsp;</span>
     </li>
   </ul>
 </div>

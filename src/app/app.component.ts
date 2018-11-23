@@ -21,11 +21,13 @@ export class AppComponent implements OnInit, OnDestroy {
     ) {}
 
   ngOnInit() {
-    this.subscription = this.authorizationService.getUserInfo()
-    .subscribe((user: User) => {
-      this.login = user.login;
-    }, 
-    error => this.httpErrorHandlingService.handlingError(error));
+    if (this.authorizationService.isAuthenticated()) {
+      this.subscription = this.authorizationService.getUserInfo()
+      .subscribe((user: User) => {
+        this.login = user.login;
+      }, 
+      error => this.httpErrorHandlingService.handlingError(error));
+    }
   }
 
   ngOnDestroy() {
