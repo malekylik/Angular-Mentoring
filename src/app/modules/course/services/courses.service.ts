@@ -4,16 +4,12 @@ import { Observable } from 'rxjs';
 
 import { Course } from '../models/course.model';
 import { COURSES_URL } from '../constants/api';
-import { coursesListMock } from '../courses-list-mock';
 import { Params } from '../../../constants/api';
 
 @Injectable()
 export class CoursesService {
 
-  private coursesList: Course[] = [];
-
   constructor(private http: HttpClient) {
-    this.coursesList = [...coursesListMock];
   }
 
   getCourses(start: number = 0, count: number = 15, textFragment: string = ''): Observable<Course[]> {

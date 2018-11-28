@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable, Subject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { authorizationStorageToken } from '../../../../constants/authorization';
 import { User } from '../../../../models/user/user.model';
@@ -10,6 +11,8 @@ import { AUTH_URL, USER_INFO_URL } from '../../constants/api';
 @Injectable()
 export class AuthorizationService {
 
+  private authStatus: Subject<boolean> = new Subject();
+
   constructor(private http: HttpClient) { }
 
   login(user: User): Observable<Token> {
@@ -18,10 +21,12 @@ export class AuthorizationService {
 
   logout(): void {
     localStorage.removeItem(authorizationStorageToken);
+    this.authStatus.next(false);
   }
 
   storeToken(token: string): void {
     localStorage.setItem(authorizationStorageToken, token);
+    this.authStatus.next(true);
   }
 
   isAuthenticated(): boolean {
@@ -30,5 +35,9 @@ export class AuthorizationService {
 
   getUserInfo(): Observable<User> {
     return this.http.post<User>(USER_INFO_URL, null);
+  }
+
+  getAuthStatus(): Observable<boolean> {
+    return this.authStatus.asObservable();
   }
 }
