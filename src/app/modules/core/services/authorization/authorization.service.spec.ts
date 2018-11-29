@@ -1,8 +1,11 @@
 import { TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { AuthorizationService } from './authorization.service';
 import { authorizationStorageToken } from '../../../../constants/authorization';
 import { User } from '../../../../models/user/user.model';
+import { Token } from '../../../../models/token.model';
+import { AUTH_URL, USER_INFO_URL } from '../../constants/api';
 
 describe('AuthorizationService', () => {
   const user: User = {
@@ -12,12 +15,26 @@ describe('AuthorizationService', () => {
     login: 'login',
     password: 'password',
   };
+  const token: Token = {
+    token: 'token',
+  };
 
   let service: AuthorizationService;
+  let httpMock: HttpTestingController;
 
-  beforeEach(() => TestBed.configureTestingModule({
-    providers: [AuthorizationService]
-  }));
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [AuthorizationService]
+    });
+
+    service = TestBed.get(AuthorizationService);
+    httpMock = TestBed.get(HttpTestingController);
+  });
+
+  afterEach(() => {
+    httpMock.verify();
+  });
 
   beforeEach(() => {
     service = TestBed.get(AuthorizationService);
@@ -33,16 +50,27 @@ describe('AuthorizationService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should login user', () => {
-    service.login(user);
+  it('login should return an Observable<Token>', () => {
+    service.login(user).subscribe((t: Token) => {
+      expect(t).toBe(token);
+    });
+
+    const req = httpMock.expectOne(AUTH_URL);
+    expect(req.request.method).toBe('POST');
+    expect(req.request.body).toBe(user);
+    req.flush(token);
+  });
+
+  it('should store token', () => {
+    service.storeToken(token.token);
 
     expect(localStorage.getItem(authorizationStorageToken)).toBeTruthy();
   });
 
   it('should logout user', () => {
-    service.login(user);
+    service.storeToken(token.token);
     service.logout();
-    
+
     expect(localStorage.getItem(authorizationStorageToken)).toBeFalsy();
   });
 
@@ -52,23 +80,38 @@ describe('AuthorizationService', () => {
     });
 
     it('should return true if user is authenticated', () => {
-      service.login(user);
+      service.storeToken(token.token);
 
       expect(service.isAuthenticated()).toBeTruthy();
     });
   });
 
-  describe('getUserInfo', () => {
-    it('should return null if user is not authenticated', () => {
-      expect(service.getUserInfo()).toBeNull();
+  it('getUserInfo should return an Observable<User>', () => {
+    service.getUserInfo().subscribe((u: User) => {
+      expect(u).toBe(user);
     });
 
-    it('should return user login if user is authenticated', () => {
-      const userLogin: string = user.login;
+    const req = httpMock.expectOne(USER_INFO_URL);
+    expect(req.request.method).toBe('POST');
+    expect(req.request.body).toBe(null);
+    req.flush(user);
+  });
 
-      service.login(user);
+  describe('getAuthStatus should return Observable<boolean>', () => {
+    it('should be true when login', () => {
+      service.getAuthStatus().subscribe((isAuth: boolean) => {
+        expect(isAuth).toBeTruthy();
+      });
 
-      // expect(service.getUserInfo()).toEqual(userLogin);
+      service.storeToken(token.token);
+    });
+
+    it('should be false when logout', () => {
+      service.getAuthStatus().subscribe((isAuth: boolean) => {
+        expect(isAuth).toBeFalsy();
+      });
+
+      service.logout();
     });
   });
 });

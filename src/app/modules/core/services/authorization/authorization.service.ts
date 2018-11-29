@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 import { authorizationStorageToken } from '../../../../constants/authorization';
 import { User } from '../../../../models/user/user.model';
@@ -38,6 +38,7 @@ export class AuthorizationService {
   }
 
   getAuthStatus(): Observable<boolean> {
-    return this.authStatus.asObservable();
+    return this.authStatus.asObservable()
+    .pipe(distinctUntilChanged());
   }
 }
