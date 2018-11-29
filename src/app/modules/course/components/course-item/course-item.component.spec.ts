@@ -19,11 +19,11 @@ import { DurationPipe } from '../../pipes/duration/duration.pipe';
 class TestHostComponent {
   course: Course = {
     id: "42",
-    title: "Video Course 4",
-    creationTime: "07.16.2018",
-    duration: 46,
+    name: "Video Course 4",
+    date: "07/16/2018",
+    length: 46,
     description: 'Sleeper pelican gulper slimy sculpin demoiselle duckbill, "Sacramento splittail mudminnow dwarf gourami Australian lungfish Atlantic trout mrigal." Nurseryfish: mullet jellynose fish: bonytail chub spiny-back zebrafish crevice kelpfish dartfish; Atlantic silverside. Rice eel four-eyed fish roach, "roanoke bass." Manta Ray halfmoon Shingle Fish: northern squawfish jack nase barfish combfish bowfin stoneroller minnow. Kelp perch haddock oarfish weever, prickleback pencilfish yellowtail barracuda. Carpetshark butterflyfish; monkeyface prickleback orangestriped triggerfish elasmobranch giant danio ocean sunfish, longnose dace oarfish?"',
-    topRated: false
+    isTopRated: false
   };
 
   courseIdToDelete: string;
@@ -63,9 +63,9 @@ describe('CourseItemComponent', () => {
     const descriptionTimeElement = fixture.debugElement.query(By.css(".description")).nativeElement;
     const course = component.course;
 
-    expect(courseTitleElement.innerText).toBe(new UpperCasePipe().transform(course.title));
-    expect(courseDurationElement.innerText).toBe(new DurationPipe().transform(course.duration));
-    expect(creationTimeElement.innerText).toBe(course.creationTime);
+    expect(courseTitleElement.innerText).toBe(new UpperCasePipe().transform(course.name));
+    expect(courseDurationElement.innerText).toBe(new DurationPipe().transform(course.length));
+    expect(creationTimeElement.innerText).toBe('7/16/18');
     expect(descriptionTimeElement.innerText).toBe(course.description);
   });
 

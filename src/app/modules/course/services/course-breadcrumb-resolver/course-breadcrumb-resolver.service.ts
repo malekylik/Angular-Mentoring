@@ -14,8 +14,6 @@ export class CourseBreadcrumbResolverService implements Resolve<Course> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Course> | Promise<Course> | Course {
     const courseIdParam: string = 'id';
     return this.coursesService.getCourse(route.paramMap.get(courseIdParam))
-      .pipe(
-        catchError(() => of(null))
-      );
+      .pipe(catchError(() => of(null)));
   }
 }

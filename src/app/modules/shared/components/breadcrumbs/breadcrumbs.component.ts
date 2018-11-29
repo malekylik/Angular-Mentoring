@@ -4,7 +4,6 @@ import { Subscription } from 'rxjs';
 import { filter, distinctUntilChanged, map } from 'rxjs/operators';
 
 import { Breadcrumb } from '../../models/breadcrumb.model';
-import { BaseBreadcrumb } from '../../models/base-breadcrumb';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -56,8 +55,11 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
       label = this.resolveLabel(route.snapshot.data, label);
     }
 
-    const nextUrl = `${url}${path}/`;
-    const breadcrumb = new BaseBreadcrumb(nextUrl, label);
+    const nextUrl: string = `${url}${path}/`;
+    const breadcrumb: Breadcrumb = {
+      url: nextUrl,
+      label,
+    };
 
     if (route.firstChild) {
         return [breadcrumb, ...this.buildBreadCrumb(route.firstChild, nextUrl)];

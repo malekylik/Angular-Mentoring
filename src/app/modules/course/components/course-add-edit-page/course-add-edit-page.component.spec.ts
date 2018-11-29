@@ -1,10 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { SharedModule } from '../../../shared/shared.module';
 import { CourseAddEditPageComponent } from './course-add-edit-page.component';
 import { CoursesService } from '../../services/courses.service';
+import { HttpErrorHandlingService } from '../../../core/services/http-error-handling/http-error-handling.service'; 
 
 describe('CourseAddEditPageComponent', () => {
   let component: CourseAddEditPageComponent;
@@ -12,9 +15,9 @@ describe('CourseAddEditPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [SharedModule, RouterTestingModule],
+      imports: [SharedModule, RouterTestingModule, HttpClientTestingModule, MatSnackBarModule],
       declarations: [CourseAddEditPageComponent],
-      providers: [CoursesService],
+      providers: [CoursesService, HttpErrorHandlingService],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
       .compileComponents();

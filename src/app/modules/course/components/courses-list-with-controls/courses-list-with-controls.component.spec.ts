@@ -3,9 +3,12 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { CoursesListWithControlsComponent } from './courses-list-with-controls.component';
 import { CoursesService } from '../../services/courses.service';
+import { HttpErrorHandlingService } from '../../../core/services/http-error-handling/http-error-handling.service'; 
 
 describe('CoursesListWithControlsComponent', () => {
   let component: CoursesListWithControlsComponent;
@@ -13,8 +16,8 @@ describe('CoursesListWithControlsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ MatDialogModule, RouterTestingModule ],
-      providers: [ CoursesService ],
+      imports: [ MatDialogModule, RouterTestingModule, HttpClientTestingModule, MatSnackBarModule ],
+      providers: [ CoursesService, HttpErrorHandlingService ],
       declarations: [ CoursesListWithControlsComponent ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
     })
