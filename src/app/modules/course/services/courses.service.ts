@@ -22,15 +22,6 @@ export class CoursesService {
     return this.getCoursesWithParams(params);
   }
 
-  getCourseName(id: string): Observable<Partial<Course>> {
-    const params: Params = {
-      id,
-      ['courses.name']: 'typicode',
-    };
-
-    return this.http.get<Partial<Course>>(COURSES_URL, { params });
-  }
-
   getCoursesWithParams(params: Params): Observable<Course[]> {
     return this.http.get<Course[]>(COURSES_URL, { params });
   }
