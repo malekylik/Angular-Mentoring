@@ -1,14 +1,14 @@
 <div class="toolbox">
   <form (ngSubmit)="onSearch()">
     <mat-form-field>
-      <input 
+      <input
       matInput type="search" 
       class="toolbox__search-field" 
       placeholder="Name, fragment or date" 
       name="courseName"
+      (ngModelChange)="onSearch($event)"
       [(ngModel)]="searchValue">
     </mat-form-field>
-    <button type="submit" class="toolbox__search-button" mat-button>Search</button>
   </form>
   <button (click)="onAddCourse()" mat-button>Add course</button>
 </div>

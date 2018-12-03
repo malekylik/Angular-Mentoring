@@ -77,11 +77,9 @@ export class CoursesListWithControlsComponent implements OnInit, OnDestroy {
   onLoadMore(start: number = this.courses.length, count: number = this.loadCount): void {
     if (!this.loading) {
       this.coursesService.getCourses(start, count, this.searchString)
-      .pipe(
-        takeUntil(this.unsubscribe$),
-      )
+      .pipe(takeUntil(this.unsubscribe$))
       .subscribe((courses: Course[]) => {
-        if (courses.length) {
+        if (courses.length || this.courses.length !== this.transformedCourses.length) {
           this.courses = [...this.courses, ...courses];
           this.transformedCourses = this.orderByCourses(this.courses);
         }
