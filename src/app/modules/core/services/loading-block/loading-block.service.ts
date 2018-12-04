@@ -22,13 +22,13 @@ export class LoadingBlockService {
         this.loadingBlock = factory
           .create(this.rootViewContainer.parentInjector)
         this.rootViewContainer.insert(this.loadingBlock.hostView);
-        this.rootViewContainer.element.nativeElement.style.overflow = 'hidden';
+        this.rootViewContainer.element.nativeElement.parentElement.style.overflow = 'hidden';
       }
     } else {
       if (this.loadingBlock) {
         this.loadingBlock.destroy();
         this.loadingBlock = null;
-        this.rootViewContainer.element.nativeElement.style.overflow = 'auto';
+        this.rootViewContainer.element.nativeElement.parentElement.style.overflow = 'visible';
       }
     }
   }
