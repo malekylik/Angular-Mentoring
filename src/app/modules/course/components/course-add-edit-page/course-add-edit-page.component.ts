@@ -1,13 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, tap } from 'rxjs/operators';
 
 import { CoursesService } from '../../services/courses.service';
 import { Course } from '../../models/course.model';
 import { BaseCourse } from '../../models/base-course';
 import { NOT_FOUND_STATUS } from '../../../../constants/api';
 import { HttpErrorHandlingService } from '../../../core/services/http-error-handling/http-error-handling.service';
+import { LoadingBlockService } from 'src/app/modules/core/services/loading-block/loading-block.service';
 
 @Component({
   selector: 'app-course-add-edit-page',
@@ -26,6 +27,7 @@ export class CourseAddEditPageComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private coursesService: CoursesService,
     private httpErrorHandlingService: HttpErrorHandlingService,
+    private loadingBlockService: LoadingBlockService,
   ) { }
 
   ngOnInit() {
@@ -36,9 +38,7 @@ export class CourseAddEditPageComponent implements OnInit, OnDestroy {
 
       if (this.id) {
         this.coursesService.getCourse(this.id)
-          .pipe(
-            takeUntil(this.unsubscribe$),
-          )
+          .pipe(takeUntil(this.unsubscribe$))
           .subscribe(
             (course) => {
               this.course = course;
@@ -58,7 +58,7 @@ export class CourseAddEditPageComponent implements OnInit, OnDestroy {
   }
 
   onSave(course: Course): void {
-    let updating$: Observable<Course> = null; 
+    let updating$: Observable<Course> = null;
 
     if (this.id) {
       updating$ = this.coursesService.updateCourse(course);
@@ -67,12 +67,17 @@ export class CourseAddEditPageComponent implements OnInit, OnDestroy {
     }
 
     updating$
-    .pipe(
-      takeUntil(this.unsubscribe$),
-    )
-    .subscribe(
-      course => this.router.navigateByUrl('courses'),
-      error => this.httpErrorHandlingService.handlingError(error));
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        tap(() => this.loadingBlockService.showLoadingBlock(true)),
+      )
+      .subscribe(
+        course => {
+          this.loadingBlockService.showLoadingBlock(false);
+          this.router.navigateByUrl('courses')
+        },
+        error => this.httpErrorHandlingService.handlingError(error),
+      );
   }
 
   onCancel(): void {
