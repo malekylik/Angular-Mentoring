@@ -99,19 +99,19 @@ describe('AuthorizationService', () => {
 
   describe('getAuthStatus should return Observable<boolean>', () => {
     it('should be true when login', () => {
+      service.storeToken(token.token);
+
       service.getAuthStatus().subscribe((isAuth: boolean) => {
         expect(isAuth).toBeTruthy();
       });
-
-      service.storeToken(token.token);
     });
 
     it('should be false when logout', () => {
+      service.logout();
+
       service.getAuthStatus().subscribe((isAuth: boolean) => {
         expect(isAuth).toBeFalsy();
       });
-
-      service.logout();
     });
   });
 });

@@ -8,6 +8,7 @@ import { SharedModule } from '../../../shared/shared.module';
 import { CourseAddEditPageComponent } from './course-add-edit-page.component';
 import { CoursesService } from '../../services/courses.service';
 import { HttpErrorHandlingService } from '../../../core/services/http-error-handling/http-error-handling.service'; 
+import { LoadingBlockService } from 'src/app/modules/core/services/loading-block/loading-block.service';
 
 describe('CourseAddEditPageComponent', () => {
   let component: CourseAddEditPageComponent;
@@ -17,7 +18,7 @@ describe('CourseAddEditPageComponent', () => {
     TestBed.configureTestingModule({
       imports: [SharedModule, RouterTestingModule, HttpClientTestingModule, MatSnackBarModule],
       declarations: [CourseAddEditPageComponent],
-      providers: [CoursesService, HttpErrorHandlingService],
+      providers: [CoursesService, HttpErrorHandlingService, LoadingBlockService],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
       .compileComponents();

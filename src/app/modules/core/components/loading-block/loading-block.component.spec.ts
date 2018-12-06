@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { LoadingBlockComponent } from './loading-block.component';
 
@@ -8,9 +9,10 @@ describe('LoadingBlockComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoadingBlockComponent ]
+      imports: [MatProgressSpinnerModule],
+      declarations: [LoadingBlockComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

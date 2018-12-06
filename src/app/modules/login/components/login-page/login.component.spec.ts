@@ -8,6 +8,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { LoginPageComponent } from './login.component';
 import { AuthorizationService } from '../../../core/services/authorization/authorization.service';
 import { HttpErrorHandlingService } from '../../../core/services/http-error-handling/http-error-handling.service'; 
+import { LoadingBlockService } from 'src/app/modules/core/services/loading-block/loading-block.service';
 
 describe('LoginComponent', () => {
   let component: LoginPageComponent;
@@ -17,7 +18,7 @@ describe('LoginComponent', () => {
     TestBed.configureTestingModule({
       imports: [FormsModule, RouterTestingModule, HttpClientTestingModule, MatSnackBarModule],
       declarations: [LoginPageComponent],
-      providers: [AuthorizationService, HttpErrorHandlingService],
+      providers: [AuthorizationService, HttpErrorHandlingService, LoadingBlockService],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();

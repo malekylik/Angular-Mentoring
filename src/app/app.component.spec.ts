@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { AuthorizationService } from './modules/core/services/authorization/authorization.service';
 import { CoursesService } from './modules/course/services/courses.service';
 import { HttpErrorHandlingService } from './modules/core/services/http-error-handling/http-error-handling.service'; 
+import { LoadingBlockService } from './modules/core/services/loading-block/loading-block.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -15,7 +16,7 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
-      providers: [AuthorizationService, CoursesService, HttpErrorHandlingService],
+      providers: [AuthorizationService, CoursesService, HttpErrorHandlingService, LoadingBlockService],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
     }).compileComponents();
   }));

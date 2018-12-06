@@ -8,7 +8,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { CoursesListWithControlsComponent } from './courses-list-with-controls.component';
 import { CoursesService } from '../../services/courses.service';
-import { HttpErrorHandlingService } from '../../../core/services/http-error-handling/http-error-handling.service'; 
+import { HttpErrorHandlingService } from '../../../core/services/http-error-handling/http-error-handling.service';
+import { LoadingBlockService } from '../../../core/services/loading-block/loading-block.service';
 
 describe('CoursesListWithControlsComponent', () => {
   let component: CoursesListWithControlsComponent;
@@ -16,12 +17,12 @@ describe('CoursesListWithControlsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ MatDialogModule, RouterTestingModule, HttpClientTestingModule, MatSnackBarModule ],
-      providers: [ CoursesService, HttpErrorHandlingService ],
-      declarations: [ CoursesListWithControlsComponent ],
-      schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+      imports: [MatDialogModule, RouterTestingModule, HttpClientTestingModule, MatSnackBarModule],
+      providers: [CoursesService, HttpErrorHandlingService, LoadingBlockService],
+      declarations: [CoursesListWithControlsComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(async(() => {
