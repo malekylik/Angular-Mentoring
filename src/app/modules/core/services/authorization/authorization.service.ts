@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
 
 import { authorizationStorageToken } from '../../../../constants/authorization';
@@ -11,7 +11,7 @@ import { AUTH_URL, USER_INFO_URL } from '../../constants/api';
 @Injectable()
 export class AuthorizationService {
 
-  private authStatus: Subject<boolean> = new Subject();
+  private authStatus: BehaviorSubject<boolean> = new BehaviorSubject(this.isAuthenticated());
 
   constructor(private http: HttpClient) { }
 

@@ -25,10 +25,6 @@ export class AppComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    if (this.authorizationService.isAuthenticated()) {
-      this.getUserInfo();
-    }
-
     this.loadingBlockService.setRootViewContainerRef(this.viewContainerRef);
     this.subsribeOnAuthStatus();
   }
