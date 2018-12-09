@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { Observable, Subject } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
+import { takeUntil, finalize } from 'rxjs/operators';
 
 import { CoursesService } from '../../services/courses.service';
 import { Course } from '../../models/course.model';
@@ -68,16 +68,15 @@ export class CourseAddEditPageComponent implements OnInit, OnDestroy {
 
     updating$
       .pipe(
+        finalize(() => this.loadingBlockService.showLoadingBlock(false)),
         takeUntil(this.unsubscribe$),
-        tap(() => this.loadingBlockService.showLoadingBlock(true)),
       )
       .subscribe(
-        course => {
-          this.loadingBlockService.showLoadingBlock(false);
-          this.router.navigateByUrl('courses')
-        },
+        () => this.router.navigateByUrl('courses'),
         error => this.httpErrorHandlingService.handlingError(error),
       );
+
+    this.loadingBlockService.showLoadingBlock(true);
   }
 
   onCancel(): void {

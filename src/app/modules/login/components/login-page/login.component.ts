@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from "@angular/router";
 import { Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 
 import { AuthorizationService } from '../../../core/services/authorization/authorization.service';
 import { HttpErrorHandlingService } from '../../../core/services/http-error-handling/http-error-handling.service';
@@ -34,14 +34,16 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   login(isValid: boolean): void {
     if (isValid) {
       this.subscription = this.authorizationService.login(BaseUser.generateUser('', '', this.userLogin, this.password))
-        .pipe(tap(() => this.loadingBlockService.showLoadingBlock(true)))
+        .pipe(finalize(() => this.loadingBlockService.showLoadingBlock(false)))
         .subscribe((token: Token) => {
           this.authorizationService.storeToken(token.token);
-          this.loadingBlockService.showLoadingBlock(false);
+
           this.router.navigateByUrl('courses');
         },
           error => this.httpErrorHandlingService.handlingError(error),
         );
+
+      this.loadingBlockService.showLoadingBlock(true);
     }
   }
 

@@ -1,35 +1,32 @@
-import { Injectable, ViewContainerRef, ComponentFactoryResolver, ComponentRef, ComponentFactory } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { BehaviorSubject, Observable } from 'rxjs';
 
-import { LoadingBlockComponent } from '../../components/loading-block/loading-block.component';
+
 
 @Injectable()
 export class LoadingBlockService {
 
-  private rootViewContainer: ViewContainerRef;
-  private loadingBlock: ComponentRef<LoadingBlockComponent>;
+  private loadingBlockStatus: boolean = false;
+  private loadingBlockStatus$: BehaviorSubject<boolean> = new BehaviorSubject(this.loadingBlockStatus);
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
 
-  setRootViewContainerRef(viewContainerRef: ViewContainerRef): void {
-    this.rootViewContainer = viewContainerRef;
-  }
+  constructor(@Inject(DOCUMENT) private document: Document) { }
 
   showLoadingBlock(condition: boolean): void {
+    this.loadingBlockStatus = condition;
+
     if (condition) {
-      if (!this.loadingBlock) {
-        const factory: ComponentFactory<LoadingBlockComponent> = this.componentFactoryResolver
-          .resolveComponentFactory(LoadingBlockComponent);
-        this.loadingBlock = factory
-          .create(this.rootViewContainer.parentInjector)
-        this.rootViewContainer.insert(this.loadingBlock.hostView);
-        this.rootViewContainer.element.nativeElement.parentElement.style.overflow = 'hidden';
-      }
+      this.document.body.style.overflow = 'hidden';
     } else {
-      if (this.loadingBlock) {
-        this.loadingBlock.destroy();
-        this.loadingBlock = null;
-        this.rootViewContainer.element.nativeElement.parentElement.style.overflow = 'visible';
-      }
+      this.document.body.style.overflow = 'visible';
     }
+
+    this.loadingBlockStatus$.next(condition);
   }
+
+  getLoadingBlockStatus(): Observable<boolean> {
+    return this.loadingBlockStatus$.asObservable();
+  }
+
 }
