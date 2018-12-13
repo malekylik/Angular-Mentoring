@@ -1,13 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from "@angular/router";
 import { Subscription } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
 
-import { AuthorizationService } from '../../../core/services/authorization/authorization.service';
-import { HttpErrorHandlingService } from '../../../core/services/http-error-handling/http-error-handling.service';
 import { BaseUser } from '../../../../models/user/base-user';
-import { Token } from '../../../../models/token.model';
-import { LoadingBlockService } from 'src/app/modules/core/services/loading-block/loading-block.service';
+import { State } from 'src/app/models/state.model';
+import { Login } from 'src/app/store/actions/auth.actions';
 
 @Component({
   selector: 'app-login-page',
@@ -21,29 +18,14 @@ export class LoginPageComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = null;
 
-  constructor(
-    private router: Router,
-    private authorizationService: AuthorizationService,
-    private httpErrorHandlingService: HttpErrorHandlingService,
-    private loadingBlockService: LoadingBlockService,
-  ) { }
+  constructor(private store: Store<State>) { }
 
   ngOnInit() {
   }
 
   login(isValid: boolean): void {
     if (isValid) {
-      this.subscription = this.authorizationService.login(BaseUser.generateUser('', '', this.userLogin, this.password))
-        .pipe(finalize(() => this.loadingBlockService.showLoadingBlock(false)))
-        .subscribe((token: Token) => {
-          this.authorizationService.storeToken(token.token);
-
-          this.router.navigateByUrl('courses');
-        },
-          error => this.httpErrorHandlingService.handlingError(error),
-        );
-
-      this.loadingBlockService.showLoadingBlock(true);
+      this.store.dispatch(new Login(BaseUser.generateUser('', '', this.userLogin, this.password, '')));
     }
   }
 

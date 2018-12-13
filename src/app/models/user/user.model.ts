@@ -1,7 +1,9 @@
+import { Name } from '../name.model';
+
 export interface User {
     id: string;
-    firstName: string;
-    lastName: string;
+    name: Name;
     login: string;
     password: string;
+    fakeToken: string;
 }

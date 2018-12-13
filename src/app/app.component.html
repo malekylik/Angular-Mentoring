@@ -1,7 +1,7 @@
 <app-loading-block></app-loading-block>
 <div class="app mat-app-background">
     <header>
-        <app-header logo="Logo" [user-login]="login"></app-header>
+        <app-header logo="Logo" [user-login]="login$ | async"></app-header>
     </header>
     <main class="app__content content">
         <router-outlet></router-outlet>
