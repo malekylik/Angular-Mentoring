@@ -7,12 +7,17 @@ export enum AuthActionTypes {
     Logout = '[Auth] Logout',
     SaveUserInfo = '[Auth] SaveUserInfo',
     ResetUserInfo = '[Auth] ResetUserInfo',
+    Error = '[Auth] Error',
 }
 
 export class Login implements Action {
     readonly type: string = AuthActionTypes.Login;
 
     constructor(public payload: User) {}
+}
+
+export class Logout implements Action {
+    readonly type: string = AuthActionTypes.Logout;
 }
 
 export class SaveUserInfo implements Action {
@@ -26,7 +31,9 @@ export class ResetUserInfo implements Action {
 }
 
 export class Error implements Action {
-    readonly type: string = 'Error';
+    readonly type: string = AuthActionTypes.Error;
+
+    constructor(public payload) {}
 }
 
-export type AuthActions = Login | ResetUserInfo;
+export type AuthActions = Login | ResetUserInfo | Error;

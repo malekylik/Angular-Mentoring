@@ -5,7 +5,7 @@ import { Action } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Router } from '@angular/router';
 
-import { AuthActionTypes, Login, SaveUserInfo, Error } from '../actions/auth.actions';
+import { AuthActionTypes, Login, SaveUserInfo, Error, ResetUserInfo } from '../actions/auth.actions';
 import { AuthorizationService } from '../../modules/core/services/authorization/authorization.service';
 import { Token } from '../../models/token.model';
 import { User } from '../../models/user/user.model';
@@ -27,11 +27,19 @@ export class AuthEffects {
                 map((user: User) => new SaveUserInfo(user)),
                 catchError(error => {
                     this.httpErrorHandlingService.handlingError(error);
-                    return of(new Error());
+                    return of(new Error(error));
                 }),
                 finalize(() => this.loadingBlockService.showLoadingBlock(false)),
             )
         ),
+    );
+
+    @Effect()
+    logout$: Observable<Action> = this.actions$.pipe(
+        ofType(AuthActionTypes.Logout),
+        tap(() => this.authorizationService.logout()),
+        tap(() => this.router.navigateByUrl('auth')),
+        map(() => new ResetUserInfo()),
     );
 
     constructor(

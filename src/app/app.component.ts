@@ -7,7 +7,7 @@ import { User } from './models/user/user.model';
 import { AuthorizationService } from './modules/core/services/authorization/authorization.service';
 import { HttpErrorHandlingService } from './modules/core/services/http-error-handling/http-error-handling.service';
 import { State } from './models/state.model';
-import { SaveUserInfo, ResetUserInfo } from './store/actions/auth.actions';
+import { SaveUserInfo } from './store/actions/auth.actions';
 
 @Component({
   selector: 'app-root',
@@ -31,8 +31,6 @@ export class AppComponent implements OnInit, OnDestroy {
     if (this.authorizationService.isAuthenticated()) {
       this.getUserInfo();
     }
-    
-    this.subsribeOnAuthStatus();
   }
 
   ngOnDestroy() {
@@ -47,17 +45,5 @@ export class AppComponent implements OnInit, OnDestroy {
         this.store.dispatch(new SaveUserInfo(user));
       },
         error => this.httpErrorHandlingService.handlingError(error));
-  }
-
-  private subsribeOnAuthStatus(): void {
-    this.authorizationService.getAuthStatus()
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((isAuthenticated: boolean) => {
-        if (isAuthenticated) {
-          this.getUserInfo();
-        } else {
-          this.store.dispatch(new ResetUserInfo());
-        }
-      });
   }
 }

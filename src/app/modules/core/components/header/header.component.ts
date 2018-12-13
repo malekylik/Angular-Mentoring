@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from "@angular/router";
+import { Store } from '@ngrx/store';
 
-import { AuthorizationService } from '../../services/authorization/authorization.service';
+import { State } from 'src/app/models/state.model';
+import { Logout } from 'src/app/store/actions/auth.actions';
 
 @Component({
   selector: 'app-header',
@@ -13,17 +14,13 @@ export class HeaderComponent implements OnInit {
   @Input() logo: string;
   @Input("user-login") userLogin: string;
 
-  constructor(
-    private router: Router,
-    private authorizationService: AuthorizationService,
-  ) { }
+  constructor(private store: Store<State>) { }
 
   ngOnInit() {
   }
 
   logout(): void {
-    this.authorizationService.logout();
-    this.router.navigateByUrl('auth');
+    this.store.dispatch(new Logout());
   }
 
 }
