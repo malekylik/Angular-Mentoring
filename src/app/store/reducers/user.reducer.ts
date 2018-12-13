@@ -1,8 +1,6 @@
-import { UserActions } from '../actions/user.action';
-import { UserActionTypes } from '../actions/user.action';
+import { UserActions, UserActionTypes, SaveUserInfo } from '../actions/user.actions';
 import { User } from '../../models/user/user.model';
 import { BaseUser } from '../../models/user/base-user';
-import { SaveUserInfo } from '../actions/user.action'
 
 const initialState: User = new BaseUser('', '', '', '', '', '');
 

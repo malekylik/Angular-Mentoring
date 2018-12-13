@@ -6,7 +6,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Router } from '@angular/router';
 
 import { AuthActionTypes, Login, Error as AuthError } from '../actions/auth.actions';
-import { SaveUserInfo, ResetUserInfo } from '../actions/user.action';
+import { SaveUserInfo, ResetUserInfo } from '../actions/user.actions';
 import { AuthorizationService } from '../../modules/core/services/authorization/authorization.service';
 import { Token } from '../../models/token.model';
 import { User } from '../../models/user/user.model';
