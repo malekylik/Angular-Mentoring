@@ -7,7 +7,7 @@ import { User } from './models/user/user.model';
 import { AuthorizationService } from './modules/core/services/authorization/authorization.service';
 import { HttpErrorHandlingService } from './modules/core/services/http-error-handling/http-error-handling.service';
 import { State } from './models/state.model';
-import { SaveUserInfo } from './store/actions/auth.actions';
+import { SaveUserInfo } from './store/actions/user.action';
 
 @Component({
   selector: 'app-root',

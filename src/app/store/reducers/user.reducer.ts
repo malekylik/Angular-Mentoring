@@ -1,21 +1,20 @@
-import { AuthActions } from '../actions/auth.actions';
-import { AuthActionTypes } from '../actions/auth.actions';
-
+import { UserActions } from '../actions/user.action';
+import { UserActionTypes } from '../actions/user.action';
 import { User } from '../../models/user/user.model';
 import { BaseUser } from '../../models/user/base-user';
-import { Login } from '../actions/auth.actions';
+import { SaveUserInfo } from '../actions/user.action'
 
 const initialState: User = new BaseUser('', '', '', '', '', '');
 
-export function userReducer(state: User = initialState, action: AuthActions): User {
+export function userReducer(state: User = initialState, action: UserActions): User {
     switch (action.type) {
-        case AuthActionTypes.SaveUserInfo: {
+        case UserActionTypes.SaveUserInfo: {
             return {
                 ...state,
-                ...(<Login>action).payload,
+                ...(<SaveUserInfo>action).payload,
             };
         }
-        case AuthActionTypes.ResetUserInfo: {
+        case UserActionTypes.ResetUserInfo: {
             return initialState;
         }
         default: {

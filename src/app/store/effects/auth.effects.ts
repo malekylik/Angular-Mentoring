@@ -5,7 +5,8 @@ import { Action } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Router } from '@angular/router';
 
-import { AuthActionTypes, Login, SaveUserInfo, Error, ResetUserInfo } from '../actions/auth.actions';
+import { AuthActionTypes, Login, Error as AuthError } from '../actions/auth.actions';
+import { SaveUserInfo, ResetUserInfo } from '../actions/user.action';
 import { AuthorizationService } from '../../modules/core/services/authorization/authorization.service';
 import { Token } from '../../models/token.model';
 import { User } from '../../models/user/user.model';
@@ -27,7 +28,7 @@ export class AuthEffects {
                 map((user: User) => new SaveUserInfo(user)),
                 catchError(error => {
                     this.httpErrorHandlingService.handlingError(error);
-                    return of(new Error(error));
+                    return of(new AuthError(error));
                 }),
                 finalize(() => this.loadingBlockService.showLoadingBlock(false)),
             )
