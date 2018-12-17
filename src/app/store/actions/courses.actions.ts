@@ -6,6 +6,7 @@ import { CoursesReqParams } from "src/app/modules/course/models/courses-req-para
 export enum CoursesActionTypes {
     GetCourses = '[Courses] GetCourses',
     StoreCourses = '[Courses] StoreCourses',
+    ResetCourses = '[Courses] ResetCourses',
     Error = '[Courses] Error',
 }
 
@@ -19,6 +20,10 @@ export class StoreCourses implements Action {
     readonly type: string = CoursesActionTypes.StoreCourses;
 
     constructor(public payload: Course[]) {}
+}
+
+export class ResetCourses implements Action {
+    readonly type: string = CoursesActionTypes.ResetCourses;
 }
 
 export class Error implements Action {

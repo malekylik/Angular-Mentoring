@@ -5,7 +5,10 @@ export function coursesReducer(state: Course[] = [], action: CoursesActions): Co
     switch (action.type) {
         case CoursesActionTypes.StoreCourses: {
             const courses: Course[] = (<StoreCourses>action).payload;
-            return  courses.length ? [...state, ...(<StoreCourses>action).payload] : state;
+            return courses.length ? [...state, ...(<StoreCourses>action).payload] : state;
+        }
+        case CoursesActionTypes.ResetCourses: {
+            return [];
         }
         default: {
             return state;

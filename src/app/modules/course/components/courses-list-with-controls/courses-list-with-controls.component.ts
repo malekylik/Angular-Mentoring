@@ -13,7 +13,7 @@ import { HttpErrorHandlingService } from '../../../core/services/http-error-hand
 import { LoadingBlockService } from '../../../core/services/loading-block/loading-block.service';
 import { DeleteConfirmationModalComponent } from '../delete-confirmation-modal/delete-confirmation-modal.component';
 import { State } from 'src/app/models/state.model';
-import { GetCourses } from 'src/app/store/actions/courses.actions';
+import { GetCourses, ResetCourses } from 'src/app/store/actions/courses.actions';
 
 @Component({
   selector: 'app-courses-list-with-controls',
@@ -59,7 +59,7 @@ export class CoursesListWithControlsComponent implements OnInit, OnDestroy {
     if (typeof searchString === 'string') {
       if (this.searchString !== searchString) {
         this.searchString = searchString;
-        this.transformedCourses = [];
+        this.store.dispatch(new ResetCourses());
       }
 
       this.onLoadMore();
