@@ -14,15 +14,17 @@ export class LoadingBlockService {
   constructor(@Inject(DOCUMENT) private document: Document) { }
 
   showLoadingBlock(condition: boolean): void {
-    this.loadingBlockStatus = condition;
+    if (this.loadingBlockStatus !== condition) {
+      this.loadingBlockStatus = condition;
 
-    if (condition) {
-      this.document.body.style.overflow = 'hidden';
-    } else {
-      this.document.body.style.overflow = 'visible';
+      if (condition) {
+        this.document.body.style.overflow = 'hidden';
+      } else {
+        this.document.body.style.overflow = 'visible';
+      }
+  
+      this.loadingBlockStatus$.next(condition);
     }
-
-    this.loadingBlockStatus$.next(condition);
   }
 
   getLoadingBlockStatus(): Observable<boolean> {

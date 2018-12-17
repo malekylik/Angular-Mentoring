@@ -2,18 +2,16 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Router } from "@angular/router";
 import { Observable, Subject } from 'rxjs';
-import { takeUntil, filter, flatMap, finalize, tap } from 'rxjs/operators';
+import { takeUntil, filter } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
 
 import { Course } from '../../models/course.model';
 import { CourseOrderByPipe } from '../../pipes/course-order-by/course-order-by.pipe';
 import { SearchPipe } from '../../pipes/search/search.pipe';
-import { CoursesService } from '../../services/courses.service';
 import { HttpErrorHandlingService } from '../../../core/services/http-error-handling/http-error-handling.service';
-import { LoadingBlockService } from '../../../core/services/loading-block/loading-block.service';
 import { DeleteConfirmationModalComponent } from '../delete-confirmation-modal/delete-confirmation-modal.component';
 import { State } from 'src/app/models/state.model';
-import { GetCourses, ResetCourses } from 'src/app/store/actions/courses.actions';
+import { GetCourses, ResetCourses, DeleteCourses } from 'src/app/store/actions/courses.actions';
 
 @Component({
   selector: 'app-courses-list-with-controls',
@@ -35,10 +33,8 @@ export class CoursesListWithControlsComponent implements OnInit, OnDestroy {
   constructor(
     public dialog: MatDialog,
     private courseOrderByPipe: CourseOrderByPipe,
-    private coursesService: CoursesService,
     private router: Router,
     private httpErrorHandlingService: HttpErrorHandlingService,
-    private loadingBlockService: LoadingBlockService,
     private store: Store<State>,
   ) {
     this.transformedCourses = [];
@@ -48,8 +44,8 @@ export class CoursesListWithControlsComponent implements OnInit, OnDestroy {
     this.store.pipe(
       select('courses'),
       takeUntil(this.unsubscribe$),
-      ).subscribe((courses: Course[]) => {
-        this.transformedCourses = this.orderByCourses(courses);
+    ).subscribe((courses: Course[]) => {
+      this.transformedCourses = this.orderByCourses(courses);
     });
 
     this.onLoadMore();
@@ -74,14 +70,17 @@ export class CoursesListWithControlsComponent implements OnInit, OnDestroy {
     this.openDeleteConfirmationDialog()
       .pipe(
         filter(result => result),
-        tap(() => this.loadingBlockService.showLoadingBlock(true)),
-        flatMap(() => this.coursesService.deleteCourse(id)),
-        finalize(() => this.loadingBlockService.showLoadingBlock(false)),
         takeUntil(this.unsubscribe$),
       )
       .subscribe(() => {
-        this.transformedCourses = [];
-        this.onLoadMore();
+        this.store.dispatch(new DeleteCourses({
+          id,
+          coursesReqParams: {
+            start: 0,
+            count: this.transformedCourses.length,
+            textFragment: this.searchString
+          }
+        }));
       },
         error => this.httpErrorHandlingService.handlingError(error),
       );
