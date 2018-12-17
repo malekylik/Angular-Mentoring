@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material';
 import { Router } from "@angular/router";
 import { Observable, Subject } from 'rxjs';
 import { takeUntil, filter, flatMap, finalize, tap } from 'rxjs/operators';
+import { Store, select } from '@ngrx/store';
 
 import { Course } from '../../models/course.model';
 import { CourseOrderByPipe } from '../../pipes/course-order-by/course-order-by.pipe';
@@ -11,6 +12,8 @@ import { CoursesService } from '../../services/courses.service';
 import { HttpErrorHandlingService } from '../../../core/services/http-error-handling/http-error-handling.service';
 import { LoadingBlockService } from '../../../core/services/loading-block/loading-block.service';
 import { DeleteConfirmationModalComponent } from '../delete-confirmation-modal/delete-confirmation-modal.component';
+import { State } from 'src/app/models/state.model';
+import { GetCourses } from 'src/app/store/actions/courses.actions';
 
 @Component({
   selector: 'app-courses-list-with-controls',
@@ -23,9 +26,7 @@ import { DeleteConfirmationModalComponent } from '../delete-confirmation-modal/d
 })
 export class CoursesListWithControlsComponent implements OnInit, OnDestroy {
 
-  courses: Course[];
   transformedCourses: Course[];
-  loading: boolean = false;
 
   private searchString: string = '';
   private loadCount: number = 15;
@@ -38,12 +39,19 @@ export class CoursesListWithControlsComponent implements OnInit, OnDestroy {
     private router: Router,
     private httpErrorHandlingService: HttpErrorHandlingService,
     private loadingBlockService: LoadingBlockService,
+    private store: Store<State>,
   ) {
-    this.courses = [];
     this.transformedCourses = [];
   }
 
   ngOnInit() {
+    this.store.pipe(
+      select('courses'),
+      takeUntil(this.unsubscribe$),
+      ).subscribe((courses: Course[]) => {
+        this.transformedCourses = this.orderByCourses(courses);
+    });
+
     this.onLoadMore();
   }
 
@@ -51,7 +59,7 @@ export class CoursesListWithControlsComponent implements OnInit, OnDestroy {
     if (typeof searchString === 'string') {
       if (this.searchString !== searchString) {
         this.searchString = searchString;
-        this.courses = [];
+        this.transformedCourses = [];
       }
 
       this.onLoadMore();
@@ -72,29 +80,15 @@ export class CoursesListWithControlsComponent implements OnInit, OnDestroy {
         takeUntil(this.unsubscribe$),
       )
       .subscribe(() => {
-        this.courses = [];
+        this.transformedCourses = [];
         this.onLoadMore();
       },
         error => this.httpErrorHandlingService.handlingError(error),
       );
   }
 
-  onLoadMore(start: number = this.courses.length, count: number = this.loadCount): void {
-    this.coursesService.getCourses(start, count, this.searchString)
-      .pipe(
-        finalize(() => this.loadingBlockService.showLoadingBlock(false)),
-        takeUntil(this.unsubscribe$),
-      )
-      .subscribe((courses: Course[]) => {
-        if (courses.length || this.courses.length !== this.transformedCourses.length) {
-          this.courses = [...this.courses, ...courses];
-          this.transformedCourses = this.orderByCourses(this.courses);
-        }
-      },
-        error => this.httpErrorHandlingService.handlingError(error),
-      );
-
-    this.loadingBlockService.showLoadingBlock(true)
+  onLoadMore(start: number = this.transformedCourses.length, count: number = this.loadCount): void {
+    this.store.dispatch(new GetCourses({ start, count, textFragment: this.searchString }));
   }
 
   ngOnDestroy() {

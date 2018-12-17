@@ -16,6 +16,7 @@ import { NoAuthGuard } from './guards/no-auth.guard';
 import { mainReducer } from './store/reducers';
 import { AuthEffects } from './store/effects/auth.effects';
 import { UserEffects } from './store/effects/user.effects';
+import { CoursesEffects } from './store/effects/courses.effects';
 
 
 @NgModule({
@@ -30,7 +31,7 @@ import { UserEffects } from './store/effects/user.effects';
     CoreModule.forRoot(),
     RouterModule.forRoot(ROUTES),
     StoreModule.forRoot(mainReducer),
-    EffectsModule.forRoot([AuthEffects, UserEffects]),
+    EffectsModule.forRoot([AuthEffects, UserEffects, CoursesEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 10 }),
   ],
   providers: [

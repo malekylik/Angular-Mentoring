@@ -20,4 +20,3 @@ export function userReducer(state: User = initialState, action: UserActions): Us
         }
     }
 }
-
