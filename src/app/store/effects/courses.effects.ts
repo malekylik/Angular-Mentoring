@@ -4,11 +4,12 @@ import { Effect, ofType, Actions } from "@ngrx/effects";
 import { Observable, of } from "rxjs";
 import { tap, switchMap, map, catchError, finalize, flatMap, concatMapTo } from "rxjs/operators";
 
-import { CoursesActionTypes, GetCourses, Error as CoursesError, StoreCourses, DeleteCourses, ResetCourses } from "../actions/courses.actions";
+import { CoursesActionTypes, GetCourses, Error as CoursesError, StoreCourses, DeleteCourses, ResetCourses, AddCourse } from "../actions/courses.actions";
 import { CoursesService } from "src/app/modules/course/services/courses.service";
 import { LoadingBlockService } from "src/app/modules/core/services/loading-block/loading-block.service";
 import { HttpErrorHandlingService } from "src/app/modules/core/services/http-error-handling/http-error-handling.service";
 import { Course } from "src/app/modules/course/models/course.model";
+import { Router } from "@angular/router";
 
 @Injectable()
 export class CoursesEffects {
@@ -47,10 +48,27 @@ export class CoursesEffects {
         ),
     );
 
+    @Effect({ dispatch: false })
+    add$: Observable<Action | Course> = this.actions$.pipe(
+        ofType(CoursesActionTypes.AddCourse),
+        tap(() => this.loadingBlockService.showLoadingBlock(true)),
+        flatMap((action: AddCourse) => this.coursesService.addCourse(action.payload)
+            .pipe(
+                tap(() => this.router.navigateByUrl('courses')),
+                catchError(error => {
+                    this.httpErrorHandlingService.handlingError(error);
+                    return of(new CoursesError(error));
+                }),
+                finalize(() => this.loadingBlockService.showLoadingBlock(false)),
+            )
+        ),
+    );
+
     constructor(
         private httpErrorHandlingService: HttpErrorHandlingService,
         private loadingBlockService: LoadingBlockService,
         private actions$: Actions,
         private coursesService: CoursesService,
+        private router: Router,
     ) { }
 }

@@ -1,14 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
-import { Observable, Subject } from 'rxjs';
-import { takeUntil, finalize } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
 
 import { CoursesService } from '../../services/courses.service';
 import { Course } from '../../models/course.model';
 import { BaseCourse } from '../../models/base-course';
 import { NOT_FOUND_STATUS } from '../../../../constants/api';
 import { HttpErrorHandlingService } from '../../../core/services/http-error-handling/http-error-handling.service';
-import { LoadingBlockService } from 'src/app/modules/core/services/loading-block/loading-block.service';
+import { State } from 'src/app/models/state.model';
+import { AddCourse } from 'src/app/store/actions/courses.actions';
 
 @Component({
   selector: 'app-course-add-edit-page',
@@ -20,14 +21,14 @@ export class CourseAddEditPageComponent implements OnInit, OnDestroy {
   course: Course;
 
   private id: string | null = null;
-  private unsubscribe$: Subject<void> = new Subject();
+  private subscription: Subscription;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private coursesService: CoursesService,
     private httpErrorHandlingService: HttpErrorHandlingService,
-    private loadingBlockService: LoadingBlockService,
+    private store: Store<State>,
   ) { }
 
   ngOnInit() {
@@ -38,7 +39,6 @@ export class CourseAddEditPageComponent implements OnInit, OnDestroy {
 
       if (this.id) {
         this.coursesService.getCourse(this.id)
-          .pipe(takeUntil(this.unsubscribe$))
           .subscribe(
             (course) => {
               this.course = course;
@@ -58,25 +58,7 @@ export class CourseAddEditPageComponent implements OnInit, OnDestroy {
   }
 
   onSave(course: Course): void {
-    let updating$: Observable<Course> = null;
-
-    if (this.id) {
-      updating$ = this.coursesService.updateCourse(course);
-    } else {
-      updating$ = this.coursesService.addCourse(course)
-    }
-
-    updating$
-      .pipe(
-        finalize(() => this.loadingBlockService.showLoadingBlock(false)),
-        takeUntil(this.unsubscribe$),
-      )
-      .subscribe(
-        () => this.router.navigateByUrl('courses'),
-        error => this.httpErrorHandlingService.handlingError(error),
-      );
-
-    this.loadingBlockService.showLoadingBlock(true);
+    this.store.dispatch(new AddCourse(course));
   }
 
   onCancel(): void {
@@ -84,8 +66,9 @@ export class CourseAddEditPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
 }

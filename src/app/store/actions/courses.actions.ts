@@ -8,6 +8,7 @@ export enum CoursesActionTypes {
     StoreCourses = '[Courses] StoreCourses',
     ResetCourses = '[Courses] ResetCourses',
     DeleteCourses = '[Courses] DeleteCourses',
+    AddCourse = '[Courses] AddCourse',
     Error = '[Courses] Error',
 }
 
@@ -31,6 +32,12 @@ export class DeleteCourses implements Action {
     readonly type: string = CoursesActionTypes.DeleteCourses;
 
     constructor(public payload: { id: string, coursesReqParams?: CoursesReqParams }) {}
+}
+
+export class AddCourse implements Action {
+    readonly type: string = CoursesActionTypes.AddCourse;
+
+    constructor(public payload: Course) {}
 }
 
 export class Error implements Action {
