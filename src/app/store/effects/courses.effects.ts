@@ -4,7 +4,7 @@ import { Effect, ofType, Actions } from "@ngrx/effects";
 import { Observable, of } from "rxjs";
 import { tap, switchMap, map, catchError, finalize, flatMap, concatMapTo } from "rxjs/operators";
 
-import { CoursesActionTypes, GetCourses, Error as CoursesError, StoreCourses, DeleteCourses, ResetCourses, AddCourse } from "../actions/courses.actions";
+import { CoursesActionTypes, GetCourses, Error as CoursesError, StoreCourses, DeleteCourses, ResetCourses, AddCourse, EditCourse } from "../actions/courses.actions";
 import { CoursesService } from "src/app/modules/course/services/courses.service";
 import { LoadingBlockService } from "src/app/modules/core/services/loading-block/loading-block.service";
 import { HttpErrorHandlingService } from "src/app/modules/core/services/http-error-handling/http-error-handling.service";
@@ -48,19 +48,25 @@ export class CoursesEffects {
         ),
     );
 
-    @Effect({ dispatch: false })
-    add$: Observable<Action | Course> = this.actions$.pipe(
-        ofType(CoursesActionTypes.AddCourse),
+    @Effect()
+    addOrEdit$: Observable<Action> = this.actions$.pipe(
+        ofType(CoursesActionTypes.AddCourse, CoursesActionTypes.EditCourse),
         tap(() => this.loadingBlockService.showLoadingBlock(true)),
-        flatMap((action: AddCourse) => this.coursesService.addCourse(action.payload)
-            .pipe(
-                tap(() => this.router.navigateByUrl('courses')),
-                catchError(error => {
-                    this.httpErrorHandlingService.handlingError(error);
-                    return of(new CoursesError(error));
-                }),
-                finalize(() => this.loadingBlockService.showLoadingBlock(false)),
-            )
+        flatMap((action: AddCourse | EditCourse) =>
+            (action.type === CoursesActionTypes.AddCourse ?
+                this.coursesService.addCourse(action.payload) :
+                this.coursesService.updateCourse(action.payload))
+                    .pipe(
+                        tap(() => this.router.navigateByUrl('courses')),
+                        concatMapTo([
+                            new ResetCourses(),
+                            new GetCourses({}),
+                        ]),
+                        catchError(error => {
+                            this.httpErrorHandlingService.handlingError(error);
+                            return of(new CoursesError(error));
+                        }),
+                    )
         ),
     );
 

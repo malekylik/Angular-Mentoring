@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
 import { Subscription } from 'rxjs';
-import { Store } from '@ngrx/store';
+import { Store, Action } from '@ngrx/store';
 
 import { CoursesService } from '../../services/courses.service';
 import { Course } from '../../models/course.model';
@@ -9,7 +9,7 @@ import { BaseCourse } from '../../models/base-course';
 import { NOT_FOUND_STATUS } from '../../../../constants/api';
 import { HttpErrorHandlingService } from '../../../core/services/http-error-handling/http-error-handling.service';
 import { State } from 'src/app/models/state.model';
-import { AddCourse } from 'src/app/store/actions/courses.actions';
+import { AddCourse, EditCourse } from 'src/app/store/actions/courses.actions';
 
 @Component({
   selector: 'app-course-add-edit-page',
@@ -58,7 +58,15 @@ export class CourseAddEditPageComponent implements OnInit, OnDestroy {
   }
 
   onSave(course: Course): void {
-    this.store.dispatch(new AddCourse(course));
+    let action: Action;
+
+    if (this.id) {
+      action = new EditCourse(course);
+    } else {
+      action = new AddCourse(course);
+    }
+
+    this.store.dispatch(action);
   }
 
   onCancel(): void {
