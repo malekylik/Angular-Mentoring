@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { mergeMap, tap, map, catchError, switchMap, finalize } from 'rxjs/operators';
+import { mergeMap, tap, map, catchError, switchMap, finalize, concatMapTo } from 'rxjs/operators';
 import { Action } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Router } from '@angular/router';
@@ -12,6 +12,7 @@ import { Token } from '../../models/token.model';
 import { User } from '../../models/user/user.model';
 import { LoadingBlockService } from 'src/app/modules/core/services/loading-block/loading-block.service';
 import { HttpErrorHandlingService } from 'src/app/modules/core/services/http-error-handling/http-error-handling.service';
+import { ResetCourses } from '../actions/courses.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -40,7 +41,10 @@ export class AuthEffects {
         ofType(AuthActionTypes.Logout),
         tap(() => this.authorizationService.logout()),
         tap(() => this.router.navigateByUrl('auth')),
-        map(() => new ResetUserInfo()),
+        concatMapTo([
+            new ResetUserInfo(),
+            new ResetCourses(),
+        ]),
     );
 
     constructor(

@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
     private authorizationService: AuthorizationService,
     private store: Store<State>,
   ) {
-    this.login$ = this.store.pipe(select('user', 'login'));
+    this.login$ = this.store.pipe(select((state: State) => state.user.login));
    }
 
   ngOnInit() {

@@ -58,14 +58,12 @@ export class CoursesEffects {
                 this.coursesService.updateCourse(action.payload))
                     .pipe(
                         tap(() => this.router.navigateByUrl('courses')),
-                        concatMapTo([
-                            new ResetCourses(),
-                            new GetCourses({}),
-                        ]),
+                        concatMapTo([new ResetCourses()]),
                         catchError(error => {
                             this.httpErrorHandlingService.handlingError(error);
                             return of(new CoursesError(error));
                         }),
+                        finalize(() => this.loadingBlockService.showLoadingBlock(false)),
                     )
         ),
     );

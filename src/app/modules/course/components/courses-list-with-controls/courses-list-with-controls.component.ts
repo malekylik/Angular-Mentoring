@@ -42,13 +42,15 @@ export class CoursesListWithControlsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.store.pipe(
-      select('courses'),
+      select((state: State) => state.courses),
       takeUntil(this.unsubscribe$),
     ).subscribe((courses: Course[]) => {
       this.transformedCourses = this.orderByCourses(courses);
     });
 
-    this.onLoadMore();
+    if (!this.transformedCourses.length) {
+      this.onLoadMore();
+    } 
   }
 
   onSearch(searchString: string): void {
