@@ -23,7 +23,7 @@ describe('AppComponent', () => {
   let store: Store<State>;
 
   beforeEach(async(() => {
-    const spy = jasmine.createSpyObj('AuthorizationService', ['getAuthStatus', 'getUserInfo']);
+    const spy = jasmine.createSpyObj('AuthorizationService', ['isAuthenticated']);
 
     TestBed.configureTestingModule({
       imports: [
