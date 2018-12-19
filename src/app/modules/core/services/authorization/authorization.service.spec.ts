@@ -10,10 +10,13 @@ import { AUTH_URL, USER_INFO_URL } from '../../constants/api';
 describe('AuthorizationService', () => {
   const user: User = {
     id: '1',
-    firstName: 'firstName',
-    lastName: 'lastName',
+    name: {
+      first: 'firstName',
+      last: 'lastName',
+    },
     login: 'login',
     password: 'password',
+    fakeToken: '',
   };
   const token: Token = {
     token: 'token',

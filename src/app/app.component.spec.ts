@@ -2,23 +2,37 @@ import { TestBed, async } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { of } from 'rxjs';
+import { StoreModule, Store } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { AppComponent } from './app.component';
 import { AuthorizationService } from './modules/core/services/authorization/authorization.service';
 import { CoursesService } from './modules/course/services/courses.service';
 import { HttpErrorHandlingService } from './modules/core/services/http-error-handling/http-error-handling.service';
 import { LoadingBlockService } from './modules/core/services/loading-block/loading-block.service';
-import { User } from './models/user/user.model';
+import { mainReducer } from './store/reducers';
+import { AuthEffects } from './store/effects/auth.effects';
+import { UserEffects } from './store/effects/user.effects';
+import { CoursesEffects } from './store/effects/courses.effects';
+import { State } from './models/state.model';
+import { GetUserInfo } from './store/actions/user.actions';
 
 describe('AppComponent', () => {
   let valueServiceSpy: jasmine.SpyObj<AuthorizationService>;
+  let store: Store<State>;
 
   beforeEach(async(() => {
     const spy = jasmine.createSpyObj('AuthorizationService', ['getAuthStatus', 'getUserInfo']);
 
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, MatSnackBarModule],
+      imports: [
+        HttpClientTestingModule,
+        MatSnackBarModule,
+        StoreModule.forRoot(mainReducer),
+        EffectsModule.forRoot([AuthEffects, UserEffects, CoursesEffects]),
+        RouterTestingModule,
+      ],
       declarations: [
         AppComponent
       ],
@@ -27,6 +41,8 @@ describe('AppComponent', () => {
     }).compileComponents();
 
     valueServiceSpy = TestBed.get(AuthorizationService);
+    store = TestBed.get(Store);
+    spyOn(store, 'dispatch').and.callThrough();
   }));
 
   it('should create the app', async(() => {
@@ -35,67 +51,25 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   }));
 
-  describe('getAuthStatus', () => {
-    it('should subscribe on auth status on init', async(() => {
-      valueServiceSpy.getAuthStatus = jasmine.createSpy('getAuthStatus')
-      .and.returnValue(of(true));
-      valueServiceSpy.getUserInfo = jasmine.createSpy('getUserInfo')
-      .and.returnValue(of({}));
-  
-      const fixture = TestBed.createComponent(AppComponent);
-      fixture.detectChanges();
-  
-      expect(valueServiceSpy.getAuthStatus).toHaveBeenCalledTimes(1);
-    }));
+  it('should dispatch GetUserInfo action if user is authenticated', () => {
+    valueServiceSpy.isAuthenticated = jasmine.createSpy('isAuthenticated')
+      .and.returnValue(true);
 
-    it('should call getUserInfo if user is authenticated', async(() => {
-      valueServiceSpy.getAuthStatus = jasmine.createSpy('getAuthStatus')
-      .and.returnValue(of(true));
-      valueServiceSpy.getUserInfo = jasmine.createSpy('getUserInfo')
-      .and.returnValue(of({}));
-  
       const fixture = TestBed.createComponent(AppComponent);
       fixture.detectChanges();
-  
-      expect(valueServiceSpy.getUserInfo).toHaveBeenCalledTimes(1);
-    }));
 
-    it('shouldn\'t call getUserInfo if user is not authenticated', async(() => {
-      valueServiceSpy.getAuthStatus = jasmine.createSpy('getAuthStatus')
-      .and.returnValue(of(false));
-  
-      const fixture = TestBed.createComponent(AppComponent);
-      fixture.detectChanges();
-  
-      expect(valueServiceSpy.getUserInfo).toHaveBeenCalledTimes(0);
-    }));
+      const action = new GetUserInfo();
 
-    it('should unset login if user is not authenticated', async(() => {
-      valueServiceSpy.getAuthStatus = jasmine.createSpy('getAuthStatus')
-      .and.returnValue(of(false));
-  
-      const fixture = TestBed.createComponent(AppComponent);
-      const component = fixture.componentInstance;
-      fixture.detectChanges();
-  
-      expect(component.login).toBeNull();
-    }));
+      expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
-  describe('getUserInfo', () => {
-    it('should set login if user is authenticated', async(() => {
-      const userInfo: Partial<User> = { login: 'login' };
+  it('shouldn\'t dispatch GetUserInfo action if user is not authenticated', () => {
+    valueServiceSpy.isAuthenticated = jasmine.createSpy('isAuthenticated')
+      .and.returnValue(false);
 
-      valueServiceSpy.getAuthStatus = jasmine.createSpy('getAuthStatus')
-      .and.returnValue(of(true));
-      valueServiceSpy.getUserInfo = jasmine.createSpy('getUserInfo')
-      .and.returnValue(of(userInfo));
-  
       const fixture = TestBed.createComponent(AppComponent);
-      const component = fixture.componentInstance;
       fixture.detectChanges();
-  
-      expect(component.login).toBe(userInfo.login);
-    }));
+
+      expect(store.dispatch).toHaveBeenCalledTimes(0);
   });
 });
