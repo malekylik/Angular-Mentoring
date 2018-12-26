@@ -1,11 +1,11 @@
 <mat-form-field>
   <input  matInput 
-          type="number" 
-          min="0"
+          type="text" 
           (blur)="onBlur()"
           [(ngModel)]="duration"
           [placeholder]="placeholder" 
           [name]="name"
           [required]="isRequired">
   <mat-hint>{{duration | durationPipe}}</mat-hint>
+  <mat-error>error</mat-error>
 </mat-form-field>

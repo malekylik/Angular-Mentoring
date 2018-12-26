@@ -1,5 +1,15 @@
-import { Component, OnInit, Input, forwardRef, ChangeDetectionStrategy } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import {
+  Component,
+  OnInit,
+  Input,
+  ChangeDetectionStrategy,
+  Self,
+  Optional,
+  ViewChild,
+  AfterViewInit,
+} from '@angular/core';
+import { ControlValueAccessor, NgControl } from '@angular/forms';
+import { MatInput } from '@angular/material';
 
 const noop = () => { };
 
@@ -7,22 +17,30 @@ const noop = () => { };
   selector: 'app-date-input',
   templateUrl: './date-input.component.html',
   styleUrls: ['./date-input.component.scss'],
-  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => DateInputComponent), multi: true }],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DateInputComponent implements OnInit, ControlValueAccessor {
+export class DateInputComponent implements OnInit, AfterViewInit, ControlValueAccessor {
 
   @Input() name: string = '';
-  @Input() placeholder: string = '';
   @Input('required') isRequired = false;
+  @Input() placeholder: string = '';
+  @ViewChild(MatInput) input: MatInput;
 
   private innerValue: string = '';
   private onTouchedCallback: () => void = noop;
   private onChangeCallback: (_: any) => void = noop;
 
-  constructor() { }
+  constructor(@Optional() @Self() private ngControl: NgControl) {
+    if (this.ngControl != null) {
+      this.ngControl.valueAccessor = this;
+    }
+  }
 
   ngOnInit() {
+  }
+
+  ngAfterViewInit() {
+    this.input.ngControl = this.ngControl;
   }
 
   get date(): string {

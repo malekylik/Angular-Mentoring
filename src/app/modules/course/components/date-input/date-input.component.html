@@ -4,6 +4,8 @@
           (blur)="onBlur()"
           [placeholder]="placeholder" 
           [name]="name"
-          [(ngModel)]="date"
+          (input)="date = $event.target.value"
+          [value]="date"
           [required]="isRequired">
+  <mat-error>error</mat-error>
 </mat-form-field>
