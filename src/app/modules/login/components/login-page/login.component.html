@@ -2,13 +2,15 @@
   <header class="login-header">
     <h2 class="login-heading">Login</h2>
   </header>
-  <form class="login-form" #form="ngForm" (ngSubmit)="login(form.valid)">
+  <form class="login-form" [formGroup]="form" (ngSubmit)="login()">
     <mat-form-field>
-      <input matInput type="text" placeholder="Please enter login" name="login" [(ngModel)]="userLogin"
+      <input matInput type="text" placeholder="Please enter login" name="login" formControlName="login"
         required>
+      <mat-error>{{validationService.validate(loginControl.errors)}}</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput type="password" placeholder="Please enter password" name="password" [(ngModel)]="password" required>
+      <input matInput type="password" placeholder="Please enter password" name="password" formControlName="password" required>
+      <mat-error>{{validationService.validate(passwordControl.errors)}}</mat-error>
     </mat-form-field>
     <button mat-button type="submit" class="login-button">Login</button>
   </form>
