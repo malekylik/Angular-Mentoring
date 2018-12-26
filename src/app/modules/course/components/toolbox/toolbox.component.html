@@ -6,8 +6,8 @@
       class="toolbox__search-field" 
       placeholder="Name, fragment or date" 
       name="courseName"
-      (ngModelChange)="onSearch($event)"
-      [(ngModel)]="searchValue">
+      (input)="onSearch()"
+      [formControl]="searchValue">
     </mat-form-field>
   </form>
   <button (click)="onAddCourse()" mat-button>Add course</button>

@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { filter, debounceTime } from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-toolbox',
@@ -11,11 +12,11 @@ import { filter, debounceTime } from 'rxjs/operators';
 })
 export class ToolboxComponent implements OnInit {
 
-  searchValue: string = "";
+  searchValue: FormControl = new FormControl('');
 
   @Output() search: EventEmitter<string> = new EventEmitter();
   @Output() addCourse: EventEmitter<void> = new EventEmitter();
-
+ 
   private searchChange$: Subject<string> = new Subject();
 
   constructor() { }
@@ -32,8 +33,8 @@ export class ToolboxComponent implements OnInit {
     .subscribe(str => this.search.emit(str));
   }
 
-  onSearch(search: string = this.searchValue): void {
-    this.searchChange$.next(search);
+  onSearch(): void {
+    this.searchChange$.next(this.searchValue.value);
   }
 
   onAddCourse(): void {
