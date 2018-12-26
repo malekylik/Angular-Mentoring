@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { MatInput } from '@angular/material';
+import { ValidationService } from 'src/app/modules/core/services/validation/validation.service';
 
 const noop = () => { };
 
@@ -30,7 +31,10 @@ export class DateInputComponent implements OnInit, AfterViewInit, ControlValueAc
   private onTouchedCallback: () => void = noop;
   private onChangeCallback: (_: any) => void = noop;
 
-  constructor(@Optional() @Self() private ngControl: NgControl) {
+  constructor(
+    @Optional() @Self() public ngControl: NgControl,
+    public validationService: ValidationService,
+  ) {
     if (this.ngControl != null) {
       this.ngControl.valueAccessor = this;
     }

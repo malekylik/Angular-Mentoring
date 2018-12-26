@@ -1,11 +1,11 @@
 <form class="course-add-edit mat-elevation-z4" [formGroup]="courseForm" (ngSubmit)="onSave()">
   <mat-form-field class="course-add-edit__field">
     <input matInput type="text" placeholder="Title:" name="courseTitle" formControlName="name">
-    <mat-error>error</mat-error>
+    <mat-error>{{validationService.validate(nameControl.errors)}}</mat-error>
   </mat-form-field>
   <mat-form-field class="course-add-edit__field">
     <textarea matInput placeholder="Description:" name="courseDescription" formControlName="description"></textarea>
-    <mat-error>error</mat-error>
+    <mat-error>{{validationService.validate(descriptionControl.errors)}}</mat-error>
   </mat-form-field>
     <app-date-input 
     class="course-add-edit__field" 
@@ -18,8 +18,7 @@
     placeholder="Duration:"
     formControlName="length"></app-duration-input>
   <div class="controls course-add-edit__field">
-    <button mat-button type="submit">Save</button>
-    <!-- <button mat-button [disabled]="!courseForm.valid" type="submit">Save</button> -->
+    <button mat-button [disabled]="!courseForm.valid" type="submit">Save</button>
     <button mat-button type="button" (click)="onCancel()">Cancel</button>
   </div>
 </form>

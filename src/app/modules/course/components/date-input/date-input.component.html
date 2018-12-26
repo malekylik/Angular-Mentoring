@@ -7,5 +7,5 @@
           (input)="date = $event.target.value"
           [value]="date"
           [required]="isRequired">
-  <mat-error>error</mat-error>
+  <mat-error>{{validationService.validate(ngControl.errors)}}</mat-error>
 </mat-form-field>

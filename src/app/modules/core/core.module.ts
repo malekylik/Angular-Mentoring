@@ -11,6 +11,7 @@ import { AuthInterceptor } from './services/auth.interceptor';
 import { AuthorizationService } from './services/authorization/authorization.service';
 import { HttpErrorHandlingService } from './services/http-error-handling/http-error-handling.service';
 import { LoadingBlockService } from './services/loading-block/loading-block.service';
+import { ValidationService } from './services/validation/validation.service';
 
 @NgModule({
   imports: [
@@ -45,6 +46,7 @@ export class CoreModule {
         AuthorizationService,
         HttpErrorHandlingService,
         LoadingBlockService,
+        ValidationService,
         { provide: HTTP_INTERCEPTORS, multi: true, useClass: AuthInterceptor },
       ]
     }
