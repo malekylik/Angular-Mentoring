@@ -18,6 +18,7 @@ import { CourseOrderByPipe } from './pipes/course-order-by/course-order-by.pipe'
 import { SearchPipe } from './pipes/search/search.pipe';
 import { CoursesService } from './services/courses.service';
 import { CourseBreadcrumbResolverService } from './services/course-breadcrumb-resolver/course-breadcrumb-resolver.service';
+import { AuthorsInputComponent } from './components/authors-input/authors-input.component';
 
 @NgModule({
   imports: [
@@ -39,8 +40,12 @@ import { CourseBreadcrumbResolverService } from './services/course-breadcrumb-re
     CourseAddEditComponent,
     DateInputComponent,
     DurationInputComponent,
+    AuthorsInputComponent,
   ],
-  providers: [CoursesService, CourseBreadcrumbResolverService],
+  providers: [
+    CoursesService, 
+    CourseBreadcrumbResolverService,
+  ],
   entryComponents: [
     DeleteConfirmationModalComponent
   ],

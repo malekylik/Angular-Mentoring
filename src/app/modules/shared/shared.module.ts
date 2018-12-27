@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
 import { MatSelectModule } from '@angular/material';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
@@ -34,6 +35,7 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
     FontAwesomeModule,
     BrowserAnimationsModule,
     RouterModule,
+    MatAutocompleteModule,
     MatProgressSpinnerModule,
     BreadcrumbsComponent,
   ]

@@ -1,7 +1,9 @@
-import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { filter, debounceTime } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
+
+import { DEBOUNCE_TIME } from 'src/app/constants/api';
 
 @Component({
   selector: 'app-toolbox',
@@ -10,7 +12,7 @@ import { FormControl } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 
 })
-export class ToolboxComponent implements OnInit {
+export class ToolboxComponent implements OnInit, OnDestroy {
 
   searchValue: FormControl = new FormControl('');
 
@@ -23,12 +25,11 @@ export class ToolboxComponent implements OnInit {
 
   ngOnInit() {
     const minSearchStringLength: number = 3;
-    const debounceT: number = 500;
 
     this.searchChange$
     .pipe(
       filter(str => str.length >= minSearchStringLength || str === ''),
-      debounceTime(debounceT),
+      debounceTime(DEBOUNCE_TIME),
     )
     .subscribe(str => this.search.emit(str));
   }
@@ -39,5 +40,9 @@ export class ToolboxComponent implements OnInit {
 
   onAddCourse(): void {
     this.addCourse.emit();
+  }
+
+  ngOnDestroy() {
+    this.searchChange$.complete();
   }
 }

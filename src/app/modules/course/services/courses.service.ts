@@ -3,7 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Course } from '../models/course.model';
-import { COURSES_URL } from '../constants/api';
+import { Author } from '../models/author.model';
+import { COURSES_URL, AUTHORS_URL } from '../constants/api';
 import { Params } from '../../../constants/api';
 
 @Injectable()
@@ -52,5 +53,9 @@ export class CoursesService {
 
   deleteCourse(id: string): Observable<void> {
     return this.http.delete<void>(`${COURSES_URL}/${id}`);
+  }
+
+  getAuthors(textFragment: string = ''): Observable<Author[]> {
+    return this.http.get<Author[]>(AUTHORS_URL, { params: { textFragment } });
   }
 }
