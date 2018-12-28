@@ -1,12 +1,19 @@
-<mat-form-field>
-  <input matInput 
-         type="text" 
-         placeholder="Author:" 
-         name="authorName" 
-         [matAutocomplete]="auto"
-         (input)="onSearch($event.target.value)">
-         
-         <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let author of autoCompleteAuthors" [value]="author.name">{{author.name}}</mat-option>
-          </mat-autocomplete>
+<mat-form-field class="authors-input">
+  <mat-chip-list #chipList>
+    <mat-chip *ngFor="let author of authors" removable (removed)="remove(author)">
+      {{author.name}}
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+    </mat-chip>
+    <input type="text" 
+           placeholder="Author:" 
+           name="authorName" 
+           #authorInput
+           [matChipInputFor]="chipList"
+           [matAutocomplete]="auto" 
+           (input)="onSearch($event.target.value)">
+  </mat-chip-list>
+
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+    <mat-option *ngFor="let author of autocompleteAuthors" [value]="author">{{author.name}}</mat-option>
+  </mat-autocomplete>
 </mat-form-field>
