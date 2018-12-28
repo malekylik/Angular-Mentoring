@@ -34,6 +34,7 @@ export class CourseAddEditComponent implements OnInit {
       description: [this.course.description, [Validators.required, Validators.maxLength(CourseAddEditComponent.maxDescriptionLength)]],
       date: [this.course.date, [Validators.required, DateValidator()]],
       length: [this.course.length, [Validators.required, DurationValidator()]],
+      authors: [[], [Validators.required]],
     });
   }
 
