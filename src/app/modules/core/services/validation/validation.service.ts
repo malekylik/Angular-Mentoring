@@ -21,6 +21,8 @@ export class ValidationService {
       return `Date format should be ${error.required}`;
     } else if (errors[ValidationErrorsKeys.number]) {
       return 'Only numbers allowed';
+    } else if (errors[ValidationErrorsKeys.authorsLength]) {
+      return 'At least one author should be';
     }
 
     return 'Error';

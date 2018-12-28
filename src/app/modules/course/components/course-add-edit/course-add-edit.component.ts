@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/fo
 import { Course } from '../../models/course.model';
 import { DateValidator } from '../../validators/date.validator';
 import { DurationValidator } from '../../validators/duration.validator';
+import { AuthorsValidator } from '../../validators/authors.validor';
 import { ValidationService } from 'src/app/modules/core/services/validation/validation.service';
 
 @Component({
@@ -34,7 +35,7 @@ export class CourseAddEditComponent implements OnInit {
       description: [this.course.description, [Validators.required, Validators.maxLength(CourseAddEditComponent.maxDescriptionLength)]],
       date: [this.course.date, [Validators.required, DateValidator()]],
       length: [this.course.length, [Validators.required, DurationValidator()]],
-      authors: [[], [Validators.required]],
+      authors: [[], [AuthorsValidator()]],
     });
   }
 
