@@ -41,18 +41,18 @@ export class CourseAddEditPageComponent implements OnInit, OnDestroy {
         this.coursesService.getCourse(this.id)
           .subscribe(
             (course) => {
-              this.course = course;
+              this.course = new BaseCourse(course.id, course.name, course.date, course.length, course.description, course.authors, course.isTopRated);
             },
             (error) => {
               if (error.status === NOT_FOUND_STATUS) {
-                this.course = BaseCourse.generateCourseWithCurrentDate('', 0, '');
+                this.course = BaseCourse.generateCourseWithCurrentDate('', 0, '', []);
                 this.router.navigateByUrl('courses/new');
               } else {
                 this.httpErrorHandlingService.handlingError(error)
               }
             });
       } else {
-        this.course = BaseCourse.generateCourseWithCurrentDate('', 0, '');
+        this.course = BaseCourse.generateCourseWithCurrentDate('', 0, '', []);
       }
     });
   }

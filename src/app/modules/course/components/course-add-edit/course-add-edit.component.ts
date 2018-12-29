@@ -35,7 +35,7 @@ export class CourseAddEditComponent implements OnInit {
       description: [this.course.description, [Validators.required, Validators.maxLength(CourseAddEditComponent.maxDescriptionLength)]],
       date: [this.course.date, [Validators.required, DateValidator()]],
       length: [this.course.length, [Validators.required, DurationValidator()]],
-      authors: [[], [AuthorsValidator()]],
+      authors: [this.course.authors, [AuthorsValidator()]],
     });
   }
 
@@ -53,6 +53,7 @@ export class CourseAddEditComponent implements OnInit {
       this.course.description = this.descriptionControl.value;
       this.course.date = this.courseForm.get('date').value;
       this.course.length = Number(this.courseForm.get('length').value);
+      this.course.authors = this.courseForm.get('authors').value;
 
       this.save.emit(this.course);
     }

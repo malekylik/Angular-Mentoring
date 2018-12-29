@@ -1,25 +1,27 @@
-import { Injectable } from "@angular/core";
-import { Action } from "@ngrx/store";
-import { Effect, ofType, Actions } from "@ngrx/effects";
-import { Observable, of } from "rxjs";
-import { tap, switchMap, map, catchError, finalize, flatMap, concatMapTo } from "rxjs/operators";
+import { Injectable } from '@angular/core';
+import { Action } from '@ngrx/store';
+import { Effect, ofType, Actions } from '@ngrx/effects';
+import { Observable, of } from 'rxjs';
+import { tap, switchMap, map, catchError, finalize, flatMap, concatMapTo } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
-import { CoursesActionTypes, GetCourses, Error as CoursesError, StoreCourses, DeleteCourses, ResetCourses, AddCourse, EditCourse } from "../actions/courses.actions";
-import { CoursesService } from "src/app/modules/course/services/courses.service";
-import { LoadingBlockService } from "src/app/modules/core/services/loading-block/loading-block.service";
-import { HttpErrorHandlingService } from "src/app/modules/core/services/http-error-handling/http-error-handling.service";
-import { Course } from "src/app/modules/course/models/course.model";
-import { Router } from "@angular/router";
+import { CoursesActionTypes, GetCourses, Error as CoursesError, StoreCourses, DeleteCourses, ResetCourses, AddCourse, EditCourse } from '../actions/courses.actions';
+import { CoursesService } from 'src/app/modules/course/services/courses.service';
+import { LoadingBlockService } from 'src/app/modules/core/services/loading-block/loading-block.service';
+import { HttpErrorHandlingService } from 'src/app/modules/core/services/http-error-handling/http-error-handling.service';
+import { Course } from 'src/app/modules/course/models/course.model';
+import { BaseCourse } from 'src/app/modules/course/models/base-course';
 
 @Injectable()
 export class CoursesEffects {
 
     @Effect()
-    login$: Observable<Action> = this.actions$.pipe(
+    getCourses$: Observable<Action> = this.actions$.pipe(
         ofType(CoursesActionTypes.GetCourses),
         tap(() => this.loadingBlockService.showLoadingBlock(true)),
         switchMap((action: GetCourses) => this.coursesService.getCourses(action.payload.start, action.payload.count, action.payload.textFragment)
             .pipe(
+                map((courses: Course[]) => courses.map(course => new BaseCourse(course.id, course.name, course.date, course.length, course.description, course.authors, course.isTopRated))),
                 map((courses: Course[]) => new StoreCourses(courses)),
                 catchError(error => {
                     this.httpErrorHandlingService.handlingError(error);
