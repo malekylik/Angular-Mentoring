@@ -6,11 +6,11 @@
     <button 
     class="courses-list-container__load-more-button load-more-button" 
     (click)="onLoadMore()" 
-    *ngIf="transformedCourses.length" mat-button >LOAD MORE</button>
+    *ngIf="transformedCourses.length" mat-button i18n >LOAD MORE</button>
 
     <button 
     class="courses-list-container__load-more-button load-more-button" 
     (click)="onLoadMore()" 
-    *ngIf="!transformedCourses.length" disabled mat-button >NO DATA. FEEL FREE TO ADD NEW COURSE</button>
+    *ngIf="!transformedCourses.length" disabled mat-button i18n >NO DATA. FEEL FREE TO ADD NEW COURSE</button>
   </div>
 </div>

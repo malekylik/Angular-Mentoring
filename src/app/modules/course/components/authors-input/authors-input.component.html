@@ -2,7 +2,7 @@
   <mat-chip-list #chipList>
     <mat-chip *ngFor="let author of authors" removable (removed)="remove(author)">
       {{author.name}}
-      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      <mat-icon matChipRemove *ngIf="removable" >cancel</mat-icon>
     </mat-chip>
     <input type="text" 
            #authorInput

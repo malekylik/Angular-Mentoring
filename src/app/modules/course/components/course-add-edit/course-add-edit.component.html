@@ -1,17 +1,17 @@
 <form class="course-add-edit mat-elevation-z4" [formGroup]="courseForm" (ngSubmit)="onSave()">
   <mat-form-field class="course-add-edit__field">
-    <input matInput type="text" placeholder="Title:" name="courseTitle" formControlName="name">
+    <input matInput type="text" placeholder="Title:" name="courseTitle" formControlName="name" i18n-placeholder >
     <mat-error>{{validationService.validate(nameControl.errors)}}</mat-error>
   </mat-form-field>
   <mat-form-field class="course-add-edit__field">
-    <textarea matInput placeholder="Description:" name="courseDescription" formControlName="description"></textarea>
+    <textarea matInput placeholder="Description:" name="courseDescription" formControlName="description" i18n-placeholder ></textarea>
     <mat-error>{{validationService.validate(descriptionControl.errors)}}</mat-error>
   </mat-form-field>
-  <app-date-input class="course-add-edit__field" name="courseDate" placeholder="Date:" formControlName="date"></app-date-input>
-  <app-duration-input class="course-add-edit__field" name="courseDuration" placeholder="Duration:" formControlName="length"></app-duration-input>
-  <app-authors-input class="course-add-edit__field course-add-edit__authors-field" placeholder="Authors:" name="authorName" formControlName="authors"></app-authors-input>
+  <app-date-input class="course-add-edit__field" name="courseDate" placeholder="Date:" formControlName="date" i18n-placeholder ></app-date-input>
+  <app-duration-input class="course-add-edit__field" name="courseDuration" placeholder="Duration:" formControlName="length" i18n-placeholder ></app-duration-input>
+  <app-authors-input class="course-add-edit__field course-add-edit__authors-field" placeholder="Authors:" name="authorName" formControlName="authors" i18n-placeholder ></app-authors-input>
   <div class="controls course-add-edit__field">
-    <button mat-button [disabled]="!courseForm.valid" type="submit">Save</button>
-    <button mat-button type="button" (click)="onCancel()">Cancel</button>
+    <button mat-button [disabled]="!courseForm.valid" type="submit" i18n >Save</button>
+    <button mat-button type="button" (click)="onCancel()" i18n >Cancel</button>
   </div>
 </form>
