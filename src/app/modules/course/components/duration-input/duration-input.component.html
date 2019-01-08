@@ -7,5 +7,5 @@
           [name]="name"
           [required]="isRequired">
   <mat-hint>{{duration | durationPipe}}</mat-hint>
-  <mat-error>{{validationService.validate(ngControl.errors)}}</mat-error>
+  <mat-error *ngIf="ngControl">{{validationService.validate(ngControl.errors)}}</mat-error>
 </mat-form-field>

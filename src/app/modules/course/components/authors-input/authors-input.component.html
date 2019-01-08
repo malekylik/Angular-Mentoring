@@ -18,5 +18,5 @@
   <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
     <mat-option *ngFor="let author of autocompleteAuthors" [value]="author">{{author.name}}</mat-option>
   </mat-autocomplete>
-  <mat-error>{{validationService.validate(ngControl.errors)}}</mat-error>
+  <mat-error *ngIf="ngControl">{{validationService.validate(ngControl.errors)}}</mat-error>
 </mat-form-field>

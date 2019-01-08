@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { MatDialogModule } from '@angular/material/dialog';
 
@@ -12,7 +12,7 @@ describe('ToolboxComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ FormsModule, MatDialogModule ],
+      imports: [ ReactiveFormsModule, FormsModule, MatDialogModule ],
       declarations: [ ToolboxComponent ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
     })
@@ -38,7 +38,7 @@ describe('ToolboxComponent', () => {
 
   it('should emit search event if string length equal or greater than 3', () => {
     const searchString: string = 'asd';
-    component.searchValue = searchString;
+    component.searchValue.setValue(searchString);
 
     spyOn(component.search, 'emit');
     fixture.debugElement.query(By.css('form')).triggerEventHandler('submit', null);
@@ -49,7 +49,7 @@ describe('ToolboxComponent', () => {
   });
 
   it('should not emit search event if string length less than 3', () => {
-    component.searchValue = 'as';
+    component.searchValue.setValue('as');
 
     spyOn(component.search, 'emit');
     fixture.debugElement.query(By.css('form')).triggerEventHandler('submit', null);
@@ -59,7 +59,7 @@ describe('ToolboxComponent', () => {
   });
 
   it('should emit search event after 500 milliseconds', fakeAsync(() => {
-    component.searchValue = 'asd';
+    component.searchValue.setValue('asd');
 
     spyOn(component.search, 'emit');
     fixture.debugElement.query(By.css('form')).triggerEventHandler('submit', null);

@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -9,13 +9,14 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { LoginPageComponent } from './login.component';
 import { AuthorizationService } from '../../../core/services/authorization/authorization.service';
-import { HttpErrorHandlingService } from '../../../core/services/http-error-handling/http-error-handling.service'; 
+import { HttpErrorHandlingService } from '../../../core/services/http-error-handling/http-error-handling.service';
 import { LoadingBlockService } from 'src/app/modules/core/services/loading-block/loading-block.service';
 import { CoursesService } from 'src/app/modules/course/services/courses.service';
 import { mainReducer } from 'src/app/store/reducers';
 import { AuthEffects } from 'src/app/store/effects/auth.effects';
 import { UserEffects } from 'src/app/store/effects/user.effects';
 import { CoursesEffects } from 'src/app/store/effects/courses.effects';
+import { ValidationService } from 'src/app/modules/core/services/validation/validation.service';
 
 describe('LoginComponent', () => {
   let component: LoginPageComponent;
@@ -25,6 +26,7 @@ describe('LoginComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
+        ReactiveFormsModule,
         RouterTestingModule,
         HttpClientTestingModule,
         MatSnackBarModule,
@@ -32,10 +34,16 @@ describe('LoginComponent', () => {
         EffectsModule.forRoot([AuthEffects, UserEffects, CoursesEffects]),
       ],
       declarations: [LoginPageComponent],
-      providers: [AuthorizationService, CoursesService, HttpErrorHandlingService, LoadingBlockService],
+      providers: [
+        AuthorizationService,
+        CoursesService,
+        HttpErrorHandlingService,
+        LoadingBlockService,
+        ValidationService,
+      ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -7,7 +7,7 @@ import { BaseCourse } from '../models/base-course';
 import { COURSES_URL } from '../constants/api';
 
 describe('CoursesService', () => {
-  const mockCourse: Course = BaseCourse.generateCourseWithCurrentDate('name', 42, 'desc', true);
+  const mockCourse: Course = BaseCourse.generateCourseWithCurrentDate('name', 42, 'desc', [], true);
   const headerName: string = 'Content-Type';
   const headerValue: string = 'application/json';
 
@@ -45,9 +45,9 @@ describe('CoursesService', () => {
 
   it('getCourses should return an Observable<Course[]>', () => {
     const mockCourses: Course[] = [
-      BaseCourse.generateCourseWithCurrentDate('first', 1, 'firstDesc', false),
-      BaseCourse.generateCourseWithCurrentDate('second', 2, 'secondDesc', true),
-      BaseCourse.generateCourseWithCurrentDate('third', 3, 'thirdDesc', false),
+      BaseCourse.generateCourseWithCurrentDate('first', 1, 'firstDesc', [], false),
+      BaseCourse.generateCourseWithCurrentDate('second', 2, 'secondDesc', [], true),
+      BaseCourse.generateCourseWithCurrentDate('third', 3, 'thirdDesc', [], false),
     ];
 
     const startParamName: string = 'start';

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { SharedModule } from '../../../shared/shared.module';
 import { DateInputComponent } from './date-input.component';
+import { ValidationService } from 'src/app/modules/core/services/validation/validation.service';
 
 describe('DateInputComponent', () => {
   let component: DateInputComponent;
@@ -13,6 +14,7 @@ describe('DateInputComponent', () => {
     TestBed.configureTestingModule({
       imports: [FormsModule, SharedModule],
       declarations: [DateInputComponent],
+      providers: [ValidationService],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
       .compileComponents();
