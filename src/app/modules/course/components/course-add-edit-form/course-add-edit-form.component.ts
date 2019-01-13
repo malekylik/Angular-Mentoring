@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 
 import { Course } from '../../models/course.model';
 import { DateFormatValidator } from '../../validators/date-format.validator';
@@ -24,46 +24,33 @@ export class CourseAddEditComponent implements OnInit {
   @Output() cancel: EventEmitter<void> = new EventEmitter();
 
   courseForm: FormGroup;
+  nameControl: FormControl;
+  descriptionControl: FormControl;
+  dateControl: FormControl;
+  lengthControl: FormControl;
+  authorsControl: FormControl;
 
   private static readonly maxNameLength: number = 50;
   private static readonly maxDescriptionLength: number = 500;
 
   constructor(
     public validationService: ValidationService,
-    private fb: FormBuilder,
     private dateNotationPipe: FromDMYtoMDYDatePipe,
   ) { }
 
   ngOnInit() {
-    const d: Date = new Date(this.course.date);
-    const formatedDate: string = joinDate(d.getDate(), d.getMonth() + 1, d.getFullYear());
-
-    this.courseForm = this.fb.group({
-      name: [this.course.name, [Validators.required, Validators.maxLength(CourseAddEditComponent.maxNameLength)]],
-      description: [this.course.description, [Validators.required, Validators.maxLength(CourseAddEditComponent.maxDescriptionLength)]],
-      date: [formatedDate, [Validators.required, DateFormatValidator(), DateValueValidator()]],
-      length: [this.course.length, [Validators.required, DurationValidator()]],
-      authors: [this.course.authors, [AuthorsValidator()]],
-    });
-  }
-
-  get nameControl(): AbstractControl {
-    return this.courseForm.get('name');
-  }
-
-  get descriptionControl(): AbstractControl {
-    return this.courseForm.get('description');
+    this.buildForm();
   }
 
   onSave(): void {
     if (this.courseForm.valid) {
-      const date: string = this.dateNotationPipe.transform(this.courseForm.get('date').value);
+      const date: string = this.dateNotationPipe.transform(this.dateControl.value);
 
       this.course.name = this.nameControl.value;
       this.course.description = this.descriptionControl.value;
       this.course.date = new Date(date).toISOString();
-      this.course.length = Number(this.courseForm.get('length').value);
-      this.course.authors = this.courseForm.get('authors').value;
+      this.course.length = Number(this.lengthControl.value);
+      this.course.authors = this.authorsControl.value;
 
       this.save.emit(this.course);
     }
@@ -71,5 +58,24 @@ export class CourseAddEditComponent implements OnInit {
 
   onCancel(): void {
     this.cancel.emit();
+  }
+
+  private buildForm(): void {
+    const d: Date = new Date(this.course.date);
+    const formatedDate: string = joinDate(d.getDate(), d.getMonth() + 1, d.getFullYear());
+
+    this.nameControl = new FormControl(this.course.name, [Validators.required, Validators.maxLength(CourseAddEditComponent.maxNameLength)]);
+    this.descriptionControl = new FormControl(this.course.description, [Validators.required, Validators.maxLength(CourseAddEditComponent.maxDescriptionLength)]);
+    this.dateControl = new FormControl(formatedDate, [Validators.required, DateFormatValidator(), DateValueValidator()]);
+    this.lengthControl = new FormControl(this.course.length, [Validators.required, DurationValidator()]);
+    this.authorsControl = new FormControl(this.course.authors, [AuthorsValidator()]);
+
+    this.courseForm = new FormGroup({
+      name: this.nameControl,
+      description: this.descriptionControl,
+      date: this.dateControl,
+      length: this.lengthControl,
+      authors: this.authorsControl,
+    });
   }
 }
