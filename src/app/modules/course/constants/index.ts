@@ -5,3 +5,5 @@ export const hoursPerDay: number = 24;
 export const millisecondsPerDay: number = hoursPerDay * minutesPerHour * secondsPerMinute * millisecondsPerSecond;
 
 export const courseRelevanceTimeInDays: number = 14; 
+
+export const dateSeparator: string = '.';

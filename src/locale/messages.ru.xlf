@@ -148,7 +148,7 @@
         <source>Title:</source>
         <target>Название:</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/modules/course/components/course-add-edit/course-add-edit.component.html</context>
+          <context context-type="sourcefile">app/modules/course/components/course-add-edit-form/course-add-edit-form.component.html</context>
           <context context-type="linenumber">3</context>
         </context-group>
       </trans-unit>
@@ -156,7 +156,7 @@
         <source>Description:</source>
         <target>Описание:</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/modules/course/components/course-add-edit/course-add-edit.component.html</context>
+          <context context-type="sourcefile">app/modules/course/components/course-add-edit-form/course-add-edit-form.component.html</context>
           <context context-type="linenumber">7</context>
         </context-group>
       </trans-unit>
@@ -164,7 +164,7 @@
         <source>Date:</source>
         <target>Дата:</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/modules/course/components/course-add-edit/course-add-edit.component.html</context>
+          <context context-type="sourcefile">app/modules/course/components/course-add-edit-form/course-add-edit-form.component.html</context>
           <context context-type="linenumber">10</context>
         </context-group>
       </trans-unit>
@@ -172,7 +172,7 @@
         <source>Duration:</source>
         <target>Продолжительность:</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/modules/course/components/course-add-edit/course-add-edit.component.html</context>
+          <context context-type="sourcefile">app/modules/course/components/course-add-edit-form/course-add-edit-form.component.html</context>
           <context context-type="linenumber">11</context>
         </context-group>
       </trans-unit>
@@ -180,7 +180,7 @@
         <source>Authors:</source>
         <target>Авторы:</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/modules/course/components/course-add-edit/course-add-edit.component.html</context>
+          <context context-type="sourcefile">app/modules/course/components/course-add-edit-form/course-add-edit-form.component.html</context>
           <context context-type="linenumber">12</context>
         </context-group>
       </trans-unit>
@@ -188,7 +188,7 @@
         <source>Save</source>
         <target>Сохранить</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/modules/course/components/course-add-edit/course-add-edit.component.html</context>
+          <context context-type="sourcefile">app/modules/course/components/course-add-edit-form/course-add-edit-form.component.html</context>
           <context context-type="linenumber">14</context>
         </context-group>
       </trans-unit>
@@ -196,7 +196,7 @@
         <source>Cancel</source>
         <target>Отмена</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/modules/course/components/course-add-edit/course-add-edit.component.html</context>
+          <context context-type="sourcefile">app/modules/course/components/course-add-edit-form/course-add-edit-form.component.html</context>
           <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>

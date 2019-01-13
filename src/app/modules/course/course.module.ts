@@ -10,7 +10,7 @@ import { CourseRelevanceDirective } from './directives/course-relevance/course-r
 import { CoursesPageComponent } from './components/courses-page/courses-page.component';
 import { SharedModule } from '../shared/shared.module';
 import { CourseAddEditPageComponent } from './components/course-add-edit-page/course-add-edit-page.component';
-import { CourseAddEditComponent } from './components/course-add-edit/course-add-edit.component';
+import { CourseAddEditComponent } from './components/course-add-edit-form/course-add-edit-form.component';
 import { DateInputComponent } from './components/date-input/date-input.component';
 import { DurationInputComponent } from './components/duration-input/duration-input.component';
 import { DurationPipe } from './pipes/duration/duration.pipe';
@@ -19,6 +19,7 @@ import { SearchPipe } from './pipes/search/search.pipe';
 import { CoursesService } from './services/courses.service';
 import { CourseBreadcrumbResolverService } from './services/course-breadcrumb-resolver/course-breadcrumb-resolver.service';
 import { AuthorsInputComponent } from './components/authors-input/authors-input.component';
+import { FromDMYtoMDYDatePipe } from './pipes/from-dmy-to-mdy-date/from-dmy-to-mdy-date.pipe';
 
 @NgModule({
   imports: [
@@ -41,6 +42,7 @@ import { AuthorsInputComponent } from './components/authors-input/authors-input.
     DateInputComponent,
     DurationInputComponent,
     AuthorsInputComponent,
+    FromDMYtoMDYDatePipe,
   ],
   providers: [
     CoursesService, 

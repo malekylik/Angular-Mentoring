@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { SharedModule } from '../../../shared/shared.module';
-import { CourseAddEditComponent } from './course-add-edit.component';
+import { CourseAddEditComponent } from './course-add-edit-form.component';
 import { Course } from '../../models/course.model';
 import { BaseCourse } from '../../models/base-course';
 import { DateInputComponent } from '../date-input/date-input.component';
@@ -16,7 +16,7 @@ import { CoursesService } from '../../services/courses.service';
 
 @Component({
   template: `
-    <app-course-add-edit [course]="course"></app-course-add-edit>
+    <app-course-add-edit-form [course]="course"></app-course-add-edit-form>
   `,
 })
 class HostComponent {

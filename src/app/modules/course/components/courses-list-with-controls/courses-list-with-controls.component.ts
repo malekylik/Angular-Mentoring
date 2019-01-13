@@ -7,7 +7,6 @@ import { Store, select } from '@ngrx/store';
 
 import { Course } from '../../models/course.model';
 import { CourseOrderByPipe } from '../../pipes/course-order-by/course-order-by.pipe';
-import { SearchPipe } from '../../pipes/search/search.pipe';
 import { HttpErrorHandlingService } from '../../../core/services/http-error-handling/http-error-handling.service';
 import { DeleteConfirmationModalComponent } from '../delete-confirmation-modal/delete-confirmation-modal.component';
 import { State } from 'src/app/models/state.model';
@@ -17,10 +16,7 @@ import { GetCourses, ResetCourses, DeleteCourses } from 'src/app/store/actions/c
   selector: 'app-courses-list-with-controls',
   templateUrl: './courses-list-with-controls.component.html',
   styleUrls: ['./courses-list-with-controls.component.scss'],
-  providers: [
-    CourseOrderByPipe,
-    SearchPipe,
-  ]
+  providers: [CourseOrderByPipe],
 })
 export class CoursesListWithControlsComponent implements OnInit, OnDestroy {
 
@@ -50,7 +46,7 @@ export class CoursesListWithControlsComponent implements OnInit, OnDestroy {
 
     if (!this.transformedCourses.length) {
       this.onLoadMore();
-    } 
+    }
   }
 
   onSearch(searchString: string): void {

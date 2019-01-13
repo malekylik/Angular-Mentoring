@@ -11,9 +11,9 @@ export class HttpErrorHandlingService {
 
   handlingError(error: HttpErrorResponse) {
     if (typeof error.error === 'string') {
-      this.snackBar.open(error.error, '', ERROR_SNACKBAR_CONFIG) 
+      this.snackBar.open(error.error, '', ERROR_SNACKBAR_CONFIG);
     } else {
-      this.snackBar.open(UNKNOWN_ERROR_MESSAGE, '', ERROR_SNACKBAR_CONFIG) 
+      this.snackBar.open(UNKNOWN_ERROR_MESSAGE, '', ERROR_SNACKBAR_CONFIG);
     }
   }
 }

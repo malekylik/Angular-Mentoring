@@ -19,6 +19,8 @@ export class ValidationService {
     } else if (errors[ValidationErrorsKeys.dateFormat]) {
       const error = errors[ValidationErrorsKeys.dateFormat];
       return `Date format should be ${error.required}`;
+    } else if (errors[ValidationErrorsKeys.dateValue]) {
+      return 'Invalid date value';
     } else if (errors[ValidationErrorsKeys.number]) {
       return 'Only numbers allowed';
     } else if (errors[ValidationErrorsKeys.authorsLength]) {
