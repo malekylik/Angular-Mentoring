@@ -1,6 +1,5 @@
-import { Action } from '@ngrx/store';
-
 import { User } from '../../models/user/user.model';
+import { ActionPayload } from 'src/app/modules/course/models/action-payload';
 
 export enum UserActionTypes {
     GetUserInfo = '[User] GetUserInfo',
@@ -9,24 +8,20 @@ export enum UserActionTypes {
     Error = '[User] Error',
 }
 
-export class GetUserInfo implements Action {
-    readonly type: string = UserActionTypes.GetUserInfo;
+export class UserActions {
+    public static getUserInfo(): ActionPayload<void> {
+        return new ActionPayload(UserActionTypes.GetUserInfo);
+    }
+
+    public static saveUserInfo(user: User): ActionPayload<User> {
+        return new ActionPayload(UserActionTypes.SaveUserInfo, user);
+    }
+
+    public static resetUserInfo(): ActionPayload<void> {
+        return new ActionPayload(UserActionTypes.ResetUserInfo);
+    }
+
+    public static error(payload: any): ActionPayload<any> {
+        return new ActionPayload(UserActionTypes.Error, payload);
+    }
 }
-
-export class SaveUserInfo implements Action {
-    readonly type: string = UserActionTypes.SaveUserInfo;
-
-    constructor(public payload: User) {}
-}
-
-export class ResetUserInfo implements Action {
-    readonly type: string = UserActionTypes.ResetUserInfo;
-}
-
-export class Error implements Action {
-    readonly type: string = UserActionTypes.Error;
-
-    constructor(public payload) {}
-}
-
-export type UserActions = SaveUserInfo | ResetUserInfo | Error;

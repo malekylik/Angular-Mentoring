@@ -16,7 +16,7 @@ import { AuthEffects } from './store/effects/auth.effects';
 import { UserEffects } from './store/effects/user.effects';
 import { CoursesEffects } from './store/effects/courses.effects';
 import { State } from './models/state.model';
-import { GetUserInfo } from './store/actions/user.actions';
+import { UserActions } from './store/actions/user.actions';
 
 describe('AppComponent', () => {
   let valueServiceSpy: jasmine.SpyObj<AuthorizationService>;
@@ -58,7 +58,7 @@ describe('AppComponent', () => {
       const fixture = TestBed.createComponent(AppComponent);
       fixture.detectChanges();
 
-      const action = new GetUserInfo();
+      const action = UserActions.getUserInfo();
 
       expect(store.dispatch).toHaveBeenCalledWith(action);
   });

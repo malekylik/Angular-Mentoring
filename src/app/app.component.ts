@@ -4,7 +4,7 @@ import { Store, select } from '@ngrx/store';
 
 import { AuthorizationService } from './modules/core/services/authorization/authorization.service';
 import { State } from './models/state.model';
-import { GetUserInfo } from './store/actions/user.actions';
+import { UserActions } from './store/actions/user.actions';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     if (this.authorizationService.isAuthenticated()) {
-      this.store.dispatch(new GetUserInfo());
+      this.store.dispatch(UserActions.getUserInfo());
     }
   }
 }

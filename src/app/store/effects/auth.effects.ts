@@ -6,7 +6,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Router } from '@angular/router';
 
 import { AuthActionTypes, AuthActions } from '../actions/auth.actions';
-import { SaveUserInfo, ResetUserInfo } from '../actions/user.actions';
+import { UserActions } from '../actions/user.actions';
 import { AuthorizationService } from '../../modules/core/services/authorization/authorization.service';
 import { Token } from '../../models/token.model';
 import { User } from '../../models/user/user.model';
@@ -27,7 +27,7 @@ export class AuthEffects {
                 tap((token: Token) => this.authorizationService.storeToken(token.token)),
                 mergeMap(() => this.authorizationService.getUserInfo()),
                 tap(() => this.router.navigateByUrl('courses')),
-                map((user: User) => new SaveUserInfo(user)),
+                map((user: User) => UserActions.saveUserInfo(user)),
                 catchError(error => {
                     this.httpErrorHandlingService.handlingError(error);
                     return of(AuthActions.error(error));
@@ -43,7 +43,7 @@ export class AuthEffects {
         tap(() => this.authorizationService.logout()),
         tap(() => this.router.navigateByUrl('auth')),
         concatMapTo([
-            new ResetUserInfo(),
+            UserActions.resetUserInfo(),
             CoursesActions.resetCourses(),
         ]),
     );
