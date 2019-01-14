@@ -16,7 +16,7 @@ import { HttpErrorHandlingService } from '../../services/http-error-handling/htt
 import { LoadingBlockService } from '../../services/loading-block/loading-block.service';
 import { CoursesService } from 'src/app/modules/course/services/courses.service';
 import { State } from 'src/app/models/state.model';
-import { Logout } from 'src/app/store/actions/auth.actions';
+import { AuthActions } from 'src/app/store/actions/auth.actions';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -79,7 +79,7 @@ describe('HeaderComponent', () => {
     const logoutButton = fixture.debugElement.query(By.css('.user-managment__user-login-button'));
     logoutButton.triggerEventHandler('click', null);
 
-    const action = new Logout();
+    const action = AuthActions.logout();
 
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });

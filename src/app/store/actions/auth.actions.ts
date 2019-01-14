@@ -1,6 +1,5 @@
-import { Action } from '@ngrx/store';
-
 import { User } from '../../models/user/user.model';
+import { ActionPayload } from 'src/app/modules/course/models/action-payload';
 
 export enum AuthActionTypes {
     Login = '[Auth] Login',
@@ -8,20 +7,16 @@ export enum AuthActionTypes {
     Error = '[Auth] Error',
 }
 
-export class Login implements Action {
-    readonly type: string = AuthActionTypes.Login;
+export class AuthActions {
+    public static login(user: User): ActionPayload<User> {
+        return new ActionPayload(AuthActionTypes.Login, user);
+    }
 
-    constructor(public payload: User) {}
+    public static logout(): ActionPayload<void> {
+        return new ActionPayload(AuthActionTypes.Logout);
+    }
+
+    public static error(payload: any): ActionPayload<any> {
+        return new ActionPayload(AuthActionTypes.Error, payload);
+    }
 }
-
-export class Logout implements Action {
-    readonly type: string = AuthActionTypes.Logout;
-}
-
-export class Error implements Action {
-    readonly type: string = AuthActionTypes.Error;
-
-    constructor(public payload) {}
-}
-
-export type AuthActions = Login | Logout | Error;

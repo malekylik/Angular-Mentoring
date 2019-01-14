@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { State } from 'src/app/models/state.model';
-import { Logout } from 'src/app/store/actions/auth.actions';
+import { AuthActions } from 'src/app/store/actions/auth.actions';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +12,7 @@ import { Logout } from 'src/app/store/actions/auth.actions';
 export class HeaderComponent implements OnInit {
 
   @Input() logo: string;
-  @Input("user-login") userLogin: string;
+  @Input('user-login') userLogin: string;
 
   constructor(private store: Store<State>) { }
 
@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout(): void {
-    this.store.dispatch(new Logout());
+    this.store.dispatch(AuthActions.logout());
   }
 
 }
