@@ -9,6 +9,7 @@ import { AuthorsValidator } from '../../validators/authors.validor';
 import { ValidationService } from 'src/app/modules/core/services/validation/validation.service';
 import { FromDMYtoMDYDatePipe } from '../../pipes/from-dmy-to-mdy-date/from-dmy-to-mdy-date.pipe';
 import { joinDate } from '../../utils';
+import { maxNameLength, maxDescriptionLength } from '../../constants';
 
 @Component({
   selector: 'app-course-add-edit-form',
@@ -29,9 +30,6 @@ export class CourseAddEditComponent implements OnInit {
   dateControl: FormControl;
   lengthControl: FormControl;
   authorsControl: FormControl;
-
-  private static readonly maxNameLength: number = 50;
-  private static readonly maxDescriptionLength: number = 500;
 
   constructor(
     public validationService: ValidationService,
@@ -64,8 +62,8 @@ export class CourseAddEditComponent implements OnInit {
     const d: Date = new Date(this.course.date);
     const formatedDate: string = joinDate(d.getDate(), d.getMonth() + 1, d.getFullYear());
 
-    this.nameControl = new FormControl(this.course.name, [Validators.required, Validators.maxLength(CourseAddEditComponent.maxNameLength)]);
-    this.descriptionControl = new FormControl(this.course.description, [Validators.required, Validators.maxLength(CourseAddEditComponent.maxDescriptionLength)]);
+    this.nameControl = new FormControl(this.course.name, [Validators.required, Validators.maxLength(maxNameLength)]);
+    this.descriptionControl = new FormControl(this.course.description, [Validators.required, Validators.maxLength(maxDescriptionLength)]);
     this.dateControl = new FormControl(formatedDate, [Validators.required, DateFormatValidator(), DateValueValidator()]);
     this.lengthControl = new FormControl(this.course.length, [Validators.required, DurationValidator()]);
     this.authorsControl = new FormControl(this.course.authors, [AuthorsValidator()]);

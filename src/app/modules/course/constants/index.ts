@@ -6,4 +6,7 @@ export const millisecondsPerDay: number = hoursPerDay * minutesPerHour * seconds
 
 export const courseRelevanceTimeInDays: number = 14; 
 
+export const maxNameLength: number = 50;
+export const maxDescriptionLength: number = 500;
+
 export const dateSeparator: string = '.';
