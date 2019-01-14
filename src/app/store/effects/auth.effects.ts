@@ -12,7 +12,7 @@ import { Token } from '../../models/token.model';
 import { User } from '../../models/user/user.model';
 import { LoadingBlockService } from 'src/app/modules/core/services/loading-block/loading-block.service';
 import { HttpErrorHandlingService } from 'src/app/modules/core/services/http-error-handling/http-error-handling.service';
-import { ResetCourses } from '../actions/courses.actions';
+import { CoursesActions } from '../actions/courses.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -43,7 +43,7 @@ export class AuthEffects {
         tap(() => this.router.navigateByUrl('auth')),
         concatMapTo([
             new ResetUserInfo(),
-            new ResetCourses(),
+            CoursesActions.resetCourses(),
         ]),
     );
 

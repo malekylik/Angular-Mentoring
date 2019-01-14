@@ -9,7 +9,7 @@ import { BaseCourse } from '../../models/base-course';
 import { NOT_FOUND_STATUS } from '../../../../constants/api';
 import { HttpErrorHandlingService } from '../../../core/services/http-error-handling/http-error-handling.service';
 import { State } from 'src/app/models/state.model';
-import { AddCourse, EditCourse } from 'src/app/store/actions/courses.actions';
+import { CoursesActions } from 'src/app/store/actions/courses.actions';
 
 @Component({
   selector: 'app-course-add-edit-page',
@@ -61,9 +61,9 @@ export class CourseAddEditPageComponent implements OnInit, OnDestroy {
     let action: Action;
 
     if (this.id) {
-      action = new EditCourse(course);
+      action = CoursesActions.editCourse(course);
     } else {
-      action = new AddCourse(course);
+      action = CoursesActions.addCourse(course);
     }
 
     this.store.dispatch(action);

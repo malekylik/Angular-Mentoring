@@ -1,7 +1,7 @@
-import { Action } from "@ngrx/store";
-
-import { Course } from "src/app/modules/course/models/course.model";
-import { CoursesReqParams } from "src/app/modules/course/models/courses-req-params";
+import { Course } from 'src/app/modules/course/models/course.model';
+import { CoursesReqParams } from 'src/app/modules/course/models/courses-req-params';
+import { ActionPayload } from 'src/app/modules/course/models/action-payload';
+import { CoursesDeletePayload } from 'src/app/models/courses-delete-action-payload';
 
 export enum CoursesActionTypes {
     GetCourses = '[Courses] GetCourses',
@@ -13,44 +13,32 @@ export enum CoursesActionTypes {
     Error = '[Courses] Error',
 }
 
-export class GetCourses implements Action {
-    readonly type: string = CoursesActionTypes.GetCourses;
+export class CoursesActions {
+    public static getCourses(payload: CoursesReqParams): ActionPayload<CoursesReqParams> {
+        return new ActionPayload(CoursesActionTypes.GetCourses, payload);
+    }
 
-    constructor(public payload: CoursesReqParams) {}
+    public static storeCourses(courses: Course[]): ActionPayload<Course[]> {
+        return new ActionPayload(CoursesActionTypes.StoreCourses, courses);
+    }
+
+    public static resetCourses(): ActionPayload<void> {
+        return new ActionPayload(CoursesActionTypes.ResetCourses);
+    }
+
+    public static deleteCourses(payload: CoursesDeletePayload): ActionPayload<CoursesDeletePayload> {
+        return new ActionPayload(CoursesActionTypes.DeleteCourses, payload);
+    }
+
+    public static addCourse(course: Course): ActionPayload<Course> {
+        return new ActionPayload(CoursesActionTypes.AddCourse, course);
+    }
+
+    public static editCourse(course: Course): ActionPayload<Course> {
+        return new ActionPayload(CoursesActionTypes.EditCourse, course);
+    }
+
+    public static error(payload: any): ActionPayload<any> {
+        return new ActionPayload(CoursesActionTypes.Error, payload);
+    }
 }
-
-export class StoreCourses implements Action {
-    readonly type: string = CoursesActionTypes.StoreCourses;
-
-    constructor(public payload: Course[]) {}
-}
-
-export class ResetCourses implements Action {
-    readonly type: string = CoursesActionTypes.ResetCourses;
-}
-
-export class DeleteCourses implements Action {
-    readonly type: string = CoursesActionTypes.DeleteCourses;
-
-    constructor(public payload: { id: string, coursesReqParams?: CoursesReqParams }) {}
-}
-
-export class AddCourse implements Action {
-    readonly type: string = CoursesActionTypes.AddCourse;
-
-    constructor(public payload: Course) {}
-}
-
-export class EditCourse implements Action {
-    readonly type: string = CoursesActionTypes.EditCourse;
-
-    constructor(public payload: Course) {}
-}
-
-export class Error implements Action {
-    readonly type: string = CoursesActionTypes.Error;
-
-    constructor(public payload) {}
-}
-
-export type CoursesActions = GetCourses | StoreCourses | Error;
